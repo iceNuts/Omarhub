@@ -8,7 +8,7 @@ from email.mime.text import MIMEText
  
 # 设置服务器名称、用户名、密码以及邮件后缀 
 mail_host = "smtp.126.com" 
-mail_user = "buaasoft2009" 
+mail_user = "omarhub" 
 mail_pass = "soft2009" 
 mail_postfix="126.com" 
  
