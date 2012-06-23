@@ -8,6 +8,9 @@ DROP TABLE IF EXISTS Active_Users;
 DROP TABLE IF EXISTS Follow_Status;
 DROP TABLE IF EXISTS Recent_Events;
 DROP TABLE IF EXISTS Activate_Events;
+DROP TABLE IF EXISTS Offers;
+DROP TABLE IF EXISTS Needs;
+DROP TABLE IF EXISTS Events;
 
 CREATE TABLE Users (
     user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -69,6 +72,39 @@ CREATE TABLE Recent_Events (
     _date TIMESTAMP,
     _from INT,
     _to INT	
+);
+
+CREATE TABLE Offers (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mail VARCHAR(100) NOT NULL,
+	title VARCHAR(100),
+	decription VARCHAR(500),
+	location VARCHAR(100),
+	target_population VARCHAR(100),
+    time TIMESTAMP
+);
+
+CREATE TABLE Needs (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mail VARCHAR(100) NOT NULL,
+	title VARCHAR(100),
+	decription VARCHAR(500),
+	location VARCHAR(100),
+	target_population VARCHAR(100),
+    time TIMESTAMP
+);
+
+CREATE TABLE Events (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	mail VARCHAR(100) NOT NULL,
+	title VARCHAR(100),
+	decription VARCHAR(500),
+	location VARCHAR(100),
+	work_field VARCHAR(100),
+	target_population VARCHAR(100),
+	start_date VARCHAR(100),
+	end_date VARCHAR(100),
+    time TIMESTAMP
 );
 
 
