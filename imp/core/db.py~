@@ -1,0 +1,120 @@
+import tornado.database
+from tornado.options import define, options
+
+define("port", default=8888, help="run on the given port", type=int)
+define("mysql_host", default="127.0.0.1:3306", help="imp host")
+define("mysql_database", default="imp", help="imp db")
+define("mysql_user", default="imp", help="imp db user")
+define("mysql_password", default="imp", help="imp db passwd")
+
+class dbmgr:
+	def checkAuth(usr_name, passwd):
+		return 1;		
+
+	def create_db_connection(self):
+		self.db = tornado.database.Connection(
+			host=options.mysql_host, database=options.mysql_database,
+            		user=options.mysql_user, password=options.mysql_password)
+	
+	def drop_db_connection(self):
+		self.db.close()
+	
+	def generate_user_id(mail):
+		"""Generate user's id with mail address"""
+		result = self.db.get("SELECT * FROM Users WHERE mail = %s", mail)
+		if result:
+			return 0
+		return (self.db.excute("SELECT COUNT(*) FROM Users", None)) + 1
+
+	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
+		"""Create a unique id"""
+		create_db_connection(self)
+		_id = generate_user_id(mail)
+		if _id:
+			return 0
+		self.db.execute("INSERT INTO Users (user_id, first_name,last_name,age,gender,mail,target_population,location,work_field,language,street,city,state,post_code,country,mobile,mobile_code,skype,passwd,register_date, avatar,org_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,UTC_TIMESTAMP(),%s,%s)", _id, first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd, None,None)	
+		drop_db_connection(self)	
+		return 1
+
+
+	def delete_a_user(mail):
+		"""Lack of Update Users"""
+		create_db_connection(self)
+		result = self.db.execute("DELETE FROM Users WHERE mail=%s", mail)
+		drop_db_connection(self)					
+		if result:
+			return 1
+		else:
+			return 0
+
+	def insert_user_avatar(user_id ,avatar):
+		"""Use avatar's name to remember a url for resource"""
+		create_db_connection(self)
+		result = self.db.execute("UPDATE Users SET avatar = %s WHERE user_id = %s", "/resources/avatars/"+avatar ,user_id)
+		drop_db_connection(self)
+		if result:
+			return 1
+		return 0
+		
+	
+	def insert_user_orgnization(_id, name, acronym, found_date, site_url, _type, numberOfemployees, phoneNumber, country_code):
+		"""Insert the organization info to an user"""
+		create_db_connection(self)
+		number = (self.db.excute("SELECT COUNT(*) FROM Orgnization", None)) + 1
+		usr = self.db.excute("UPDATE Users SET org_id = %s WHERE user_id = %s", number, _id)
+		org = self.db.excute("INSERT INTO Organization (org_id, name, acronym, found_date, site_url, _type, numberOfemployees, phoneNumber, country_code) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)", number, name, acronym, found_date, site_url, _type, numberOfemployees, phoneNumber, country_code)
+		drop_db_connection(self)
+		if org:
+			return 1
+		return 0
+	
+	def update_active_users(_id):
+		"""Update active users list, replace the outdated with the latest"""
+		create_db_connection(self)
+		result = self.db.execute("UPDATE Active_Users SET time = %s WHERE user_id = %s", UTC_TIMESTAMP(), _id)
+		if not result:
+			result = self.db.excute("INSERT INTO Active_Uers (user_id, time) VALUES (%s, UTC_TIMESTAMP())", _id)
+		drop_db_connection(self)
+		if result:
+			return 1
+		return 0
+	def update_follow_status(_from, _to, status):
+		create_db_connection(self)
+		if status:
+			result = self.db.excute("INSERT INTO Follow_Status (_from, _to, time) VALUES (%s, %s,UTC_TIMESTAMP())", _from, _to)
+		else:
+			result = self.db.execute("DELETE FROM Follow_Status WHERE _from=%s and _to=%s", _from, _to)
+		drop_db_connection(self)
+		if result:
+			return 1
+		else:	
+			return 0
+
+	def update_recent_events(_type, _from, _to):
+		create_db_connection(self)
+		number = self.db.execute("SELECT COUNT(*) FROM Recent_Events")
+		result = self.db.execute("INSERT INTO Recent_Events (id, _type, _date, _from, _to) VALUES(%s, %s, UTC_TIMESTAMP(),%s,%s)", number+1,_type,_from,_to)
+		drop_db_connection(self)
+		if result:
+			return 1
+		else:
+			return 0
+
+
+
+
+
+
+
+
+
+			
+
+
+
+
+
+
+
+
+		

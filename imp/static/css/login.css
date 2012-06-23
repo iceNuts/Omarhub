@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+}
+
+#logo img {
+}
+
+input[type="text"], input[type="password"] {
+    float: left;
+    clear: both;
+    height: 30px;
+    border: none;
+    border-radius: 15px;
+    margin: 10px 0px ;
+    padding: 0px 15px;
+    width: 250px;
+    box-shadow: 0px 0px 3px #aaa inset ;
+}
+
+button {
+    height: 30px;
+    width: 120px;
+    border-radius: 15px;
+    border: none;
+}
+
+.submit-button {
+    float: right;
+    margin-top: 10px;
+    background: -webkit-linear-gradient(top, #309DF3 0%, #1892F2 100%);
+    color: white;
+    font-weight: bold;
+}
+
+form {
+    position: relative;
+    margin: 20 auto;
+    width: 250px;
+    background: #ccc;
+    background: #fff;
+    padding: 30px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px #ccc inset ;
+}
+
+h2 {
+    margin: 0 auto;
+    color: #777;
+    text-align: center;
+    font-weight: normal;
+    color: #80b161;
+}
+
+
+#checkbox-label {
+    float: left;
+    color: #777;
+    font-size: 0.8em;
+    margin-top: 5px;
+    margin-top: 13px;
+}
+
+.extra-links {
+    font-size: 0.8em;
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.extra-links a {
+    color: #80b161;
+    text-decoration: none;
+}
+
+.extra-links a.first-login {
+    float: left;
+}
+.extra-links a.forget-password {
+    float: right;
+}
+
+div.pop-info {
+    position: absolute;
+    width: 250px;
+    height: 30px;
+    border-radius: 5px;
+    background: #EEA4BF;
+    background: rgba(238, 164, 191, 0.9);
+    /*box-shadow: 0px 0px 9px rgba(189, 143, 154, 0.4);*/
+    left: 30px;
+}
+
+div.pop-info:after{
+    width:0;
+    height:0;
+    position: absolute;
+    border: solid 6px transparent;
+    border-top: solid 6px rgba(238, 164, 191, 0.9);
+    bottom: -12px;
+    left: 119px;
+    z-index: 1000;
+    display: block;
+    content:"";
+   
+}
+
+div.pop-info p{
+    text-align: center;
+    padding: 5px;
+    color: #5e8bad;
+}
+
+div#login-email-checker {
+    top: 30px;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}

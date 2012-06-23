@@ -1,0 +1,90 @@
+div#sidebar {
+    /*border-right: solid 1px #eee;*/
+}
+div#sidebar #create-link {
+
+}
+
+div#sidebar #create-group-list {
+    display: none;
+}
+
+div#sidebar #top-filter {
+    font-size: 1.4em;
+    padding-bottom: 20px;
+}
+
+div#sidebar #top-filter li{
+    margin-right: 0px;
+}
+
+div#sidebar #top-filter a{
+    /*padding: 5px 0;*/
+    /*padding-left: 10px;*/
+    padding-left: 10px;
+    height: 30px;
+    color: #999;
+    margin-bottom: 5px;
+    border-radius: 5px 15px 15px 5px;
+}
+
+div#sidebar #top-filter a.active, div#sidebar #top-filter a:hover{
+    color: white;
+    background: whitesmoke;
+    background: #61C03C;
+}
+
+div#sidebar #regular-filter {
+    border-right: solid 1px #eee;
+    border-top: solid 1px #eee;
+    border-radius: 0 15px 0 0;
+    padding-left: 10px;
+}
+
+div#sidebar #regular-filter h2{
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+div#sidebar #regular-filter button#set-button{
+    height: 30px;
+    width: 80px;
+    width: 170px;
+    float: right;
+    margin-right: 37px;
+    background: #aaa;
+    border-radius: 5px;
+}
+div#sidebar #regular-filter .control-group{
+    margin-bottom: 10px;
+}
+
+
+div#sidebar #regular-filter input[type="text"]{
+    border: solid 1px #eee;
+    height: 30px;
+}
+
+div#sidebar .control-group select {
+    height: 20px;
+    border: none;
+}
+div#sidebar .control-group label{
+    font-size: 0.8em;
+}
+
+div#top-filter {
+    
+}
+
+
+div#content div#category-sort {
+    display: inline-block;
+    float: right;
+}
+
+div#content div#category-sort label#sort-option-label{
+    position: relative;
+    top: 3px;
+    color: #777;
+    margin-right: 10px;
+}

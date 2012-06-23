@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="{{static_url("./css/login.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{static_url("./css/960_16_col.css")}}" />
+  </head>
+  <body style="background:whitesmoke url({{static_url("./img/pattern.gif")}})">
+    <div class="container">
+      <div id="login-wrap">
+        <div id="logo" class="container_16">
+          <a href="#">
+            <img src="{{static_url("./img/big_logo.png")}}" style="width:360px;margin: 100px 300px 20px;" alt="" />
+          </a>
+          <h2>OmarHub is a platform where</h2><h2> you can communicate with NGOs all over the world.</h2>
+          <h2>here you can share your ideas and thought,</h2>
+          <h2>and also blablasbla</h2>
+        </div>
+        <div id="login" class="container_16">
+          <form id="login-form" class="" action="/auth/loginAuth" method="post">
+            <input id="user_mail" type="text" name="u_mail" placeholder="Email" />
+            <input id="user_passwd" type="password" name="u_mail" placeholder="Password"/>
+            <label for="checkbox" id="checkbox-label">
+              <input type="checkbox" name="remember-me"/>
+              remember me
+            </label>
+            <button type="submit" class="submit-button">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div style="position: absolute;bottom: 0px;box-shadow:0px -1px 19px rgba(0,0,0,0.3);"id="footer"></div>
+  </body>
+</html>

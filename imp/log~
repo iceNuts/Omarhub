@@ -1,0 +1,8 @@
+user(id,first name,last name,age,gender,avatar,mail,target,location,work fields,language,street,city,state/province,post code,country,mobile number,mobile number country code,Skype id, organization, password) 
+
+
+organization id,address(name,acronym,form date, web site url, type, number of employees, phone number, phone number country code) 
+
+type(0,1,2);
+
+active users(id,latest time) follow(from,to,date) recent events(id,type,date,from,to)

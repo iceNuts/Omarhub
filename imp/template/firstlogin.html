@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>active your account</title>
+        <link rel="stylesheet" type="text/css" href="{{static_url("css/login.css")}}">
+        <link rel="stylesheet" type="text/css" href="{{static_url("css/960_16_col.css")}}" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+
+  </head>
+    <body style="background:#474747" url("{{static_url("./img/pattern.gif")}}")>
+    <div class="container">
+      <div id="login-wrap">
+        <div id="logo" class="container_16">
+          <a href="/">
+             <img src="{{static_url("./img/big_logo_light.png")}}" style="width:360px;margin: 100px 300px 20px;" alt="" />
+          </a>
+        </div>
+        <div id="login" class="container_16">
+          <form id="login-form" class="" action="/auth/activate/" method="post">
+            <h2 style="margin-bottom: 20px;">Enter your email:</h2>
+            <input id="login-username" name="user_email" type="text" placeholder="Email" />
+            <div id="login-email-checker" class="pop-info hide"><p id="error-info">The Email doesn't exist.</p></div>
+            <button type="submit" class="submit-button">Active</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div style="position: absolute;bottom: 0px;box-shadow:0px -1px 19px rgba(0,0,0,0.3);"id="footer"></div>
+    <script type="text/javascript" src="{{static_url("js/login.js")}}"></script>
+  </body>
+</html>
