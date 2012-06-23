@@ -6,7 +6,7 @@ define("port", default=8888, help="run on the given port", type=int)
 define("mysql_host", default="127.0.0.1:3306", help="imp host")
 define("mysql_database", default="imp", help="imp db")
 define("mysql_user", default="root", help="imp db user")
-define("mysql_password", default="zll9188", help="imp db passwd")
+define("mysql_password", default="alpine", help="imp db passwd")
 
 class dbmgr:
 
