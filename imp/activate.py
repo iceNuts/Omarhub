@@ -10,7 +10,7 @@ from core.db import *
 xmyUri = ''
 
 class ActivateHandler(BaseHandler):
-	webaddress="127.0.0.1:8888/auth/activate/"
+	webaddress="http://127.0.0.1:8888/auth/activate/"
 	def initialize(self):
 		self.dbManager = dbmgr()
 	def genLink(self,email):
@@ -49,10 +49,12 @@ class ActivateHandler(BaseHandler):
 		"""check if user exists"""
 		if (not self.dbManager.check_user_exist(email)) or (self.dbManager.check_user_activated(email) and xmyUri != "/auth/login/forgetpasswd"):
 			"""Show no users"""
+			print "forgetpassword"
 			xmyUri = ''
 			self.redirect("/")
 			return
 		link=self.genLink(email)
+		print "activate"
 		message="Please click "+self.webaddress+link+" to activate your account"
 		#db.insert(link,email,date)
 		self.dbManager.set_activate_events(email,link)

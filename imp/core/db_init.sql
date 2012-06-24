@@ -71,8 +71,8 @@ CREATE TABLE Recent_Events (
     _type INT,
 	typeId INT,
     _date TIMESTAMP,
-    _from INT,
-    _to INT	
+    _from VARCHAR(500),
+    _to VARCHAR(500)	
 );
 
 CREATE TABLE Offers (
@@ -89,7 +89,7 @@ CREATE TABLE Needs (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	mail VARCHAR(100) NOT NULL,
 	title VARCHAR(100),
-	decription VARCHAR(500),
+	description VARCHAR(500),
 	location VARCHAR(100),
 	target_population VARCHAR(100),
     time TIMESTAMP
@@ -99,7 +99,7 @@ CREATE TABLE Events (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	mail VARCHAR(100) NOT NULL,
 	title VARCHAR(100),
-	decription VARCHAR(500),
+	description VARCHAR(500),
 	location VARCHAR(100),
 	work_field VARCHAR(100),
 	target_population VARCHAR(100),

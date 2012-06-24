@@ -3,7 +3,7 @@ from tornado.options import define, options
 import unicodedata
 
 define("port", default=8888, help="run on the given port", type=int)
-define("mysql_host", default="127.0.0.1:3306", help="imp host")
+define("mysql_host", default="localhost:3306", help="imp host")
 define("mysql_database", default="imp", help="imp db")
 define("mysql_user", default="root", help="imp db user")
 define("mysql_password", default="alpine", help="imp db passwd")
@@ -62,6 +62,8 @@ class dbmgr:
 		self.create_db_connection()
 		u = self.db.get("SELECT passwd FROM Users WHERE mail=%s", ''.join(mail))
 		self.drop_db_connection()
+		if not u.passwd:
+			return 0
 		if ''.join(u.passwd) != '':
 			return 1
 		else:
@@ -72,6 +74,8 @@ class dbmgr:
 		self.create_db_connection()
 		date = self.db.get("SELECT create_time FROM Activate_Events WHERE _id=%s", ''.join(_id))
 		self.drop_db_connection()
+		if not date:
+			return 1
 		if cmp(unicodedata.normalize('NFKD', date.create_time).encode('ascii','ignore'), "1") == 0:
 			return 0
 		else:
@@ -94,21 +98,65 @@ class dbmgr:
 			return 0
 		return (self.db.excute("SELECT COUNT(*) FROM Users", None)) + 1
 
-	def get_event_list(mail, cursor):
+	def get_event_list(self, mail, cursor):
 		"""for event provider,return dictionary"""
-		result = self.db.get("select * from Events where mail=%s limit cursor,20", mail)
+		self.create_db_connection()
+		if not cursor:
+			return None
+		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
+		result = self.db.query("SELECT mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		self.drop_db_connection()
 		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
         
-	def get_offer_list(mail, cursor):
+	def get_offer_list(self,mail, cursor):
 		"""for offer provider,return dictionary"""
-		pass
+		self.create_db_connection()
+		if not cursor:
+			return None
+		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
+		result = self.db.query("SELECT mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		self.drop_db_connection()
+		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
     
-	def get_need_list(mail, cursor):
+	def get_need_list(self,mail, cursor):
 		"""for need provider,return dictionary"""
-		pass
+		self.create_db_connection()
+		if not cursor:
+			return None
+		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
+		result = self.db.query("SELECT mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		self.drop_db_connection()
+		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
         
-	def get_recent_all_list(mail, cursor):
+	def get_recent_all_list(self,mail, cursor):
 		"""for all recent events provider,return dictionary"""
+		self.create_db_connection()
+		if not cursor:
+			return None
+		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
+		result = self.db.query("SELECT _type,typeId,_date,_from,_to FROM Recent_Events WHERE _from = %s LIMIT %s,20", mail, int(strCursor))
+		self.drop_db_connection()
+		#####Todo#######
+		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
+	
+	def get_user_profile_info(self, mail):
+		"""Profile to fetch info"""
 		pass
         
 
