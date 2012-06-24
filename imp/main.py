@@ -26,7 +26,7 @@ class Application(tornado.web.Application):
 			(r"/", MainHandler),
 			(r"/auth/login", LoginHandler),
 			(r"/home", HomeHandler),
-			(r"/auth/activate/", ActivateHandler),
+			(r"/auth/activate", ActivateHandler),
 			(r"/auth/activate/([\S]+)",PasswdSettingHandler),
 			(r"/auth/login/verify/username", LoginUsernameHandler),
 			(r"/auth/login/forgetpasswd", ActivateHandler),
