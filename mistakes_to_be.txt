@@ -1,0 +1,1 @@
+db.py delete_a_user :deleting a user,next time create_new_user user_id will error
