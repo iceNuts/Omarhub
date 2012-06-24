@@ -94,6 +94,24 @@ class dbmgr:
 			return 0
 		return (self.db.excute("SELECT COUNT(*) FROM Users", None)) + 1
 
+	def get_event_list(mail, cursor):
+		"""for event provider,return dictionary"""
+		result = self.db.get("select * from Events where mail=%s limit cursor,20", mail)
+		print result
+        
+	def get_offer_list(mail, cursor):
+		"""for offer provider,return dictionary"""
+		pass
+    
+	def get_need_list(mail, cursor):
+		"""for need provider,return dictionary"""
+		pass
+        
+	def get_recent_all_list(mail, cursor):
+		"""for all recent events provider,return dictionary"""
+		pass
+        
+
 	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
 		"""Create a unique id"""
 		create_db_connection(self)

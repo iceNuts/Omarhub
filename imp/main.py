@@ -25,14 +25,15 @@ class Application(tornado.web.Application):
 		handlers = [
 			(r"/", MainHandler),
 			(r"/auth/login", LoginHandler),
-			(r"/home/([\S]+)", HomeHandler),
+			(r"/home", HomeHandler),
 			(r"/auth/activate/", ActivateHandler),
 			(r"/auth/activate/([\S]+)",PasswdSettingHandler),
 			(r"/auth/login/verify/username", LoginUsernameHandler),
 			(r"/auth/login/forgetpasswd", ActivateHandler),
             (r"/content/provider/getevents", EventProvider),
             (r"/content/provider/getoffers", OfferProvider),
-            (r"/content/provider/getneeds", NeedProvider)
+            (r"/content/provider/getneeds", NeedProvider),
+            (r"/content/provider/getrecentall", RecentallProvider)
 			]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "template"),
