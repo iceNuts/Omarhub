@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}People and Activity{%end%}
+{% block extra-links %}
+<link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+{% end %}
+
+
+
+{% block content %}
+<div id="container" class="container_16">
+    <div id="sidebar-wrap" class="grid_4">
+        <div id="sidebar">
+            <div id="top-filter">
+              <div id="top-filter-bg"></div>
+                <ul>
+                    <li><a href="#">Activities</a></li>
+                    <li><a class="active" href="#">My Profile</a></li>
+                    <li><a href="#">Innovation</a></li>
+                </ul>
+            </div>
+            <div id="followed"></div>
+            <div id="following"></div>
+        </div>
+    </div>
+
+    <div id="content-wrap" class="grid_12">
+        <div id="content">
+            <div id="nav-tab" class="prefix_2 clearfix">
+                <ul id="category-tab" class="tab nav grid_6 alpha">
+                    <li><a class="active" href="#">All</a></li>
+                    <li><a href="#">People</a></li>
+                    <li><a href="#">Offer</a></li>
+                    <li><a href="#">Need</a></li>
+                    <li><a href="#">Event</a></li>
+                </ul>
+                <div id="category-sort" class="grid_3 omega">
+                    <!--<label id="sort-option-label" for="sort-option">Choose how to sort:</label>-->
+                    <select id="sort-option" name="">
+                        <option value="">sort</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="content-items">
+                <div class="content-item">
+                    <div class="user-container grid_2 alpha">
+                        <div class="user-info">
+                            <a class="avatar-wrap" href="#">
+                                <img src="{{static_url('./img/avatar.jpg')}}" alt="" class="avatar" />
+                            </a>
+                            <p>name</p>
+                            <p>location</p>
+                        </div>
+                    </div>
+                    <div class="item-details grid_9 omega">
+                        <div class="item-details-main">
+                            <a href="#" class="follow-item-button"></a>
+                            <div class="general-info">
+                                <h3 class="item-title">This is the title</h3>
+                                <p class="item-time">from 19234.234 to 2349.23</p>
+                            </div>
+                            <div class="item-description-wrap">
+                                <p class="item-description">this is the description,we want some body to do it man this is very interesitong aoeuttoenc e aoteum eos oewhat wil ouaou oyou do wenhno it is an end.</p>
+                                <p class="item-description">this is the description,we want some body to do it man this is very interesitong aoeuttoenc e aoteum eos oewhat wil ouaou oyou do wenhno it is an end.</p>
+                                <p class="item-description">this is the description,we want some body to do it man this is very interesitong aoeuttoenc e aoteum eos oewhat wil ouaou oyou do wenhno it is an end.</p>
+                            </div>
+                        </div>
+                        <div class="item-details-tags">
+                            <div class="location-tag">
+                                Location
+                                <a href="" class="tag normal-tag">tag1</a>
+                                <a href="" class="tag normal-tag">tagtwoman</a>
+                                <a href="" class="tag normal-tag">tagt</a>
+                            </div>
+                            <div class="location-tag">
+                                Population
+                                <a href="" class="tag normal-tag">tag1</a>
+                                <a href="" class="tag normal-tag">tagtwoman</a>
+                                <a href="" class="tag normal-tag">tagt</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{%end%}

@@ -28,3 +28,8 @@ $('#header .hiden-list').each(function(index, eachOne) {
             }
         )
 });
+
+
+$("#header-profile-create").click(function() {
+        $("#create-modal").modal();
+});

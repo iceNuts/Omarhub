@@ -10,6 +10,7 @@ html {
 body {
     color: #777;
     /*background: whitesmoke;*/
+    background: url("../img/bg_pattern.png");
 }
 
 a {
@@ -59,6 +60,7 @@ select {
 .tab {
     background-image: -webkit-linear-gradient(top, #08C, #05C);
     background-image: -webkit-linear-gradient(top, #f5f5f5, #eeeeee);
+    background-image: -webkit-linear-gradient(top, white, whitesmoke);
     border-radius: 5px;
     padding: 0px 10px;
     overflow: hidden;
@@ -76,8 +78,9 @@ select {
 .tab a.active,.tab a:hover {
     background: #61C03C;
     color: white;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+    /*box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);*/
     text-shadow: 0px -1px 0px black;
+    text-shadow: none;
 }
 
 .tab li {
@@ -87,10 +90,9 @@ select {
 div#header-wrap {
     height: 70px;
     background: whitesmoke;
-    background-image: -webkit-linear-gradient(top,#F4F4F4,#E8E8E8);
-    /*background: #474747;*/
     width: 100%;
     box-shadow: 0px 1px 5px rgba(0,0,0,0.4);
+    background: url('http://subtlepatterns.com/patterns/subtlenet2.png');
 }
 
 div#header {
@@ -101,27 +103,39 @@ div#header {
 }
 
 div#header .nav li {
-    margin-right: 5px;
+    margin-right: 0px;
+    border-right: solid 1px #ddd;
+}
+div#header .nav li:first-child {
+    border-left: solid 1px #ddd;
 }
 
 div#header .nav li a {
     color: #333;
+    color: #888;
     height: 20px;
     padding: 25px 5px;
-    -webkit-transition: box-shadow 0.5s;
+    /*-webkit-transition: box-shadow 0.5s;*/
     font-weight: bold;
+    box-shadow: inset 0px 5px 0px #dedede;
 }
 
 div#header .nav li a.active {
-    background: #61C03C;
+    /*background: #61C03C;*/
     color: whitesmoke;
-    box-shadow: inset 0px 0px 8px #30801C;
+    color: #777;
+    background: #fafafa;
+    box-shadow: inset 0px 5px 0px #61C03C;
+    /*box-shadow: inset 0px 0px 8px #30801C;*/
 }
 
 div#header .nav li a:hover {
-    background: #61C03C;
+    /*background: #61C03C;*/
     color: whitesmoke;
-    box-shadow: inset 0px 0px 8px #30801C;
+    color: #888;
+    background: #fafafa;
+    /*box-shadow: inset 0px 0px 8px #30801C;*/
+    box-shadow: inset 0px 5px 0px #7DC462;
 }
 
 div#header #search-form {
@@ -133,7 +147,17 @@ div#header #search-form {
 
 div#header #search-form input[type="text"] {
     height: 30px;
-    /*box-shadow: 0px 0px 5px rgba(0,0,0,0.3) inset;*/
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.3) inset;
+    padding-left: 15px;
+    width: 85px;
+    border-radius: 15px;
+    float: right;
+    -webkit-transition: width linear 0.3s;
+    margin-right: 10px;
+}
+div#header #search-form input[type="text"]:focus {
+    height: 30px;
+    box-shadow: 0px 1px 2px rgba(0,0,0,0.3) inset;
     padding-left: 15px;
     width: 135px;
     border-radius: 15px;
@@ -241,7 +265,7 @@ div#container {
 
 .user-info .avatar {
     width: 50px;
-    border-radius: 25px;
+    /*border-radius: 25px;*/
     float: right;
 }
 
@@ -251,7 +275,6 @@ div#footer-wrap {
     background: #474747;
     width: 100%;
     margin-top: 50px;
-    position: absolute;
     bottom: 0px;
 }
 
@@ -270,6 +293,16 @@ div#footer-wrap {
     overflow: hidden;
 }
 
+.content-item .avatar-wrap{
+    /*height: 50px;*/
+    width: 50px;
+    /*border-radius: 30px;*/
+    border: solid 5px white;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.10);
+    overflow:hidden;
+}
+
+
 .content-item .item-details {
     box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
 }
@@ -277,6 +310,8 @@ div#footer-wrap {
 .content-item .item-details .item-details-main {
     padding: 10px;
     position: relative;
+    background: white;
+    border-bottom: solid 1px #CCC;
 }
 
 .content-item .item-details .item-details-main a.follow-item-button {
@@ -328,7 +363,7 @@ div#footer-wrap {
 .content-item .item-details .item-details-tags {
     padding: 10px;
     background: whitesmoke;
-    border-top: solid 1px #CCC;
+    border-top: solid 1px white;
 }
 
 .general-info {
@@ -385,3 +420,20 @@ div#footer-wrap {
 
 /*all tag css*/
 /*all tag css*/
+
+
+
+
+
+/*the create modal box*/
+/*the create modal box*/
+#create-modal {
+    background: url('http://subtlepatterns.com/patterns/escheresque.png');
+    width: 480px;
+    height: 400px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+}
+/*the create modal box*/
+/*the create modal box*/

@@ -1,6 +1,7 @@
 import tornado.web
 import tornado.auth
 from base import *
+from core.db import *
 
 class HomeHandler(BaseHandler):
 	def initialize(self):

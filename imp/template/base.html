@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}OmarHub{% end %}</title>
+    <link rel="stylesheet" href="{{static_url('./css/main.css')}}" type="text/css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
+    <script type="text/javascript" src="{{static_url('./js/simplemodal.js')}}"></script>
+    <link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static_url('./css/960_16_col.css')}}" type="text/css"/>
+    {% block extra-links %} {%end%}
+  </head>
+
+  <body>
+    <div id="header-wrap">
+      <div id="header" class="container_16">
+        <div id="logo-wrap" class="grid_4">
+          <a id="logo" href="#">
+            <img src="{{static_url('./img/omarlogo.png')}}" alt="" />
+          </a>
+        </div>
+        <div id="top-nav" class="nav grid_5">
+          <ul>
+          	<li><a href="/home" class="active">People&Activity</a></li>
+          	<li><a href="/profile">Profile</a></li>
+          	<li><a href="/tags">Tags</a></li>
+          </ul>
+        </div>
+        <div id="search-form" class="grid_3 prefix_2">
+          <form action="">
+            <input type="text" />
+            <button></button>
+          </form>
+        </div>
+        <div class="create-group grid_1 rela-position">
+          <a id="header-profile-create" href="#create-modal" class="header-icon">
+            <img class="avatar" src="{{static_url('./img/new.png')}}" alt="" />
+          </a>
+        </div>
+        <div id="header-profile" class="grid_1 rela-position">
+          <a id="header-profile-avatar" href="#" class="header-icon">
+            <img class="avatar" src="{{static_url('./img/avatar.jpg')}}" alt="" />
+          </a>
+          <ul id="profile-nav" class="hide hiden-list">
+          	<li><a href="/profile">Profile</a></li>
+          	<li><a href="/settings">Settings</a></li>
+          	<li><a href="/auth/logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="create-modal" class="hide">
+      <h1>Create New</h1>
+      <ul class="nav">
+      	<li><a href="">Offer</a></li>
+      	<li><a href="">Event</a></li>
+      	<li><a href="">Need</a></li>
+      </ul>
+    </div>
+
+    {% block content %}{%end%}
+
+
+
+  	<div id="footer-wrap"></div>
+    <script type="text/javascript" src="{{static_url('./js/main.js')}}"></script>
+  </body>
+</html>

@@ -11,7 +11,9 @@ div#sidebar #create-group-list {
 
 div#sidebar #top-filter {
     font-size: 1.4em;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background: whitesmoke;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.10);
 }
 
 div#sidebar #top-filter li{
@@ -22,22 +24,24 @@ div#sidebar #top-filter a{
     /*padding: 5px 0;*/
     /*padding-left: 10px;*/
     padding-left: 10px;
+    padding: 5px;
     height: 30px;
     color: #999;
-    margin-bottom: 5px;
-    border-radius: 5px 15px 15px 5px;
+    border-bottom: solid 1px #ddd;
+    box-shadow: 0px 1px 0px rgba(255,255,255,0.6) inset, -1px 0px 0px rgba(255,255,255,0.5) inset;
+    border-left: solid 5px #aaa;
 }
 
 div#sidebar #top-filter a.active, div#sidebar #top-filter a:hover{
-    color: white;
-    background: whitesmoke;
-    background: #61C03C;
+    color: #61C03C;
+    background: #eee;
+    background: #fafafa;
+    border-left: solid 5px #61C03C;
 }
 
 div#sidebar #regular-filter {
-    border-right: solid 1px #eee;
+    /*border-right: solid 1px #eee;*/
     border-top: solid 1px #eee;
-    border-radius: 0 15px 0 0;
     padding-left: 10px;
 }
 
