@@ -36,7 +36,8 @@ class Application(tornado.web.Application):
             (r"/content/provider/getneeds", NeedProvider),
             (r"/content/provider/getrecentall", RecentallProvider),
 			(r"/profile",ProfileHandler),
-			(r"/profile/editMyProfile", ProfileEditHandler)
+			(r"/profile/editMyProfile", ProfileEditHandler),
+			(r"/auth/logout", LogoutHandler)
 			]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "template"),

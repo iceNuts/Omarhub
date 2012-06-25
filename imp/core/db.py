@@ -160,14 +160,28 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.query("SELECT mail,first_name,last_name,age,location,target_population,work_field,language,country,skype FROM Users WHERE mail = %s", mail)
+		result = self.db.query("SELECT * FROM Users WHERE mail = %s", mail)
 		self.drop_db_connection()
 		print result
 		if not result:
 			print "Ooops"
 			return None
 		return result
-			
+	
+	def get_user_organization(self, mail):
+		"""Return organization info"""
+		self.create_db_connection()
+		if not mail:
+			return None
+		org_id = self.db.get("SELECT org_id FROM Users Where mail=%s", mail)
+		result = self.db.query("SELECT * FROM Organization WHERE org_id=%s", int(org_id))
+		self.drop_db_connection()
+		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
+
 	def set_user_profile_info(self, mail, info):
 		pass
 			
