@@ -47,7 +47,7 @@ class NeedProvider(BaseHandler):
 			return None
 		cursor = self.get_arguments("cursor")
 		id = self.current_user
-		#print id
+		#print id/
 		list = self.dbManager.get_need_list(id, cursor)
 		self.write(json.dumps(list))
 

@@ -158,14 +158,50 @@ class dbmgr:
 	def get_user_profile_info(self, mail):
 		"""Profile to fetch info"""
 		self.create_db_connection()
-		user_info = self.db.query("SELECT * FROM Users WHERE mail = %s",mail)
+		if not mail:
+			return None
+		result = self.db.query("SELECT * FROM Users WHERE mail = %s", mail)
 		self.drop_db_connection()
-		#####Todo#######
-		print user_info
-		if not user_info:
+		print result
+		if not result:
 			print "Ooops"
 			return None
-		return user_info
+		return result
+	
+	def get_user_organization(self, mail):
+		"""Return organization info"""
+		self.create_db_connection()
+		if not mail:
+			return None
+		org_id = self.db.get("SELECT org_id FROM Users Where mail=%s", mail)
+		result = self.db.query("SELECT * FROM Organization WHERE org_id=%s", int(org_id))
+		self.drop_db_connection()
+		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
+
+	def set_user_profile_info(self, mail, info):
+		pass
+			
+	def get_follower_count(self, mail):
+		"""Get the number of followers"""
+		self.create_db_connection()
+		if not mail:
+			return None
+		result = self.db.execute_rowcount("select * from Follow_Status where _to=%s", mail)
+		self.drop_db_connection()
+		return result
+			
+	def get_following_count(self, mail):
+		"""Get the number of following"""
+		self.create_db_connection()
+		if not mail:
+			return None
+		result = self.db.execute_rowcount("select * from Follow_Status where _from=%s", mail)
+		self.drop_db_connection()
+		return result
 
 	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
 		"""Create a unique id"""

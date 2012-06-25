@@ -35,7 +35,14 @@ class LoginHandler(BaseHandler):
 			errorcode = '1'
 			self.redirect("/")
 			return
-			
+
+class LogoutHandler(BaseHandler):
+	def initialize(self):
+		self.dbManager = dbmgr()
+	def get(self):
+		if self.current_user:
+			self.clear_all_cookies()
+		self.redirect("/")
 				
 
 
