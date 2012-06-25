@@ -7,6 +7,20 @@ class ProfileHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
 		
+	def get_strgender(self,gid):
+		if gid==0 :
+			return "Male"
+		else:
+			return "Female"
+			
+	def get_str_orgtype(self,otid):
+		if otid==0 :
+			return "Private sector"
+		elif otid==1 :
+			return "Government Agency"
+		else:
+			return "Multilateral Organization"
+		
 	def get(self):
 		if not self.current_user:
 			self.redirect("/auth/login")
@@ -39,10 +53,8 @@ class ProfileHandler(BaseHandler):
 		}
 		user_basic.update(user)
 		user_contact.update(user)
-		if user_basic["gender"]==0 :
-			user_basic["gender"]="male"
-		else:
-			user_basic["gender"]="female"
+		user_basic["gender"]=self.get_strgender(user_basic["gender"])
+		organzation["_type"]=self. get_str_orgtype(organzation["_type"])
 		
 		follower_count=self.dbManager.get_follower_count(mail)
 		following_count=self.dbManager.get_following_count(mail)
