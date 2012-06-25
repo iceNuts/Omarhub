@@ -157,8 +157,15 @@ class dbmgr:
 	
 	def get_user_profile_info(self, mail):
 		"""Profile to fetch info"""
-		pass
-        
+		self.create_db_connection()
+		user_info = self.db.query("SELECT * FROM Users WHERE mail = %s",mail)
+		self.drop_db_connection()
+		#####Todo#######
+		print user_info
+		if not user_info:
+			print "Ooops"
+			return None
+		return user_info
 
 	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
 		"""Create a unique id"""
@@ -215,9 +222,9 @@ class dbmgr:
 	def update_follow_status(_from, _to, status):
 		create_db_connection(self)
 		if status:
-			result = self.db.excute("INSERT INTO Follow_Status (_from, _to, time) VALUES (%s, %s,UTC_TIMESTAMP())", _from, _to)
+			result = self.db.excute("INSERT INTO Follow_Status (mail_from, mail_to, time) VALUES (%s, %s,UTC_TIMESTAMP())", _from, _to)
 		else:
-			result = self.db.execute("DELETE FROM Follow_Status WHERE _from=%s and _to=%s", _from, _to)
+			result = self.db.execute("DELETE FROM Follow_Status WHERE mail_from=%s and mail_to=%s", _from, _to)
 		drop_db_connection(self)
 		if result:
 			return 1
@@ -234,7 +241,7 @@ class dbmgr:
 		else:
 			return 0
 			
-	def get_follower(mail):
+	def get_follower(self, mail):
 		self.create_db_connection()
 		follower_list = self.db.query("SELECT mail_from FROM Follow_Status WHERE mail_to = %s", mail)
 		self.drop_db_connection()
@@ -245,7 +252,7 @@ class dbmgr:
 			return None
 		return follower_list
 		
-	def get_following(mail):
+	def get_following(self, mail):
 		self.create_db_connection()
 		following_list = self.db.query("SELECT mail_to FROM Follow_Status WHERE mail_to = %s", mail)
 		self.drop_db_connection()

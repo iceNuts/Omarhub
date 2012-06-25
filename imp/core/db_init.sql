@@ -64,7 +64,7 @@ CREATE TABLE Follow_Status (
     mail_from VARCHAR(100) NOT NULL,
     mail_to VARCHAR(100) NOT NULL,
     time TIMESTAMP,
-    PRIMARY KEY(_from,_to)
+    PRIMARY KEY(mail_from,mail_to)
 );
 
 CREATE TABLE Recent_Events (

@@ -7,6 +7,7 @@ import unicodedata
 from login import *
 from base import *
 from home import *
+from profile import *
 from activate import *
 from loginUsername import *
 from content import *
@@ -25,7 +26,7 @@ class Application(tornado.web.Application):
 		handlers = [
 			(r"/", MainHandler),
 			(r"/auth/login", LoginHandler),
-			(r"/home", HomeHandler),
+			(r"/home", ProfileHandler),
 			(r"/auth/activate", ActivateHandler),
 			(r"/auth/activate/([\S]+)",PasswdSettingHandler),
 			(r"/auth/login/verify/username", LoginUsernameHandler),
