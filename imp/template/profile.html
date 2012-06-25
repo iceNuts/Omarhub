@@ -38,7 +38,7 @@
             <div class="profile-info">
               <h4>Contact Info</h4>
               <a href="#">edit</a>
-              {% for k,v in user[0].items() %}
+              {% for k,v in user_contact.items() %}
               {% if v!=None %}
               <ul class="control-group">
                 <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
@@ -48,12 +48,28 @@
               {% end %}
             </div>
             <div class="profile-info">
-              <h4>Organzition Info</h4>
+              <h4>Organization Info</h4>
               <a href="#">edit</a>
+              {% for k,v in organization.items() %}
+              {% if v!=None %}
+              <ul class="control-group">
+                <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+                <li class="control-group-content grid_5 omega"><p class="inside">{{v}}</p></li>
+              </ul>
+              {% end %}
+              {% end %}
             </div>
             <div class="profile-info">
               <h4>Basic Info</h4>
               <a href="#">edit</a>
+              {% for k,v in user_basic.items() %}
+              {% if v!=None %}
+              <ul class="control-group">
+                <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+                <li class="control-group-content grid_5 omega"><p class="inside">{{v}}</p></li>
+              </ul>
+              {% end %}
+              {% end %}
             </div>
           </div>
 

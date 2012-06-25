@@ -174,7 +174,8 @@ class dbmgr:
 		if not mail:
 			return None
 		org_id = self.db.get("SELECT org_id FROM Users Where mail=%s", mail)
-		result = self.db.query("SELECT * FROM Organization WHERE org_id=%s", int(org_id))
+  		print org_id
+		result = self.db.query("SELECT * FROM Organization WHERE org_id=%s", int(org_id['org_id']))
 		self.drop_db_connection()
 		print result
 		if not result:

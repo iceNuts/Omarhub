@@ -55,12 +55,11 @@ class ProfileHandler(BaseHandler):
 		user_basic.update(user)
 		user_contact.update(user)
 		user_basic["gender"]=self.get_strgender(user_basic["gender"])
-		organzation["_type"]=self. get_str_orgtype(organzation["_type"])
+		organization["_type"]=self. get_str_orgtype(organization["_type"])
 		
 		follower_count=self.dbManager.get_follower_count(mail)
 		following_count=self.dbManager.get_following_count(mail)
 		self.render("profile.html",
-			user=user,
 			follower_count=follower_count,
 			following_count=following_count,
 			user_basic=user_basic,
