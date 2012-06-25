@@ -61,9 +61,10 @@ CREATE TABLE Active_Users (
 );
 
 CREATE TABLE Follow_Status (
-    _from INT NOT NULL PRIMARY KEY,
-    _to INT NOT NULL,
-    time TIMESTAMP
+    mail_from VARCHAR(100) NOT NULL,
+    mail_to VARCHAR(100) NOT NULL,
+    time TIMESTAMP,
+    PRIMARY KEY(_from,_to)
 );
 
 CREATE TABLE Recent_Events (
