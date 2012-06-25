@@ -29,20 +29,32 @@
         <div id="content">
           <div class="profile-top">
             <div class="avatar grid_2 alpha">
-              <a href="#">
                 <img src="{{static_url('./img/avatar_big.jpg')}}" alt="" />
-              </a>
+            </div>
+            <div class="profile-top-follow">
             </div>
           </div>
-          <div class="profile-abstract grid_9 prefix_1">
-            {% for k,v in user[0].items() %}
-            {% if v!=None %}
-            <ul class="control-group">
-              <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
-              <li class="control-group-content grid_6 omega"><p class="inside">{{v}}</p></li>
-            </ul>
-            {% end %}
-            {% end %}
+          <div class="profile-info-container">
+            <div class="profile-info">
+              <h4>Contact Info</h4>
+              <a href="#">edit</a>
+              {% for k,v in user[0].items() %}
+              {% if v!=None %}
+              <ul class="control-group">
+                <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+                <li class="control-group-content grid_5 omega"><p class="inside">{{v}}</p></li>
+              </ul>
+              {% end %}
+              {% end %}
+            </div>
+            <div class="profile-info">
+              <h4>Organzition Info</h4>
+              <a href="#">edit</a>
+            </div>
+            <div class="profile-info">
+              <h4>Basic Info</h4>
+              <a href="#">edit</a>
+            </div>
           </div>
 
         </div>

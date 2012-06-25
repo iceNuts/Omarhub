@@ -116,14 +116,29 @@ div#content div.profile-top div.avatar img{
     border: solid 5px white;
 }
 
-div.profile-abstract {
-    /*background: rgba(245,245,245,0.5);*/
+div.profile-info-container {
+    
+}
+
+div.profile-info {
+    background: rgba(255,255,255,0.9);
     /*background: white;*/
-    /*padding: 20px 0;*/
+    padding: 10px 10px;
+    border-bottom: solid 1px #eee;
+    margin-bottom: 10px;
+}
+
+div.profile-info h4 {
+    margin-left: 0px;
+    display: inline-block;
+}
+
+div.profile-info a {
+    float: right;
 }
 
 .control-group {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     overflow: hidden;
 }
 
@@ -134,4 +149,8 @@ div.profile-abstract {
 .control-group .control-group-content .inside{
     float: left;
     padding-left: 10px;
+}
+
+.profile-info-container .profile-info {
+    border: solid 1px #ccc;
 }
