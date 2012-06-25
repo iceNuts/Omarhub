@@ -12,8 +12,8 @@ class ProfileHandler(BaseHandler):
 			self.redirect("/auth/login")
 		mail=self.current_user
 		user=self.dbManager.get_user_profile_info(mail)
-		followers=self.dbManager.get_follower(mail)
-		following=self.dbManager.get_following(mail)
+		followers=self.dbManager.get_follower_count(mail)
+		following=self.dbManager.get_following_count(mail)
 		self.render("profile.html",user=user,followers=followers,following=following)
 
 
