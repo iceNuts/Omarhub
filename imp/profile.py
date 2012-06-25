@@ -11,10 +11,49 @@ class ProfileHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail=self.current_user
-		user=self.dbManager.get_user_profile_info(mail)
-		followers=self.dbManager.get_follower_count(mail)
-		following=self.dbManager.get_following_count(mail)
-		self.render("profile.html",user=user,followers=followers,following=following)
+		userlist=self.dbManager.get_user_profile_info(mail)
+		user=userlist[0]
+		organizationlist=self.dbManager.get_user_organization(mail)
+		organization=organizationlist[0]
+		user_basic={
+			"first_name":"",
+			"last_name":"",
+			"age":0,
+			"gender":0,
+			"mail":"",
+			"target_population":"",
+			"location":"",
+			"work_field":"",
+			"language":"",
+			"avatar":""
+		}
+		user_contact={
+			"street":"",
+			"city":"",
+			"state":"",
+			"post_code":"",
+			"country":"",
+			"mobile":"",
+			"mobile_code":"",
+			"skype":""
+		}
+		user_basic.update(user)
+		user_contact.update(user)
+		if user_basic["gender"]==0 :
+			user_basic["gender"]="male"
+		else:
+			user_basic["gender"]="female"
+		
+		follower_count=self.dbManager.get_follower_count(mail)
+		following_count=self.dbManager.get_following_count(mail)
+		self.render("profile.html",
+			user=user,
+			follower_count=follower_count,
+			following_count=following_count,
+			user_basic=user_basic,
+			user_contact=user_contact,
+			organization=organization
+		)
 
 
 class ProfileEditHandler(BaseHandler):
