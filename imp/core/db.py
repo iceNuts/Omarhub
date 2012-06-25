@@ -190,7 +190,7 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.execute_rowcount("select * from Follow_Status where _to=%s", mail)
+		result = self.db.execute_rowcount("select * from Follow_Status where mail_to=%s", mail)
 		self.drop_db_connection()
 		return result
 			
@@ -199,7 +199,7 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.execute_rowcount("select * from Follow_Status where _from=%s", mail)
+		result = self.db.execute_rowcount("select * from Follow_Status where mail_from=%s", mail)
 		self.drop_db_connection()
 		return result
 
