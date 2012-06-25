@@ -10,6 +10,7 @@ from home import *
 from activate import *
 from loginUsername import *
 from content import *
+from profile import *
 
 class MainHandler(BaseHandler):
 	def get(self):
@@ -33,7 +34,9 @@ class Application(tornado.web.Application):
             (r"/content/provider/getevents", EventProvider),
             (r"/content/provider/getoffers", OfferProvider),
             (r"/content/provider/getneeds", NeedProvider),
-            (r"/content/provider/getrecentall", RecentallProvider)
+            (r"/content/provider/getrecentall", RecentallProvider),
+			(r"/profile",ProfileHandler),
+			(r"/profile/editMyProfile", ProfileEditHandler)
 			]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "template"),
