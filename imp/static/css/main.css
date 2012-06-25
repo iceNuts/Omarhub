@@ -61,7 +61,7 @@ select {
     background-image: -webkit-linear-gradient(top, #08C, #05C);
     background-image: -webkit-linear-gradient(top, #f5f5f5, #eeeeee);
     background-image: -webkit-linear-gradient(top, white, whitesmoke);
-    border-radius: 5px;
+    /*border-radius: 5px;*/
     padding: 0px 10px;
     overflow: hidden;
     display: inline-block;
@@ -282,7 +282,7 @@ div#footer-wrap {
 
 /*content items css */
 /*content items css */
-#content-items {
+.content-items {
     margin-top: 10px;
     overflow: hidden;
     padding-bottom: 50px;
@@ -363,6 +363,7 @@ div#footer-wrap {
 .content-item .item-details .item-details-tags {
     padding: 10px;
     background: whitesmoke;
+    box-shadow: 0px -1px 0px white inset,1px 0px 0px white inset,-1px 0px 0px white inset;
     border-top: solid 1px white;
 }
 

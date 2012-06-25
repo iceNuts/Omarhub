@@ -11,9 +11,10 @@ div#sidebar #create-group-list {
 
 div#sidebar #top-filter {
     font-size: 1.4em;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     background: whitesmoke;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.10);
+    /*border-bottom: solid 1px #ddd;*/
 }
 
 div#sidebar #top-filter li{
@@ -76,6 +77,15 @@ div#sidebar .control-group label{
     font-size: 0.8em;
 }
 
+div#sidebar .side-zone {
+    height: 150px;
+    padding: 10px;
+    border: solid 1px #eee;
+    margin-top: 20px;
+    background: rgba(245,245,245,0.5);
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.10);
+}
+
 div#top-filter {
     
 }
@@ -91,4 +101,37 @@ div#content div#category-sort label#sort-option-label{
     top: 3px;
     color: #777;
     margin-right: 10px;
+}
+
+div#content div.profile-top {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #eee;
+    overflow: hidden;
+}
+
+div#content div.profile-top div.avatar img{
+    width: 80px;
+    /*float: right;*/
+    border: solid 5px white;
+}
+
+div.profile-abstract {
+    /*background: rgba(245,245,245,0.5);*/
+    /*background: white;*/
+    /*padding: 20px 0;*/
+}
+
+.control-group {
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.control-group .control-group-description .inside{
+    float: right;
+    margin-right: 10px;
+}
+.control-group .control-group-content .inside{
+    float: left;
+    margin-left: 10px;
 }
