@@ -27,7 +27,7 @@ class Application(tornado.web.Application):
 		handlers = [
 			(r"/", MainHandler),
 			(r"/auth/login", LoginHandler),
-			(r"/home", ProfileHandler),
+			(r"/home", HomeHandler),
 			(r"/auth/activate", ActivateHandler),
 			(r"/auth/activate/([\S]+)",PasswdSettingHandler),
 			(r"/auth/login/verify/username", LoginUsernameHandler),
