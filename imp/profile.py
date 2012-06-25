@@ -13,7 +13,7 @@ class ProfileHandler(BaseHandler):
 		mail=self.current_user
 		user=self.dbManager.get_user_profile_info(mail)
 		followers=self.dbManager.get_follower(mail)
-		followering=self.dbManager.get_following(mail)
+		following=self.dbManager.get_following(mail)
 		self.render("profile.html",user=user,followers=followers,following=following)
 
 
