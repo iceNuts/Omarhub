@@ -277,27 +277,6 @@ class dbmgr:
 		else:
 			return 0
 			
-	def get_follower(mail):
-		self.create_db_connection()
-		follower_list = self.db.query("SELECT mail_from FROM Follow_Status WHERE mail_to = %s", mail)
-		self.drop_db_connection()
-		#####Todo#######
-		print follower_list
-		if not follower_list:
-			print "Ooops"
-			return None
-		return follower_list
-		
-	def get_following(mail):
-		self.create_db_connection()
-		following_list = self.db.query("SELECT mail_to FROM Follow_Status WHERE mail_to = %s", mail)
-		self.drop_db_connection()
-		#####Todo#######
-		print following_list
-		if not following_list:
-			print "Ooops"
-			return None
-		return following_list
 
 
 
