@@ -7,6 +7,7 @@ import unicodedata
 import json
 from base import *
 from core.db import *
+from copy import copy
 
 #Return json 
 
@@ -22,6 +23,10 @@ class EventProvider(BaseHandler):
 		id = self.current_user
 		print id
 		list = self.dbManager.get_event_list(id, cursor, mode)
+		for item in list:
+				m_mail = item['mail']
+				tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+				item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
 
