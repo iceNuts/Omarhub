@@ -29,7 +29,7 @@ class LoginHandler(BaseHandler):
 		if self.dbManager.checkAuth(usr_mail, passwd):
 			self.errorcode = ''
 			self.set_secure_cookie("user", ''.join(usr_mail))
-			self.redirect("/home/"+''.join(usr_mail))
+			self.redirect("/home")
 			return
 		else:
 			errorcode = '1'

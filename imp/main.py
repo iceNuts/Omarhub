@@ -36,7 +36,7 @@ class Application(tornado.web.Application):
             (r"/content/provider/getoffers", OfferProvider),
             (r"/content/provider/getneeds", NeedProvider),
             (r"/content/provider/getrecentall", RecentallProvider),
-			(r"/profile",ProfileHandler),
+			(r"/profile/([\d]+)",ProfileHandler),
 			(r"/profile/editMyProfile", ProfileEditHandler),
 			(r"/auth/logout", LogoutHandler)
 			]

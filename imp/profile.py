@@ -37,6 +37,7 @@ class ProfileHandler(BaseHandler):
 		user=userlist[0]
 		organizationlist=self.dbManager.get_user_organization(mail)
 		organization=organizationlist[0]
+		user_id=user["user_id"]
 		user_basic={
 			"name":" ".join([user["first_name"],user["last_name"]]),
 			"age":user["age"],
@@ -75,6 +76,7 @@ class ProfileHandler(BaseHandler):
 		follower_count=self.dbManager.get_follower_count(mail)
 		following_count=self.dbManager.get_following_count(mail)
 		self.render("profile.html",
+			user_id=user_id,
 			follower_count=follower_count,
 			following_count=following_count,
 			user_basic=user_basic,
