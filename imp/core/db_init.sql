@@ -12,7 +12,8 @@ CREATE TABLE Organization (
     acronym VARCHAR(100),
     found_date VARCHAR(100),
     site_url VARCHAR(100),
-    _type INT,
+    _type INT,  
+    #0 for "Private sector",1 for "Government Agency",2 for "Multilateral Organization"
     numberOfemployees INT,
     phoneNumber VARCHAR(100),
     country_code VARCHAR(100)
@@ -23,7 +24,7 @@ CREATE TABLE Users (
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     age INT,
-    gender INT,
+    gender INT,  #0 for Male,1 for Female
     mail VARCHAR(100) NOT NULL,
     target_population VARCHAR(100),
     location VARCHAR(100),
@@ -67,7 +68,7 @@ CREATE TABLE Follow_Status (
 
 CREATE TABLE Recent_Events (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    _type INT,
+    _type INT, #0 for follow,1 for event,2 for offer,3 for need
 	typeId INT,
     _date TIMESTAMP,
     _from VARCHAR(100),
