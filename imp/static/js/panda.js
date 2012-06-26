@@ -6,14 +6,16 @@ $(document).ready(function(){
 
                 //get the id of the tab
                 var category = $(this).prop('id');
+                var callbackUrl = '/content/provider/get'+category+'s';
 
                 if (category === 'all') {
-                    return true;
+                    callbackUrl = '/content/provider/getrecentall';
                 }
+
 
                 //send ajax to get the events/offer/needs
                 $.ajax({
-                        url: '/content/provider/get'+category+'s',
+                        url: callbackUrl,
                         type: 'post',
                         data: {'cursor':0,'mode':1},
                         success: function(contentJson) {
@@ -39,6 +41,7 @@ $(document).ready(function(){
                 $('#content-items')[0].innerHTML = '';
                 var i = contentJson.length-1;
                 for (i;i>=0;i--) {
+                    var item = contentJson[i];
                     var contentItem = $('<div class="content-item"></div>');
 
                     //parse the user info box
@@ -49,7 +52,9 @@ $(document).ready(function(){
                     avatarImg.prop('src', '/static/img/avatar.jpg');
                     avatarWrap.append(avatarImg);
                     var pName = $('<p>Name</p>');
+                    pName.html(item.author.first_name+' '+item.author.last_name);
                     var pLocation = $('<p>Location</p>');
+                    pLocation.html(item.author.location);
                     userInfo.append(avatarWrap);
                     userInfo.append(pName);
                     userInfo.append(pLocation);
@@ -63,13 +68,17 @@ $(document).ready(function(){
 
                     var generalInfo = $('<div class="general-info"></div');
                     var itemHeader = $('<h3 class="item-title"></h3>');
+                    itemHeader.html(item.title);
                     var itemTime = $('<p class="item-time">May-2123 to May-23</p>');
+                    itemTime.html(item.start_date+'-'+item.end_date);
                     generalInfo.append(itemHeader);
                     generalInfo.append(itemTime);
                     itemDetailMain.append(generalInfo);
 
-                    var descriptionWrap = $('<div class="item-description-wrap></div>"');
+                    var descriptionWrap = $('<div class="item-description-wrap"></div>');
                     var itemDescription = $('<p class="item-description"></p>');
+                    itemDescription.html(item.description);
+
                     descriptionWrap.append(itemDescription);
                     itemDetailMain.append(descriptionWrap);
                     itemDetails.append(itemDetailMain);

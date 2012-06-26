@@ -21,7 +21,7 @@
         <div id="top-nav" class="nav grid_5">
           <ul>
           	<li><a id="home-nav" href="/home" class="active">People&Activity</a></li>
-          	<li><a id="profile-nav" href="/profile">Profile</a></li>
+            <li><a id="profile-nav" href="/profile/{{user_id}}">Profile</a></li>
           	<li><a id="tags-nav" href="/tags">Tags</a></li>
           </ul>
         </div>
@@ -41,7 +41,7 @@
             <img class="avatar" src="{{static_url('./img/avatar.jpg')}}" alt="" />
           </a>
           <ul id="profile-nav" class="hide hiden-list">
-          	<li><a href="/profile">Profile</a></li>
+            <li><a href="/profile/{{user_id}}">Profile</a></li>
           	<li><a href="/settings">Settings</a></li>
           	<li><a href="/auth/logout">Logout</a></li>
           </ul>

@@ -39,15 +39,20 @@ select {
 .btn {
     border: none;
     height: 20px;
-    padding: 5px;
     color: white;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-    border-radius: 15px;
+    /*text-shadow: 1px 1px 1px rgba(0,0,0,0.3);*/
+    display: block;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 5px;
+    /*box-shadow: 0px 1px 0px rgba(0,0,0,0.3) inset;*/
+    border: solid 1px #41a02C;
 }
 
 .btn-primary {
     background: #309DF3;
     background: -webkit-linear-gradient(top, #309DF3 0%, #1892F2 100%);
+    background: #61C03C;
 }
 
 .hide {
