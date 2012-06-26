@@ -1,16 +1,22 @@
+DROP DATABASE imp;
+CREATE DATABASE imp;
+USE imp;
+
 SET SESSION storage_engine = "InnoDB";
 SET SESSION time_zone = "+0:00";
 ALTER DATABASE CHARACTER SET "utf8";
 
-DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Organization;
-DROP TABLE IF EXISTS Active_Users;
-DROP TABLE IF EXISTS Follow_Status;
-DROP TABLE IF EXISTS Recent_Events;
-DROP TABLE IF EXISTS Activate_Events;
-DROP TABLE IF EXISTS Offers;
-DROP TABLE IF EXISTS Needs;
-DROP TABLE IF EXISTS Events;
+CREATE TABLE Organization (
+    org_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    acronym VARCHAR(100),
+    found_date VARCHAR(100),
+    site_url VARCHAR(100),
+    _type INT,
+    numberOfemployees INT,
+    phoneNumber VARCHAR(100),
+    country_code VARCHAR(100)
+);
 
 CREATE TABLE Users (
     user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -34,25 +40,15 @@ CREATE TABLE Users (
     passwd VARCHAR(100),
     register_date TIMESTAMP,
     avatar VARCHAR(100),
-    org_id INT
+    org_id INT,
+	UNIQUE KEY (mail),
+ 	FOREIGN KEY (org_id) REFERENCES Organization(org_id)
 );
 
 CREATE TABLE Activate_Events (
 	mail VARCHAR(100) NOT NULL PRIMARY KEY,
 	_id   VARCHAR(100),
 	create_time VARCHAR(100)
-);
-
-CREATE TABLE Organization (
-    org_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100),
-    acronym VARCHAR(100),
-    found_date VARCHAR(100),
-    site_url VARCHAR(100),
-    _type INT,
-    numberOfemployees INT,
-    phoneNumber VARCHAR(100),
-    country_code VARCHAR(100)
 );
 
 CREATE TABLE Active_Users (
@@ -64,7 +60,9 @@ CREATE TABLE Follow_Status (
     mail_from VARCHAR(100) NOT NULL,
     mail_to VARCHAR(100) NOT NULL,
     time TIMESTAMP,
-    PRIMARY KEY(mail_from,mail_to)
+    PRIMARY KEY(mail_from,mail_to),
+	FOREIGN KEY (mail_from) REFERENCES Users(mail),
+	FOREIGN KEY (mail_to) REFERENCES Users(mail)
 );
 
 CREATE TABLE Recent_Events (
@@ -72,8 +70,10 @@ CREATE TABLE Recent_Events (
     _type INT,
 	typeId INT,
     _date TIMESTAMP,
-    _from VARCHAR(500),
-    _to VARCHAR(500)	
+    _from VARCHAR(100),
+    _to VARCHAR(100),
+	FOREIGN KEY (_from) REFERENCES Users(mail),	
+	FOREIGN KEY (_to) REFERENCES Users(mail)
 );
 
 CREATE TABLE Offers (
@@ -83,7 +83,8 @@ CREATE TABLE Offers (
 	description VARCHAR(500),
 	location VARCHAR(100),
 	target_population VARCHAR(100),
-    time TIMESTAMP
+    time TIMESTAMP,
+	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 
 CREATE TABLE Needs (
@@ -93,7 +94,8 @@ CREATE TABLE Needs (
 	description VARCHAR(500),
 	location VARCHAR(100),
 	target_population VARCHAR(100),
-    time TIMESTAMP
+    time TIMESTAMP,
+	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 
 CREATE TABLE Events (
@@ -106,7 +108,8 @@ CREATE TABLE Events (
 	target_population VARCHAR(100),
 	start_date VARCHAR(100),
 	end_date VARCHAR(100),
-    time TIMESTAMP
+    time TIMESTAMP,
+	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 
 
