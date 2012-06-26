@@ -157,25 +157,28 @@ class dbmgr:
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
 		if int(''.join(mode)) == 1: # most recent
 			result = self.db.query("SELECT _type,typeId,_from,_to FROM Recent_Events order by _date DESC LIMIT %s,20", int(strCursor))
+			i = 0
 			for item in result:
-				type = item['_type'] # judge which table
+				type = unicodedata.normalize('NFKD', item['_type']).encode('ascii','ignore') # judge which table
 				typeId = item['typeId'] # get id in that table
 				author_mail = item['_from'] # get author's mail address
-				if type == 'Needs':
+				if cmp(type,'Needs') == 0:
 					need_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs where id=%s", int(typeId))
-					item = dict(item.items + need_item[0].items)
+					item = dict(item.items() + need_item[0].items())
 					author_item = self.get_user_profile_info(author_mail, 1)
 					item['author'] = copy(author_item[0])
-				elif type == 'Offers':
+				elif cmp(type,'Offers') == 0:
 					offer_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers WHERE id = %s ", int(typeId))
-					item = dict(item.items + offer_item[0].items)
+					item = dict(item.items() + offer_item[0].items())
 					author_item = self.get_user_profile_info(author_mail, 1)
 					item['author'] = copy(author_item[0])
-				elif type == 'Events':
+				elif cmp(type,'Events') == 0:
 					event_item = self.db.query("SELECT id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE id=%s", int(typeId))
-					item = dict(item.items + event_item[0].items)
+					item = dict(item.items() + event_item[0].items())
 					author_item = self.get_user_profile_info(author_mail, 1)
 					item['author'] = copy(author_item[0])
+				result[i] = item
+				i = i + 1
 						
 		elif int(''.join(mode)) == 2: # most followed
 			result = self.db.query("")
