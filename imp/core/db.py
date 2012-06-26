@@ -90,13 +90,6 @@ class dbmgr:
 			return 0
 		elif cmp(password, ''.join(passwd)) == 0:
 			return 1;
-	
-	def generate_user_id(mail):
-		"""Generate user's id with mail address"""
-		result = self.db.get("SELECT * FROM Users WHERE mail = %s", mail)
-		if result:
-			return 0
-		return (self.db.excute("SELECT COUNT(*) FROM Users", None)) + 1
 
 	def get_event_list(self, mail, cursor):
 		"""for event provider,return dictionary"""
@@ -104,7 +97,7 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		result = self.db.query("SELECT mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		result = self.db.query("SELECT id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -118,7 +111,7 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		result = self.db.query("SELECT mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -132,7 +125,7 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		result = self.db.query("SELECT mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -207,10 +200,8 @@ class dbmgr:
 	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
 		"""Create a unique id"""
 		create_db_connection(self)
-		_id = generate_user_id(mail)
-		if _id:
-			return 0
-		self.db.execute("INSERT INTO Users (user_id, first_name,last_name,age,gender,mail,target_population,location,work_field,language,street,city,state,post_code,country,mobile,mobile_code,skype,passwd,register_date, avatar,org_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,UTC_TIMESTAMP(),%s,%s)", _id, first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd, None,None)	
+		
+		self.db.execute("INSERT INTO Users (first_name,last_name,age,gender,mail,target_population,location,work_field,language,street,city,state,post_code,country,mobile,mobile_code,skype,passwd,register_date, avatar,org_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,UTC_TIMESTAMP(),%s,%s)",first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd, None,None)	
 		drop_db_connection(self)	
 		return 1
 
