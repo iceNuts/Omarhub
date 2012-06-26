@@ -154,9 +154,30 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		if int(''.join(mode)) == 0:
-		elif int(''.join(mode)) == 1:
-		result = self.db.query("SELECT _type,typeId,_date,_from,_to FROM Recent_Events WHERE _from = %s LIMIT %s,20", mail, int(strCursor))
+		if int(''.join(mode)) == 1: # most recent
+			result = self.db.query("SELECT _type,typeId,_from,_to FROM Recent_Events order by _date DESC LIMIT %s,20", int(strCursor))
+			for item in result:
+				type = item['_type'] # judge which table
+				typeId = item['typeId'] # get id in that table
+				author_mail = item['_from'] # get author's mail address
+				if type == 'Needs':
+					need_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs where id=%s", int(typeId))
+					item['activity'] = copy(need_item[0])
+					author_item = self.get_user_profile_info(author_mail, 1)
+					item['author'] = copy(author_item[0])
+				elif type == 'Offers':
+					offer_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers WHERE id = %s ", int(typeId))
+					item['activity'] = copy(offer_item[0])
+					author_item = self.get_user_profile_info(author_mail, 1)
+					item['author'] = copy(author_item[0])
+				elif type == 'Events':
+					event_item = self.db.query("SELECT id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE id=%s", int(typeId))
+					item['activity'] = copy(event_item[0])
+					author_item = self.get_user_profile_info(author_mail, 1)
+					item['author'] = copy(author_item[0])
+						
+		elif int(''.join(mode)) == 2: # most followed
+					pass
 		self.drop_db_connection()
 		#####Todo#######
 		print result
