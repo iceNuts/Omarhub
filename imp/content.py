@@ -69,22 +69,14 @@ class NeedProvider(BaseHandler):
 class RecentallProvider(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
-	#Only for test TODO
-	def get(self):
-		if not self.current_user:
-			return None
-		id = self.current_user
-		cursor = self.get_arguments("cursor")
-		print id
-		list = self.dbManager.get_need_list(id, cursor)
-		self.write(json.dumps(list))
 	def post(self):
 		if not self.current_user:
 			return None
 		cursor = self.get_arguments("cursor")
+		mode = self.get_arguments("mode")
 		id = self.current_user
 		#print id
-		list = self.dbManager.get_recent_all_list(id, cursor)
+		list = self.dbManager.get_recent_all_list(id, cursor, mode)
 		self.write(json.dumps(list))
 	
 

@@ -68,7 +68,7 @@ CREATE TABLE Follow_Status (
 
 CREATE TABLE Recent_Events (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    _type INT, #0 for follow,1 for event,2 for offer,3 for need
+    _type VARCHAR(100), #Follow_Status, Offers, Needs, Events
 	typeId INT,
     _date TIMESTAMP,
     _from VARCHAR(100),

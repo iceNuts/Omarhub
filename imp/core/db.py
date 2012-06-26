@@ -148,12 +148,14 @@ class dbmgr:
 			return None
 		return result
         
-	def get_recent_all_list(self,mail, cursor):
-		"""for all recent events provider,return dictionary"""
+	def get_recent_all_list(self,mail, cursor, mode):
+		"""for all recent events provider,return dictionary, mode = 1 most recent 2 most followed"""
 		self.create_db_connection()
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
+		if int(''.join(mode)) == 0:
+		elif int(''.join(mode)) == 1:
 		result = self.db.query("SELECT _type,typeId,_date,_from,_to FROM Recent_Events WHERE _from = %s LIMIT %s,20", mail, int(strCursor))
 		self.drop_db_connection()
 		#####Todo#######
