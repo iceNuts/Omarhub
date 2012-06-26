@@ -7,7 +7,14 @@ from core.db import *
 class ProfileHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
-		
+	
+	def sub_dict_minus(self,dict_ori,somekey):
+		dict_res={}
+		for k in dict_ori:
+			if k!=somekey:
+				dict_res.update({k:dict_ori[k]})
+		return dict_res
+			
 	def get_strgender(self,gid):
 		if gid==0 :
 			return "Male"
@@ -38,8 +45,7 @@ class ProfileHandler(BaseHandler):
 			"target_population":user["target_population"],
 			"location":user["location"],
 			"work_field":user["work_field"],
-			"language":user["language"],
-			#"avatar":user["avatar"]
+			"language":user["language"]
 		}
 		user_contact={
 			"street":user["street"],
@@ -53,7 +59,10 @@ class ProfileHandler(BaseHandler):
 		}
 		user_basic["gender"]=self.get_strgender(user_basic["gender"])
 		organization["_type"]=self. get_str_orgtype(organization["_type"])
-		organization["org_id"]=None
+		
+		#organization["org_id"]=None
+		organization=self.sub_dict_minus(organization,"org_id")
+		avatar=user["avatar"]
 		
 		follower_count=self.dbManager.get_follower_count(mail)
 		following_count=self.dbManager.get_following_count(mail)
@@ -62,7 +71,8 @@ class ProfileHandler(BaseHandler):
 			following_count=following_count,
 			user_basic=user_basic,
 			user_contact=user_contact,
-			organization=organization
+			organization=organization,
+			avatar=avatar
 		)
 
 
