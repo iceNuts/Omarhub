@@ -31,31 +31,29 @@ class ProfileHandler(BaseHandler):
 		organizationlist=self.dbManager.get_user_organization(mail)
 		organization=organizationlist[0]
 		user_basic={
-			"first_name":"",
-			"last_name":"",
-			"age":0,
-			"gender":0,
-			"mail":"",
-			"target_population":"",
-			"location":"",
-			"work_field":"",
-			"language":"",
-			"avatar":""
+			"name":user["first_name"]+" "+user["last_name"],
+			"age":user["age"],
+			"gender":user["gender"],
+			"mail":user["mail"],
+			"target_population":user["target_population"],
+			"location":user["location"],
+			"work_field":user["work_field"],
+			"language":user["language"],
+			#"avatar":user["avatar"]
 		}
 		user_contact={
-			"street":"",
-			"city":"",
-			"state":"",
-			"post_code":"",
-			"country":"",
-			"mobile":"",
-			"mobile_code":"",
-			"skype":""
+			"street":user["street"],
+			"city":user["city"],
+			"state":user["state"],
+			"post_code":user["post_code"],
+			"country":user["country"],
+			"mobile":user["mobile"],
+			"mobile_code":user["mobile_code"],
+			"skype":user["skype"]
 		}
-		user_basic.update(user)
-		user_contact.update(user)
 		user_basic["gender"]=self.get_strgender(user_basic["gender"])
 		organization["_type"]=self. get_str_orgtype(organization["_type"])
+		organization["org_id"]=None
 		
 		follower_count=self.dbManager.get_follower_count(mail)
 		following_count=self.dbManager.get_following_count(mail)
