@@ -33,35 +33,43 @@ class ProfileHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail=self.current_user
-		userlist=self.dbManager.get_user_profile_info(mail)
+		userlist=self.dbManager.get_user_profile_info(mail,0)
 		user=userlist[0]
 		organizationlist=self.dbManager.get_user_organization(mail)
 		organization=organizationlist[0]
 		user_basic={
-			"name":user["first_name"]+" "+user["last_name"],
+			"name":" ".join([user["first_name"],user["last_name"]]),
 			"age":user["age"],
 			"gender":user["gender"],
 			"mail":user["mail"],
-			"target_population":user["target_population"],
+			"target population":user["target_population"],
 			"location":user["location"],
-			"work_field":user["work_field"],
+			"work field":user["work_field"],
 			"language":user["language"]
 		}
 		user_contact={
 			"street":user["street"],
 			"city":user["city"],
 			"state":user["state"],
-			"post_code":user["post_code"],
 			"country":user["country"],
+			"postcode":user["post_code"],
 			"mobile":user["mobile"],
-			"mobile_code":user["mobile_code"],
+			"mobile code":user["mobile_code"],
 			"skype":user["skype"]
 		}
+		org_info={
+			"name":organization["name"],
+			"acronym":organization["acronym"],
+			"type":organization["_type"],
+			"found date":organization["found_date"],
+			"website":organization["site_url"],
+			"employee number":organization["numberOfemployees"],
+			"phone":organization["phoneNumber"],
+			"country code":organization["country_code"]
+		}
 		user_basic["gender"]=self.get_strgender(user_basic["gender"])
-		organization["_type"]=self. get_str_orgtype(organization["_type"])
+		org_info["type"]=self. get_str_orgtype(org_info["type"])
 		
-		#organization["org_id"]=None
-		organization=self.sub_dict_minus(organization,"org_id")
 		avatar=user["avatar"]
 		
 		follower_count=self.dbManager.get_follower_count(mail)
@@ -71,7 +79,7 @@ class ProfileHandler(BaseHandler):
 			following_count=following_count,
 			user_basic=user_basic,
 			user_contact=user_contact,
-			organization=organization,
+			organization=org_info,
 			avatar=avatar
 		)
 
