@@ -10,7 +10,8 @@ html {
 body {
     color: #777;
     /*background: whitesmoke;*/
-    background: url("../img/bg_pattern.png");
+    background:#e2e2e2 url("../img/bg_pattern.png");
+    z-index: 1;
 }
 
 a {
@@ -289,8 +290,8 @@ div#footer-wrap {
 }
 
 .content-item {
-    padding: 6px 0;
-    overflow: hidden;
+    /*padding: 6px 0;*/
+    /*overflow: hidden;*/
 }
 
 .content-item .avatar-wrap{
@@ -317,22 +318,18 @@ div#footer-wrap {
 .content-item .item-details .item-details-main a.follow-item-button {
     display: block;
     position: absolute;
-    top: 10px;
-    right: -40px;
-    background: #61C03C;
+    top: -20px;
+    right: 40px;
+    background: #E05e7d;
+    height: 20px;
     width: 40px;
-    color: white;
-    font-size: 0.8em;
-    padding: 10px 0px;;
-    border-radius: 0 5px 5px 0;
+    z-index: 0;
+    -webkit-transition: height linear 0.2s;
+    /*border-radius: 0 5px 5px 0;*/
 }
 .content-item .item-details .item-details-main a.follow-item-button:hover{
-    background: #61C03C;
-    right: -60px;
-    width: 40px;
-    color: white;
-    font-size: 0.8em;
-    padding: 10px 10px;;
+    height: 60px;
+    top: -20px;
 }
 
 .content-item .item-details .item-details-main:after {
@@ -340,8 +337,8 @@ div#footer-wrap {
     height:0;
     position: absolute;
     border: solid 10px transparent;
-    border-right: solid 10px white;
-    left: -20px;
+    border-left: solid 10px white;
+    right: -20px;
     top: 10px;
     z-index: 1000;
     display: block;
@@ -352,8 +349,8 @@ div#footer-wrap {
     height:0;
     position: absolute;
     border: solid 11px transparent;
-    border-right: solid 11px #ddd;
-    left: -22px;
+    border-left: solid 11px #b6b6b6;
+    right: -22px;
     top: 9px;
     z-index: 999;
     display: block;

@@ -2,14 +2,15 @@
 {% block title %}People and Activity{%end%}
 {% block extra-links %}
 <link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+<script type="text/javascript" src="{{static_url('./js/panda.js')}}"></script>
 {% end %}
 
 
 
 {% block content %}
 <div id="container" class="container_16">
-    <div id="sidebar-wrap" class="grid_4">
-        <div id="sidebar">
+    <div class="sidebar-wrap grid_4">
+        <div class="sidebar">
             <div id="top-filter">
               <div id="top-filter-bg"></div>
                 <ul>
@@ -19,44 +20,44 @@
             </div>
             <div id="regular-filter">
                 <!--<h2>Filter</h2>-->
-                <form id="regular-filter-form" action="">
-                    <div class="control-group">
-                        <label for="work-select">Fields of Work</label>
-                        <select id="work-select" name="">
-                            <option value="">aoeuaoeuaeoeauoeuaoeu</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label for="location-select">Location of Work</label>
-                        <select id="location-select" name="">
-                            <option value="">aoeuaoeuaeoeauoeuaoeu</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label for="population-select">Work Population</label>
-                        <select id="population-select" name="">
-                            <option value="">aoeuaoeuaeoeauoeuaoeu</option>
-                        </select>
-                    </div>
-                    <div class="control-group">
-                        <label for="freetag-search-input">free tag search:</label>
-                        <input id="freetag-search-input" type="text" />
-                    </div>
-                    <button class="btn btn-primary" id="set-button">set</button>
-                </form>
+                <!--<form id="regular-filter-form" action="">-->
+                  <!--<div class="control-group">-->
+                    <!--<label for="work-select">Fields of Work</label>-->
+                    <!--<select id="work-select" name="">-->
+                      <!--<option value="">aoeuaoeuaeoeauoeuaoeu</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--<div class="control-group">-->
+                    <!--<label for="location-select">Location of Work</label>-->
+                    <!--<select id="location-select" name="">-->
+                      <!--<option value="">aoeuaoeuaeoeauoeuaoeu</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--<div class="control-group">-->
+                    <!--<label for="population-select">Work Population</label>-->
+                    <!--<select id="population-select" name="">-->
+                      <!--<option value="">aoeuaoeuaeoeauoeuaoeu</option>-->
+                      <!--</select>-->
+                    <!--</div>-->
+                  <!--<div class="control-group">-->
+                    <!--<label for="freetag-search-input">free tag search:</label>-->
+                    <!--<input id="freetag-search-input" type="text" />-->
+                    <!--</div>-->
+                  <!--<button class="btn btn-primary" id="set-button">set</button>-->
+                  <!--</form>-->
             </div>
         </div>
     </div>
 
     <div id="content-wrap" class="grid_12">
         <div id="content">
-            <div id="nav-tab" class="prefix_2 clearfix">
+            <div id="nav-tab" class="clearfix">
                 <ul id="category-tab" class="tab nav grid_6 alpha">
-                    <li><a class="active" href="#">All</a></li>
-                    <li><a href="#">People</a></li>
-                    <li><a href="#">Offer</a></li>
-                    <li><a href="#">Need</a></li>
-                    <li><a href="#">Event</a></li>
+                    <li><a id="all" class="active" href="/">All</a></li>
+                    <li><a id="offer" href="#people">People</a></li>
+                    <li><a id="offer" href="#offer">Offer</a></li>
+                    <li><a id="need" href="#need">Need</a></li>
+                    <li><a id="event" href="#event">Event</a></li>
                 </ul>
                 <div id="category-sort" class="grid_3 omega">
                     <!--<label id="sort-option-label" for="sort-option">Choose how to sort:</label>-->
@@ -67,17 +68,9 @@
             </div>
 
             <div id="content-items">
+              <div class="clearfix">
                 <div class="content-item">
-                    <div class="user-container grid_2 alpha">
-                        <div class="user-info">
-                            <a class="avatar-wrap" href="#">
-                                <img src="{{static_url('./img/avatar.jpg')}}" alt="" class="avatar" />
-                            </a>
-                            <p>name</p>
-                            <p>location</p>
-                        </div>
-                    </div>
-                    <div class="item-details grid_9 omega">
+                    <div class="item-details grid_9 alpha">
                         <div class="item-details-main">
                             <a href="#" class="follow-item-button"></a>
                             <div class="general-info">
@@ -105,7 +98,17 @@
                             </div>
                         </div>
                     </div>
+                    <div class="user-container grid_2 omega">
+                        <div class="user-info">
+                            <a class="avatar-wrap" href="#">
+                                <img src="{{static_url('./img/avatar.jpg')}}" alt="" class="avatar" />
+                            </a>
+                            <p>name</p>
+                            <p>location</p>
+                        </div>
+                    </div>
                 </div>
+              </div>
             </div>
 
         </div>

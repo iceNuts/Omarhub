@@ -1,15 +1,15 @@
-div#sidebar {
+div.sidebar {
     /*border-right: solid 1px #eee;*/
 }
-div#sidebar #create-link {
+div.sidebar #create-link {
 
 }
 
-div#sidebar #create-group-list {
+div.sidebar #create-group-list {
     display: none;
 }
 
-div#sidebar #top-filter {
+div.sidebar #top-filter {
     font-size: 1.4em;
     margin-bottom: 30px;
     background: whitesmoke;
@@ -17,11 +17,11 @@ div#sidebar #top-filter {
     /*border-bottom: solid 1px #ddd;*/
 }
 
-div#sidebar #top-filter li{
+div.sidebar #top-filter li{
     margin-right: 0px;
 }
 
-div#sidebar #top-filter a{
+div.sidebar #top-filter a{
     /*padding: 5px 0;*/
     /*padding-left: 10px;*/
     padding-left: 10px;
@@ -33,24 +33,24 @@ div#sidebar #top-filter a{
     border-left: solid 5px #aaa;
 }
 
-div#sidebar #top-filter a.active, div#sidebar #top-filter a:hover{
+div.sidebar #top-filter a.active, div.sidebar #top-filter a:hover{
     color: #61C03C;
     background: #eee;
     background: #fafafa;
     border-left: solid 5px #61C03C;
 }
 
-div#sidebar #regular-filter {
+div.sidebar #regular-filter {
     /*border-right: solid 1px #eee;*/
     border-top: solid 1px #eee;
     padding-left: 10px;
 }
 
-div#sidebar #regular-filter h2{
+div.sidebar #regular-filter h2{
     font-weight: normal;
     margin-bottom: 10px;
 }
-div#sidebar #regular-filter button#set-button{
+div.sidebar #regular-filter button#set-button{
     height: 30px;
     width: 80px;
     width: 170px;
@@ -59,37 +59,50 @@ div#sidebar #regular-filter button#set-button{
     background: #aaa;
     border-radius: 5px;
 }
-div#sidebar #regular-filter .control-group{
+div.sidebar #regular-filter .control-group{
     margin-bottom: 10px;
 }
 
 
-div#sidebar #regular-filter input[type="text"]{
+div.sidebar #regular-filter input[type="text"]{
     border: solid 1px #eee;
     height: 30px;
 }
 
-div#sidebar .control-group select {
+div.sidebar .control-group select {
     height: 20px;
     border: none;
 }
-div#sidebar .control-group label{
+div.sidebar .control-group label{
     font-size: 0.8em;
 }
 
-div#sidebar .side-zone {
+div.sidebar .side-zone {
     height: 150px;
     padding: 10px;
-    border: solid 1px #eee;
-    margin-top: 20px;
-    background: rgba(245,245,245,0.5);
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.10);
+    border: solid 1px white;
+    margin-bottom: 20px;
+    background: whitesmoke;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.20);
+    padding-bottom: 20px;
+}
+
+#follower ul.followers-avatar li {
+    height: 36px;
+    width: 36px;
+    float: left;
+    overflow: hidden;
+    margin: 0px;
+    padding: 5px;
+}
+#follower ul.followers-avatar li img{
+    width: 30px;
+    border: solid 3px white;
 }
 
 div#top-filter {
     
 }
-
 
 div#content div#category-sort {
     display: inline-block;
@@ -103,29 +116,33 @@ div#content div#category-sort label#sort-option-label{
     margin-right: 10px;
 }
 
-div#content div.profile-top {
+div.profile-top {
     margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: solid 1px #eee;
     overflow: hidden;
 }
 
-div#content div.profile-top div.avatar img{
+div.profile-top div.avatar img{
     width: 80px;
     /*float: right;*/
     border: solid 5px white;
 }
 
-div.profile-info-container {
-    
+.profile-content {
+    background: #FCFCFC;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border: solid 1px white;
+    padding-bottom: 30px;
 }
 
 div.profile-info {
-    background: rgba(255,255,255,0.9);
-    /*background: white;*/
-    padding: 10px 10px;
-    border-bottom: solid 1px #eee;
-    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: solid 1px #ccc;
+}
+
+div.profile-info:hover {
+    background: #f4f4f4;
 }
 
 div.profile-info h4 {
