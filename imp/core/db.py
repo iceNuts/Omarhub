@@ -1,6 +1,7 @@
 import tornado.database
 from tornado.options import define, options
 import unicodedata
+from copy import copy
 
 define("port", default=8888, help="run on the given port", type=int)
 define("mysql_host", default="localhost:3306", help="imp host")
@@ -177,7 +178,7 @@ class dbmgr:
 					item['author'] = copy(author_item[0])
 						
 		elif int(''.join(mode)) == 2: # most followed
-					pass
+			result = self.db.query("")
 		self.drop_db_connection()
 		#####Todo#######
 		print result
