@@ -91,13 +91,18 @@ class dbmgr:
 		elif cmp(password, ''.join(passwd)) == 0:
 			return 1;
 
-	def get_event_list(self, mail, cursor):
-		"""for event provider,return dictionary"""
+	def get_event_list(self, mail, cursor, mode):
+		"""for event provider,return dictionary, 0 personal, 1 recent, 2 most followed"""
 		self.create_db_connection()
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		result = self.db.query("SELECT id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		if mode == 0:
+				result = self.db.query("SELECT id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		elif mode == 1:
+				result = self.db.query("select id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by time descending LIMIT %s,20", int(strCursor))
+		elif mode == 2:
+				result = self.db.query("select id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by followed descending LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -105,13 +110,18 @@ class dbmgr:
 			return None
 		return result
         
-	def get_offer_list(self,mail, cursor):
-		"""for offer provider,return dictionary"""
+	def get_offer_list(self,mail, cursor, mode):
+		"""for offer provider,return dictionary, 0 personal, 1 recent, 2 most followed"""
 		self.create_db_connection()
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		if mode == 0:
+			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		elif mode == 1:
+			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers order by time descending LIMIT %s,20", int(strCursor))
+		elif mode == 2:
+			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers order by followed descending LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -119,13 +129,18 @@ class dbmgr:
 			return None
 		return result
     
-	def get_need_list(self,mail, cursor):
-		"""for need provider,return dictionary"""
+	def get_need_list(self,mail, cursor, mode):
+		"""for need provider,return dictionary, 0 personal, 1 recent, 2 most followed"""
 		self.create_db_connection()
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		if mode == 0:
+			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+		elif mode == 1:
+			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs order by time descending LIMIT %s,20", int(strCursor))
+		elif mode == 2:
+			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs order by followed descending LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:

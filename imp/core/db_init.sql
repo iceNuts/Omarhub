@@ -84,6 +84,7 @@ CREATE TABLE Offers (
 	location VARCHAR(100),
 	target_population VARCHAR(100),
     time TIMESTAMP,
+	followed INT,
 	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 
@@ -95,6 +96,7 @@ CREATE TABLE Needs (
 	location VARCHAR(100),
 	target_population VARCHAR(100),
     time TIMESTAMP,
+	followed INT,
 	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 
@@ -109,6 +111,7 @@ CREATE TABLE Events (
 	start_date VARCHAR(100),
 	end_date VARCHAR(100),
     time TIMESTAMP,
+	followed INT,
 	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
 

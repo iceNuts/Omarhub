@@ -18,9 +18,10 @@ class EventProvider(BaseHandler):
 		if not self.current_user:
 			return None
 		cursor = self.get_arguments("cursor")
+		mode = self.get_arguments("mode")
 		id = self.current_user
 		print id
-		list = self.dbManager.get_event_list(id, cursor)
+		list = self.dbManager.get_event_list(id, cursor, mode)
 		self.write(json.dumps(list))
 
 
@@ -32,9 +33,10 @@ class OfferProvider(BaseHandler):
 		if not self.current_user:
 			return None
 		cursor = self.get_arguments("cursor")
+		mode = self.get_arguments("mode")
 		id = self.current_user
 		#print id
-		list = self.dbManager.get_offer_list(id, cursor)
+		list = self.dbManager.get_offer_list(id, cursor, mode)
 		self.write(json.dumps(list))
 
 
@@ -46,9 +48,10 @@ class NeedProvider(BaseHandler):
 		if not self.current_user:
 			return None
 		cursor = self.get_arguments("cursor")
+		mode = self.get_arguments("mode")
 		id = self.current_user
 		#print id/
-		list = self.dbManager.get_need_list(id, cursor)
+		list = self.dbManager.get_need_list(id, cursor, mode)
 		self.write(json.dumps(list))
 
 class RecentallProvider(BaseHandler):
