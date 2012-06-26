@@ -25,17 +25,17 @@ INSERT INTO Users (
 INSERT INTO Recent_Events (
 	_type,typeId,_from)
 	values (
-	1,1,"billzeng808@gmail.com");
+	"Events",1,"billzeng808@gmail.com");
 	
 INSERT INTO Recent_Events (
 	_type,typeId,_from)
 	values (
-	2,1,"billzeng808@gmail.com");
+	"Offers",1,"billzeng808@gmail.com");
 	
 INSERT INTO Recent_Events (
 	_type,typeId,_from)
 	values (
-	3,1,"billzeng808@gmail.com");
+	"Needs",1,"billzeng808@gmail.com");
 	
 INSERT INTO Events (
 	mail,title,description,followed)
