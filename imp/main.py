@@ -44,7 +44,8 @@ class Application(tornado.web.Application):
 			template_path=os.path.join(os.path.dirname(__file__), "template"),
 			static_path=os.path.join(os.path.dirname(__file__), "static"),
 			login_url="/auth/login",
-			cookie_secret="94s2ss5swv18xdwsdfeswrdde9xtacsxse//vr0",
+			cookie_secret="94s2ss5swv18xdwsdfeewrdde9xtacsxse//vr0",
+			debug = True
 		)
 		tornado.web.Application.__init__(self ,handlers, **settings)
 		

@@ -97,11 +97,11 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		if mode == 0:
+		if int(''.join(mode)) == 0:
 				result = self.db.query("SELECT id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
-		elif mode == 1:
+		elif int(''.join(mode)) == 1:
 				result = self.db.query("select id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by time descending LIMIT %s,20", int(strCursor))
-		elif mode == 2:
+		elif int(''.join(mode)) == 2:
 				result = self.db.query("select id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by followed descending LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
@@ -116,11 +116,11 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		if mode == 0:
+		if int(''.join(mode)) == 0:
 			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
-		elif mode == 1:
+		elif int(''.join(mode)) == 1:
 			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers order by time descending LIMIT %s,20", int(strCursor))
-		elif mode == 2:
+		elif int(''.join(mode)) == 2:
 			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers order by followed descending LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
@@ -135,11 +135,11 @@ class dbmgr:
 		if not cursor:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
-		if mode == 0:
+		if int(''.join(mode)) == 0:
 			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
-		elif mode == 1:
+		elif int(''.join(mode)) == 1:
 			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs order by time descending LIMIT %s,20", int(strCursor))
-		elif mode == 2:
+		elif int(''.join(mode)) == 2:
 			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs order by followed descending LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
