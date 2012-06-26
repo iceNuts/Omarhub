@@ -21,12 +21,11 @@ class EventProvider(BaseHandler):
 		cursor = self.get_arguments("cursor")
 		mode = self.get_arguments("mode")
 		id = self.current_user
-		print id
 		list = self.dbManager.get_event_list(id, cursor, mode)
 		for item in list:
-				m_mail = item['mail']
-				tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
-				item['author'] = copy(tmp_list[0])
+			m_mail = item['mail']
+			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+			item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
 
@@ -42,6 +41,10 @@ class OfferProvider(BaseHandler):
 		id = self.current_user
 		#print id
 		list = self.dbManager.get_offer_list(id, cursor, mode)
+		for item in list:
+			m_mail = item['mail']
+			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+			item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
 
@@ -57,6 +60,10 @@ class NeedProvider(BaseHandler):
 		id = self.current_user
 		#print id/
 		list = self.dbManager.get_need_list(id, cursor, mode)
+		for item in list:
+			m_mail = item['mail']
+			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+			item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
 class RecentallProvider(BaseHandler):

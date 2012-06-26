@@ -98,11 +98,11 @@ class dbmgr:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
 		if int(''.join(mode)) == 0:
-				result = self.db.query("SELECT id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+				result = self.db.query("SELECT id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
 		elif int(''.join(mode)) == 1:
-				result = self.db.query("select id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by time DESC LIMIT %s,20", int(strCursor))
+				result = self.db.query("select id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by time DESC LIMIT %s,20", int(strCursor))
 		elif int(''.join(mode)) == 2:
-				result = self.db.query("select id mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by followed DESC LIMIT %s,20", int(strCursor))
+				result = self.db.query("select id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events order by followed DESC LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -117,11 +117,11 @@ class dbmgr:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
 		if int(''.join(mode)) == 0:
-			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
 		elif int(''.join(mode)) == 1:
-			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers order by time DESC LIMIT %s,20", int(strCursor))
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers order by time DESC LIMIT %s,20", int(strCursor))
 		elif int(''.join(mode)) == 2:
-			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Offers order by followed DESC LIMIT %s,20", int(strCursor))
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers order by followed DESC LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
@@ -136,11 +136,11 @@ class dbmgr:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
 		if int(''.join(mode)) == 0:
-			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs WHERE mail = %s LIMIT %s,20", mail, int(strCursor))
 		elif int(''.join(mode)) == 1:
-			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs order by time DESC LIMIT %s,20", int(strCursor))
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs order by time DESC LIMIT %s,20", int(strCursor))
 		elif int(''.join(mode)) == 2:
-			result = self.db.query("SELECT id mail,title,location,description,target_population FROM Needs order by followed DESC LIMIT %s,20", int(strCursor))
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs order by followed DESC LIMIT %s,20", int(strCursor))
 		self.drop_db_connection()
 		print result
 		if not result:
