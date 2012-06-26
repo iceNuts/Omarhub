@@ -29,7 +29,7 @@ class ProfileHandler(BaseHandler):
 		else:
 			return "Multilateral Organization"
 		
-	def get(self):
+	def get(self,user_id):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail=self.current_user
