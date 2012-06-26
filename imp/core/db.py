@@ -163,22 +163,23 @@ class dbmgr:
 				author_mail = item['_from'] # get author's mail address
 				if type == 'Needs':
 					need_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs where id=%s", int(typeId))
-					item['activity'] = copy(need_item[0])
+					item = dict(item.items + need_item[0].items)
 					author_item = self.get_user_profile_info(author_mail, 1)
 					item['author'] = copy(author_item[0])
 				elif type == 'Offers':
 					offer_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers WHERE id = %s ", int(typeId))
-					item['activity'] = copy(offer_item[0])
+					item = dict(item.items + offer_item[0].items)
 					author_item = self.get_user_profile_info(author_mail, 1)
 					item['author'] = copy(author_item[0])
 				elif type == 'Events':
 					event_item = self.db.query("SELECT id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE id=%s", int(typeId))
-					item['activity'] = copy(event_item[0])
+					item = dict(item.items + event_item[0].items)
 					author_item = self.get_user_profile_info(author_mail, 1)
 					item['author'] = copy(author_item[0])
 						
 		elif int(''.join(mode)) == 2: # most followed
 			result = self.db.query("")
+						
 		self.drop_db_connection()
 		#####Todo#######
 		print result
