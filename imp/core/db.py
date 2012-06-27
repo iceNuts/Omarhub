@@ -225,7 +225,7 @@ class dbmgr:
 		"""Set profile Info"""
 		self.create_db_connection()
 		for item in info:	
-			entry = self.db.query("update Users set %s=%s where mail=%s", item,info[item],mail)
+			entry = self.db.query("update Users set %s=%s where mail=%s", unicodedata.normalize('NFKD', item).encode('ascii','ignore'),''.join(info[item]),mail)
 		self.drop_db_connection()
 			
 	def get_follower_count(self, mail):
@@ -250,11 +250,12 @@ class dbmgr:
 		"""Insert into tables for new record"""
 		self.create_db_connection()
 		if mode == 0: # Event
-			entry = self.db.query("insert into Events (mail, title, description, location, work_field, target_population, start_date, end_date) values (%s, %s, %s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'], info['start_date'], info['end_date'])
+			self.db.query("insert into Events (mail, title, description, location, work_field, target_population, start_date, end_date) values (%s, %s, %s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'], info['start_date'], info['end_date'])
 		elif mode == 1: # offer
-			entry = self.db.query("insert into Offers (mail, title, description, location, work_field, target_population) values (%s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'])
-		elif mode == 2: # nedd
-			entry = self.db.query("insert into Needs (mail, title, description, location, work_field, target_population) values (%s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'])
+			self.db.query("insert into Offers (mail, title, description, location, target_population) values (%s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['target_population'])
+		#id = self.db.query("")
+		elif mode == 2: # need
+			self.db.query("insert into Needs (mail, title, description, location, target_population) values (%s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['target_population'])
 		self.drop_db_connection()
 		print entry
 			

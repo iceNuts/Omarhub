@@ -39,10 +39,11 @@ class EventCreateHandler(BaseHandler):
 		info['work_field'] = self.get_argument("work_field")
 		info['target_population'] = self.get_argument("target_population")
 		info['start_date'] = self.get_argument("start_date")
-		info['end_date'] = self.get_argument("end_date")		
-		
+		info['end_date'] = self.get_argument("end_date")	
+						
 		id = self.dbManager.create_new_activity(self.current_user,info, 0)
-		self.redirect("/event/"+id)
+#self.redirect("/event/"+id)
+		self.redirect("/home")
 		
 
 class OfferCreateHandler(BaseHandler):
@@ -54,14 +55,15 @@ class OfferCreateHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/")
 		info = dict()
-		info['title'] = self.get_arguments("title")
-		info['description'] = self.get_arguments("description")
-		info['location'] = self.get_arguments("location")
-		info['work_field'] = self.get_arguments("work_field")
-		info['target_population'] = self.get_arguments("target_population")
+		info['title'] = self.get_argument("title")
+		info['description'] = self.get_argument("description")
+		info['location'] = self.get_argument("location")
+		info['target_population'] = self.get_argument("target_population")
 		
 		id = self.dbManager.create_new_activity(self.current_user,info, 1)
-		self.redirect("/offer/"+id)
+#self.redirect("/offer/"+id)
+		self.redirect("/home")
+
 
 
 class NeedCreateHandler(BaseHandler):
@@ -73,12 +75,12 @@ class NeedCreateHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/")
 		info = dict()
-		info['title'] = self.get_arguments("title")
-		info['description'] = self.get_arguments("description")
-		info['location'] = self.get_arguments("location")
-		info['work_field'] = self.get_arguments("work_field")
-		info['target_population'] = self.get_arguments("target_population")
+		info['title'] = self.get_argument("title")
+		info['description'] = self.get_argument("description")
+		info['location'] = self.get_argument("location")
+		info['target_population'] = self.get_argument("target_population")
 		
 		id = self.dbManager.create_new_activity(self.current_user,info, 2)
-		self.redirect("/need/"+id)
+#self.redirect("/need/"+id)
+		self.redirect("/home")
 
