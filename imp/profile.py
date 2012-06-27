@@ -131,11 +131,14 @@ class ProfileEditUserHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail = self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
 		#fetch input data
 		#user can't change the mail
 		updatedict=dict()
 		
-		updatedict["user_id"]=self.get_arguments("user_id")
+		#updatedict["user_id"]=self.get_arguments("user_id")
 		updatedict["first_name"] = self.get_arguments("first_name")
 		updatedict["last_name"] = self.get_arguments("last_name")
 		updatedict["age"] = self.get_arguments("age")
@@ -153,7 +156,7 @@ class ProfileEditUserHandler(BaseHandler):
 		updatedict["skype"] = self.get_arguments("skype")
 		self.dbManager.set_user_profile_info(mail,updatedict)
 		
-		self.redirect("/profile/"+" ".join(user_id))
+		self.redirect("/profile/"+str(user_id))
 		
 class ProfileEditOrgHandler(BaseHandler):
 	def initialize(self):
@@ -163,7 +166,10 @@ class ProfileEditOrgHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail = self.current_user
-		updatedict["user_id:"]=self.getarguments("user_id")
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
+		#updatedict["user_id:"]=self.getarguments("user_id")
 		updatedict["first_name"] = self.get_arguments("first_name")
 		updatedict["last_name"] = self.get_arguments("last_name")
 		updatedict["age"] = self.get_arguments("age")
@@ -181,7 +187,7 @@ class ProfileEditOrgHandler(BaseHandler):
 		updatedict["skype"] = self.get_arguments("skype")
 		#self.dbManager.set_org_profile_info(mail,updatedict)
 		
-		self.redirect("/profile/"+" ".join(user_id))
+		self.redirect("/profile/"+str(user_id))
 		
 
 
