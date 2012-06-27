@@ -40,6 +40,8 @@ class Application(tornado.web.Application):
             (r"/content/provider/getrecentall", RecentallProvider),
 			(r"/profile/([\d]+)",ProfileHandler),
 			(r"/profile/editMyProfile", ProfileEditHandler),
+			(r"/profile/editMyProfile/user",ProfileEditUserHandler),
+			(r"/profile/editMyProfile/org",ProfileEditOrgHandler),
 			(r"/auth/logout", LogoutHandler),
 			(r"/create", CreateHandler),
 			(r"/event/create", EventCreateHandler),

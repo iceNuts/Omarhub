@@ -133,38 +133,25 @@ class ProfileEditUserHandler(BaseHandler):
 		mail = self.current_user
 		#fetch input data
 		#user can't change the mail
+		updatedict=dict()
 		
-		
-		user_id=self.getarguments("user_id")
-		first_name = self.get_arguments("first_name")
-		last_name = self.get_arguments("last_name")
-		age = self.get_arguments("age")
-		gender=self.get_arguments("gender")
-		location = self.get_arguments("location")
-		target_population = self.get_arguments("target_population")
-		work_field = self.get_arguments("work_field")
-		language = self.get_arguments("language")
-		street=self.get_arguments("street")
-		city
-		country = self.get_arguments("country")
-		skype = self.get_arguments("skype")
-		#...
-		#street VARCHAR(100),
-		#city VARCHAR(100),
-		#post_code VARCHAR(100),
-		#country VARCHAR(100),
-		#mobile VARCHAR(100),
-		#mobile_code VARCHAR(100),
-		#skype VARCHAR(100),
-		#passwd VARCHAR(100),
-		#register_date TIMESTAMP,
-		#avatar VARCHAR(100),
-		#org_id INT,
-		
-		
-		#xxx=self.get_arguments("xxx")
-		#self.dbManager.update....
-		
+		updatedict["user_id"]=self.get_arguments("user_id")
+		updatedict["first_name"] = self.get_arguments("first_name")
+		updatedict["last_name"] = self.get_arguments("last_name")
+		updatedict["age"] = self.get_arguments("age")
+		updatedict["gender"]=self.get_arguments("gender")
+		updatedict["location"] = self.get_arguments("location")
+		updatedict["target_population"] = self.get_arguments("target_population")
+		updatedict["work_field"] = self.get_arguments("work_field")
+		updatedict["language"] = self.get_arguments("language")
+		updatedict["street"]=self.get_arguments("street")
+		updatedict["city"]=self.get_arguments("city")
+		updatedict["post_code"]=self.get_arguments("post_code")
+		updatedict["country"] = self.get_arguments("country")
+		updatedict["mobile"] =self.get_arguments("mobile")
+		updatedict["mobile_code"]=self.get_arguments("mobile_code")
+		updatedict["skype"] = self.get_arguments("skype")
+		self.dbManager.set_user_profile_info(mail,updatedict)
 		
 		self.redirect("/profile/"+" ".join(user_id))
 		
@@ -176,6 +163,23 @@ class ProfileEditOrgHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail = self.current_user
+		updatedict["user_id:"]=self.getarguments("user_id")
+		updatedict["first_name"] = self.get_arguments("first_name")
+		updatedict["last_name"] = self.get_arguments("last_name")
+		updatedict["age"] = self.get_arguments("age")
+		updatedict["gender"]=self.get_arguments("gender")
+		updatedict["location"] = self.get_arguments("location")
+		updatedict["target_population"] = self.get_arguments("target_population")
+		updatedict["work_field"] = self.get_arguments("work_field")
+		updatedict["language"] = self.get_arguments("language")
+		updatedict["street"]=self.get_arguments("street")
+		updatedict["city"]=self.get_arguments("city")
+		updatedict["post_code"]=self.get_arguments("post_code")
+		updatedict["country"] = self.get_arguments("country")
+		updatedict["mobile"] =self.get_arguments("mobile")
+		updatedict["mobile_code"]=self.get_arguments("mobile_code")
+		updatedict["skype"] = self.get_arguments("skype")
+		#self.dbManager.set_org_profile_info(mail,updatedict)
 		
 		self.redirect("/profile/"+" ".join(user_id))
 		

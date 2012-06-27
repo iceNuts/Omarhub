@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Tags{%end%}
+{% block extra-links %}
+<link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{static_url('./css/tags.css')}}" type="text/css"/>
+<script type="text/javascript">
+$(document).ready(function(){
+		$('#container img').click(function(){
+			if(!$(this).hasClass("follow") ){              //类follow为空类，作为判断空星实星的标记
+				$(this).prop('src','/static/img/star/lit_star.png');
+				$(this).addClass("follow");
+			}
+			else{
+				$(this).prop('src','/static/img/star/unlit_star.png');
+				$(this).removeClass("follow");
+			}
+			})
+	})
+</script>
+{% end %}
+
+
+
+{% block content %}
+
+<div id="container" class="container_16">
+	{% for title,tags_list in tags.items() %}
+      <div class="grid_4 tag-display">
+		<div class="general-info">
+        	<div class="grid_4">
+        	<h3 class="item-title">{{title}}</h3> 
+            </div>
+            <div id="sort" class="nav grid_4" >
+				<ul>
+					<li><a class="active" href="#">Name</a></li>
+					<li><a href="#">Most Followers</a></li>
+                </ul>
+            </div>
+            <div class="grid_4">
+			<ul>
+				{ % for k,v,isFollowed in tags_list.items() %}
+				<li>
+					<a class="tag normal-tag" href="#">{{k}}({{v}})</a>
+					   {% if(!isFollowed) %}
+                    <img class="avatar" src="/static/img/star/unlit_star.png" alt="" />
+                    { %end% }
+                    { %else%}
+                    <img class="avatar follow" src="/static/img/star/lit_star.png" alt="" />
+                    {%end%}
+				</li>
+				{ % end % }
+			</ul>
+            </div>
+		</div>
+	  </div>
+	  {%end%}
+</div>
+
+{% end %}
