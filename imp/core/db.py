@@ -224,9 +224,11 @@ class dbmgr:
 	def set_user_profile_info(self, mail, info):
 		"""Set profile Info"""
 		self.create_db_connection()
-		for item in info:	
-			entry = self.db.query("update Users set %s=%s where mail=%s", unicodedata.normalize('NFKD', item).encode('ascii','ignore'),''.join(info[item]),mail)
+		for item in info:
+			sqlstatement=' '.join(["update Users set",item])
+			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
 		self.drop_db_connection()
+		print entry
 			
 	def get_follower_count(self, mail):
 		"""Get the number of followers"""
@@ -250,15 +252,16 @@ class dbmgr:
 		"""Insert into tables for new record"""
 		self.create_db_connection()
 		if mode == 0: # Event
-			self.db.query("insert into Events (mail, title, description, location, work_field, target_population, start_date, end_date) values (%s, %s, %s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'], info['start_date'], info['end_date'])
+			entry = self.db.execute("insert into Events (mail, title, description, location, work_field, target_population, start_date, end_date) values (%s, %s, %s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'], info['start_date'], info['end_date'])
+			self.db.execute("insert into Recent_Events (_type, typeId, _from) values (%s,%s,%s)", "Events", entry, mail)
 		elif mode == 1: # offer
-			self.db.query("insert into Offers (mail, title, description, location, target_population) values (%s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['target_population'])
-		#id = self.db.query("")
+			entry = self.db.execute("insert into Offers (mail, title, description, location, target_population) values (%s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['target_population'])
+			self.db.execute("insert into Recent_Events (_type, typeId, _from) values (%s,%s,%s)", "Offers", entry, mail)
 		elif mode == 2: # need
-			self.db.query("insert into Needs (mail, title, description, location, target_population) values (%s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['target_population'])
+			entry = self.db.execute("insert into Needs (mail, title, description, location, target_population) values (%s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['target_population'])
+			self.db.execute("insert into Recent_Events (_type, typeId, _from) values (%s,%s,%s)", "Needs", entry, mail)
 		self.drop_db_connection()
-		print entry
-			
+		return entry
 			
 	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
 		"""Create a unique id"""

@@ -42,8 +42,7 @@ class EventCreateHandler(BaseHandler):
 		info['end_date'] = self.get_argument("end_date")	
 						
 		id = self.dbManager.create_new_activity(self.current_user,info, 0)
-#self.redirect("/event/"+id)
-		self.redirect("/home")
+		self.redirect("/event/"+ str(id))
 		
 
 class OfferCreateHandler(BaseHandler):
@@ -61,8 +60,7 @@ class OfferCreateHandler(BaseHandler):
 		info['target_population'] = self.get_argument("target_population")
 		
 		id = self.dbManager.create_new_activity(self.current_user,info, 1)
-#self.redirect("/offer/"+id)
-		self.redirect("/home")
+		self.redirect("/offer/"+ str(id))
 
 
 
@@ -81,6 +79,5 @@ class NeedCreateHandler(BaseHandler):
 		info['target_population'] = self.get_argument("target_population")
 		
 		id = self.dbManager.create_new_activity(self.current_user,info, 2)
-#self.redirect("/need/"+id)
-		self.redirect("/home")
+		self.redirect("/need/"+str(id))
 
