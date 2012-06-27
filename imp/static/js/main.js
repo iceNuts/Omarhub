@@ -26,7 +26,7 @@ $('#header .hiden-list').each(function(index, eachOne) {
                 $(eachOne).removeClass('show');
                 $(eachOne).prev().removeClass('hover');
             }
-        )
+        );
 });
 
 
@@ -44,4 +44,20 @@ $(document).ready(function() {
             }
         }
 
+});
+
+
+$(document).ready(function() {
+        $('.profile-top-follow').click(function(){
+                if($(this).hasClass('btn-primary')) {
+                    $(this).addClass('btn-active');
+                    $(this).removeClass('btn-primary');
+                    $(this).html('following');
+                }
+                else {
+                    $(this).addClass('btn-primary');
+                    $(this).removeClass('btn-active');
+                    $(this).html('follow');
+                }
+        });     
 });

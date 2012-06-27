@@ -1,4 +1,19 @@
 $(document).ready(function(){
+        //add action to follow button
+        $(".follow-item-button").live('click', function(){
+                if($(this).hasClass('follow-item-active')) {
+                    $(this).removeClass('follow-item-active');
+                }
+                else {
+                    $(this).addClass('follow-item-active');
+                }
+
+                return false;
+                
+        });
+
+
+
         $("ul#category-tab li a").click(function() {
                 //change the current tab to active state
                 $("ul#category-tab li a").removeClass("active");
@@ -7,9 +22,15 @@ $(document).ready(function(){
                 //get the id of the tab
                 var category = $(this).prop('id');
                 var callbackUrl = '/content/provider/get'+category+'s';
+                var mode = 0;
 
                 if (category === 'all') {
                     callbackUrl = '/content/provider/getrecentall';
+                    mode = 1;
+                }
+
+                else if (category === 'people') {
+                    callbackUrl = '/content/provider/getpeople';
                 }
 
 
@@ -17,7 +38,7 @@ $(document).ready(function(){
                 $.ajax({
                         url: callbackUrl,
                         type: 'post',
-                        data: {'cursor':0,'mode':1},
+                        data: {'cursor':0,'mode':mode},
                         success: function(contentJson) {
                             contentJson = JSON.parse(contentJson);
                             if (category === 'people') {
@@ -25,14 +46,18 @@ $(document).ready(function(){
                             }
 
                             else {
-                                showContent(contentJson);
+                                showContent(contentJson, category);
                             }
                         }
                 });
                 return false;
         });
 
-        function showContent(contentJson) {
+        function showPeople(contentJson) {
+            
+        }
+
+        function showContent(contentJson, category) {
             if (contentJson === 'null') {
                 $('#content-items')[0].innerHTML = "<p>No items in the database.</p>";
             }
@@ -69,10 +94,12 @@ $(document).ready(function(){
                     var generalInfo = $('<div class="general-info"></div');
                     var itemHeader = $('<h3 class="item-title"></h3>');
                     itemHeader.html(item.title);
-                    var itemTime = $('<p class="item-time">May-2123 to May-23</p>');
-                    itemTime.html(item.start_date+'-'+item.end_date);
                     generalInfo.append(itemHeader);
-                    generalInfo.append(itemTime);
+                    if (category === 'event') {
+                        var itemTime = $('<p class="item-time">May-2123 to May-23</p>');
+                        itemTime.html(item.start_date+'-'+item.end_date);
+                        generalInfo.append(itemTime);
+                    }
                     itemDetailMain.append(generalInfo);
 
                     var descriptionWrap = $('<div class="item-description-wrap"></div>');

@@ -67,6 +67,12 @@ select {
     background: -webkit-linear-gradient(top, #309DF3 0%, #1892F2 100%);
     background: #61C03C;
 }
+.btn-active {
+    background: #309DF3;
+}
+.btn-danger {
+    background: #E05e7d;
+}
 
 .hide {
     display: none;
@@ -303,10 +309,14 @@ div#footer-wrap {
 
 /*content items css */
 /*content items css */
-.content-items {
+#content-items {
     margin-top: 10px;
     overflow: hidden;
     padding-bottom: 50px;
+}
+
+#content-items div.clearfix {
+    margin-bottom: 30px;
 }
 
 .content-item {
@@ -352,6 +362,9 @@ div#footer-wrap {
     top: -20px;
 }
 
+.content-item .item-details .item-details-main a.follow-item-active {
+    background: #61C03C;
+}
 .content-item .item-details .item-details-main:after {
     width:0;
     height:0;
