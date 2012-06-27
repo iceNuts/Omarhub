@@ -23,19 +23,19 @@ INSERT INTO Users (
 	"Jadon","Wong",16,0,"clww.me@gmail.com","alpine",1);
 	
 INSERT INTO Recent_Events (
-	_type,typeId,_from)
+	_type,typeId,_from,followed)
 	values (
-	"Events",1,"billzeng808@gmail.com");
+	"Events",1,"billzeng808@gmail.com",0);
 	
 INSERT INTO Recent_Events (
-	_type,typeId,_from)
+	_type,typeId,_from,followed)
 	values (
-	"Offers",1,"billzeng808@gmail.com");
+	"Offers",1,"billzeng808@gmail.com",0);
 	
 INSERT INTO Recent_Events (
-	_type,typeId,_from)
+	_type,typeId,_from,followed)
 	values (
-	"Needs",1,"billzeng808@gmail.com");
+	"Needs",1,"billzeng808@gmail.com",0);
 	
 INSERT INTO Events (
 	mail,title,description,followed)

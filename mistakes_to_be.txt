@@ -1,1 +1,3 @@
 db.py delete_a_user :deleting a user,next time create_new_user user_id will error
+db.py profile.py :So long as first_name and last_name could be none,
+					" ".join([first_name,last_name]) might error

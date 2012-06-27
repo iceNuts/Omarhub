@@ -114,35 +114,70 @@ class ProfileEditHandler(BaseHandler):
 		user=self.sub_dict_minus(user,"passwd")
 		user=self.sub_dict_minus(user,"register_date")
 		user=self.sub_dict_minus(user,"org_id")
+		organization=self.sub_dict_minus(organization,"org_id")
 		
-		self.render("/profile_edit.html",
+		self.render("profile_edit.html",
 			user=user,
 			organization=organization,
 			user_id=user_id,
 			avatar=avatar
 		)
+		
+class ProfileEditUserHandler(BaseHandler):
+	def initialize(self):
+		self.dbManager = dbmgr()
 			
 	def post(self):
 		if not self.current_user:
-			return None
+			self.redirect("/auth/login")
 		mail = self.current_user
-#fetch input data
-#user can't change the mail
+		#fetch input data
+		#user can't change the mail
+		
+		
+		user_id=self.getarguments("user_id")
 		first_name = self.get_arguments("first_name")
 		last_name = self.get_arguments("last_name")
 		age = self.get_arguments("age")
+		gender=self.get_arguments("gender")
 		location = self.get_arguments("location")
 		target_population = self.get_arguments("target_population")
 		work_field = self.get_arguments("work_field")
 		language = self.get_arguments("language")
+		street=self.get_arguments("street")
+		city
 		country = self.get_arguments("country")
 		skype = self.get_arguments("skype")
+		#...
+		#street VARCHAR(100),
+		#city VARCHAR(100),
+		#post_code VARCHAR(100),
+		#country VARCHAR(100),
+		#mobile VARCHAR(100),
+		#mobile_code VARCHAR(100),
+		#skype VARCHAR(100),
+		#passwd VARCHAR(100),
+		#register_date TIMESTAMP,
+		#avatar VARCHAR(100),
+		#org_id INT,
 		
 		
 		#xxx=self.get_arguments("xxx")
 		#self.dbManager.update....
 		
 		
+		self.redirect("/profile/"+" ".join(user_id))
+		
+class ProfileEditOrgHandler(BaseHandler):
+	def initialize(self):
+		self.dbManager = dbmgr()
+			
+	def post(self):
+		if not self.current_user:
+			self.redirect("/auth/login")
+		mail = self.current_user
+		
+		self.redirect("/profile/"+" ".join(user_id))
 		
 
 
