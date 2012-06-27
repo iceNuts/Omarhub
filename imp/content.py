@@ -80,6 +80,15 @@ class RecentallProvider(BaseHandler):
 		list = self.dbManager.get_recent_all_list(id, cursor, mode)
 		self.write(json.dumps(list))
 	
+class PeopleProvider(BaseHandler):
+	def initialize(self):
+		self.dbManager = dbmgr()
+	def post(self):
+		if not self.current_user:
+			return None
+		cursor = self.get_arguments("cursor")
+		list = self.dbManager.get_all_uers(self.current_user,cursor)
+		self.write(json.dumps(list))
 
 
 
