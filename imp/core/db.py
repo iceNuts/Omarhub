@@ -334,6 +334,27 @@ class dbmgr:
 			return 1
 		else:
 			return 0
+		
+	def get_tags(self,tag_domain):
+		self.create_db_connection()
+		if not tag_domain:
+			return None
+		tags=self.db.query("SELECT name,followed From Tags WHERE tag_domain=%s",''.join(tag_domain))
+		self.drop_db_connection()
+		if not tags:
+			print "Ooops"
+			return None
+		return tags
+		
+	def check_tag_followed(self,mail,name,tag_domain):
+		self.create_db_connection()
+		
+		tag_id = self.db.get("select tag_id from Tags where name=%s and tag_domain=%s",''.join(name),''.join(tag_domain)) 
+		if not tag_id:
+			return 0
+		tagfollowed=self.db.execute_rowcount("select * from UserTag where user_mail=%s and tag_id=%s",''.join(mail),int(tag_id["tag_id"]))
+		return tagfollowed
+		
 			
 
 

@@ -17,29 +17,34 @@ class TagHandler(BaseHandler):
 		user_id=user["user_id"]
 		tagdict=dict()
 		tagdict["Work Field"]=self.dbManager.get_tags("work_field")
-		for i in tagdict["Work Field"]:
-			name=i["name"]
-			followed=i["followed"]
+		#print type(tagdict["Work Field"])
+		for i in range(len(tagdict["Work Field"])):
+			print type(i)
+			name=tagdict["Work Field"][i]["name"]
+			followed=tagdict["Work Field"][i]["followed"]
 			my_follow=self.dbManager.check_tag_followed(mail,name,"work_field")
-			i=[name,followed,my_follow]
+			tagdict["Work Field"][i]=[name,followed,my_follow]
+			#print i
+			
 		tagdict["Location"]=self.dbManager.get_tags("location")
-		for i in tagdict["Location"]:
-			name=i["name"]
-			followed=i["followed"]
+		for i in range(len(tagdict["Location"])):
+			name=tagdict["Location"][i]["name"]
+			followed=tagdict["Location"][i]["followed"]
 			my_follow=self.dbManager.check_tag_followed(mail,name,"location")
-			i=[name,followed,my_follow]
+			tagdict["Location"][i]=[name,followed,my_follow]
+			
 		tagdict["Target Population"]=self.dbManager.get_tags("target")
-		for i in tagdict["Target Population"]:
-			name=i["name"]
-			followed=i["followed"]
+		for i in range(len(tagdict["Target Population"])):
+			name=tagdict["Target Population"][i]["name"]
+			followed=tagdict["Target Population"][i]["followed"]
 			my_follow=self.dbManager.check_tag_followed(mail,name,"target")
-			i=[name,followed,my_follow]
+			tagdict["Target Population"][i]=[name,followed,my_follow]
+			
 		tagdict["Free Tags"]=self.dbManager.get_tags("freetag")
-		for i in tagdict["Free Tags"]:
-		for i in tagdict["Free Tags"]:
-			name=i["name"]
-			followed=i["followed"]
+		for i in range(len(tagdict["Free Tags"])):
+			name=tagdict["Free Tags"][i]["name"]
+			followed=tagdict["Free Tags"][i]["followed"]
 			my_follow=self.dbManager.check_tag_followed(mail,name,"freetag")
-			i=[name,followed,my_follow]
-		
+			tagdict["Free Tags"][i]=[name,followed,my_follow]
+			
 		self.render("tags.html",user_id=user_id,tagdict=tagdict)

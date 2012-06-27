@@ -24,7 +24,7 @@ $(document).ready(function(){
 {% block content %}
 
 <div id="container" class="container_16">
-	{% for title,tags_list in tags.items() %}
+	{% for title,tags_list in tagdict.items() %}
       <div class="grid_4 tag-display">
 		<div class="general-info">
         	<div class="grid_4">
@@ -38,17 +38,16 @@ $(document).ready(function(){
             </div>
             <div class="grid_4">
 			<ul>
-				{ % for k,v,isFollowed in tags_list.items() %}
+				{% for k,v,isFollowed in tags_list %}
 				<li>
 					<a class="tag normal-tag" href="#">{{k}}({{v}})</a>
-					   {% if(!isFollowed) %}
+					{% if not isFollowed %}
                     <img class="avatar" src="/static/img/star/unlit_star.png" alt="" />
-                    { %end% }
-                    { %else%}
+                    {%else%}
                     <img class="avatar follow" src="/static/img/star/lit_star.png" alt="" />
                     {%end%}
 				</li>
-				{ % end % }
+				{% end %}
 			</ul>
             </div>
 		</div>
