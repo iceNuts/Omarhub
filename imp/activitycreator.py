@@ -29,7 +29,8 @@ class EventCreateHandler(BaseHandler):
 		info['start_date'] = self.get_arguments("start_date")
 		info['end_date'] = self.get_arguments("end_date")		
 		
-		self.dbManager.create_new_activity(self.current_user,info, 0)
+		id = self.dbManager.create_new_activity(self.current_user,info, 0)
+		self.redirect("/event/"+id)
 		
 
 class OfferCreateHandler(BaseHandler):
@@ -47,7 +48,9 @@ class OfferCreateHandler(BaseHandler):
 		info['work_field'] = self.get_arguments("work_field")
 		info['target_population'] = self.get_arguments("target_population")
 		
-		self.dbManager.create_new_activity(self.current_user,info, 1)
+		id = self.dbManager.create_new_activity(self.current_user,info, 1)
+		self.redirect("/offer/"+id)
+
 
 class NeedCreateHandler(BaseHandler):
 	def initialize(self):
@@ -64,5 +67,6 @@ class NeedCreateHandler(BaseHandler):
 		info['work_field'] = self.get_arguments("work_field")
 		info['target_population'] = self.get_arguments("target_population")
 		
-		self.dbManager.create_new_activity(self.current_user,info, 2)
+		id = self.dbManager.create_new_activity(self.current_user,info, 2)
+		self.redirect("/need/"+id)
 

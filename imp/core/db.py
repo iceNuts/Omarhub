@@ -246,13 +246,13 @@ class dbmgr:
 		"""Insert into tables for new record"""
 		self.create_db_connection()
 		if mode == 0: # Event
-			self.db.query("insert into Events (mail, title, description, location, work_field, target_population, start_date, end_date) values (%s, %s, %s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'], info['start_date'], info['end_date'])
+			entry = self.db.query("insert into Events (mail, title, description, location, work_field, target_population, start_date, end_date) values (%s, %s, %s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'], info['start_date'], info['end_date'])
 		elif mode == 1: # offer
-			self.db.query("insert into Offers (mail, title, description, location, work_field, target_population) values (%s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'])
+			entry = self.db.query("insert into Offers (mail, title, description, location, work_field, target_population) values (%s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'])
 		elif mode == 2: # nedd
-			self.db.query("insert into Needs (mail, title, description, location, work_field, target_population) values (%s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'])
+			entry = self.db.query("insert into Needs (mail, title, description, location, work_field, target_population) values (%s, %s, %s, %s, %s, %s)", mail, info['title'], info['description'], info['location'], info['work_field'], info['target_population'])
 		self.drop_db_connection()
-
+		print entry
 			
 			
 	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
