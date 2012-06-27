@@ -216,14 +216,14 @@ class dbmgr:
 		i = 0
 		for item in list:
 			m_mail = self.db.query("select mail from Users where user_id=%s", item['user_id'])
-			flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail, m_mail)
+			flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail, m_mail[0]['mail'])
 			number = self.get_follower_count(m_mail)
 			if flag:
 				item['is_followed'] = '1'
 			else:
 				item['is_followed'] = '0'
 			item['follower_number'] = number
-			result[i] = item
+			list[i] = item
 			i = i + 1
 		self.drop_db_connection()
 		return list
@@ -263,9 +263,9 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.execute_rowcount("select * from Follow_Status where mail_to=%s", mail)
+		result = self.db.query("select * from Follow_Status where mail_to=%s", mail[0]['mail'])
 		self.drop_db_connection()
-		return result
+		return len(result)
 			
 	def get_following_count(self, mail):
 		"""Get the number of following"""
