@@ -73,6 +73,7 @@ CREATE TABLE Recent_Events (
     _date TIMESTAMP,
     _from VARCHAR(100),
     _to VARCHAR(100),
+	followed INT,
 	FOREIGN KEY (_from) REFERENCES Users(mail),	
 	FOREIGN KEY (_to) REFERENCES Users(mail)
 );
@@ -115,9 +116,3 @@ CREATE TABLE Events (
 	followed INT,
 	FOREIGN KEY (mail) REFERENCES Users(mail)
 );
-
-
-
-
-
-

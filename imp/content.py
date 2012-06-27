@@ -72,7 +72,8 @@ class RecentallProvider(BaseHandler):
 	def post(self):
 		if not self.current_user:
 			return None
-		cursor = self.get_arguments("cursor")
+		cursor = self.get_arguments("cursor") 
+				
 		mode = self.get_arguments("mode")
 		id = self.current_user
 		#print id
