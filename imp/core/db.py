@@ -2,6 +2,7 @@ import tornado.database
 from tornado.options import define, options
 import unicodedata
 from copy import copy
+from operator import itemgetter, attrgetter
 
 define("port", default=8888, help="run on the given port", type=int)
 define("mysql_host", default="localhost:3306", help="imp host")
@@ -382,6 +383,51 @@ class dbmgr:
 			return 0
 		tagfollowed=self.db.execute_rowcount("select * from UserTag where user_mail=%s and tag_id=%s",''.join(mail),int(tag_id["tag_id"]))
 		return tagfollowed
+		    
+	def search_default_list(self,keywords):
+		self.create_db_connection()
+		resultE = self.search_event_list(keywords)
+		resultO = self.search_offer_list(keywords)
+		resultN = self.search_need_list(keywords)
+		result = resultE + resultO + resultN
+		result1 = sorted(result, key = attrgetter('time'), reverse = True)
+		return result1
+	
+	def search_event_list(self,keywords):
+		self.create_db_connection()
+		if not keywords:
+			return None
+		result = self.db.query("SELECT u.first_name, u.last_name, e.id, e.title, e.description, e.time FROM Events e, Users u WHERE e.mail=u.mail && (e.title LIKE '%%"+str(keywords[0])+"%%' OR e.description LIKE '%%"+str(keywords[0])+"%%' OR u.first_name LIKE '%%"+str(keywords[0])+"%%' OR u.last_name LIKE '%%"+str(keywords[0])+"%%' )" )
+		self.drop_db_connection()
+		return result
+		
+	def search_offer_list(self,keywords):
+		self.create_db_connection()
+		if not keywords:
+			return None
+		result = self.db.query("SELECT u.first_name, u.last_name, o.id, o.title, o.description, o.time FROM Offers o, Users u WHERE o.mail=u.mail && (o.title LIKE '%%"+str(keywords[0])+"%%' OR o.description LIKE '%%"+str(keywords[0])+"%%' OR u.first_name LIKE '%%"+str(keywords[0])+"%%' OR u.last_name LIKE '%%"+str(keywords[0])+"%%' )" )
+		self.drop_db_connection()
+		return result
+        
+	def search_need_list(self,keywords):
+		self.create_db_connection()
+		if not keywords:
+			return None
+		result = self.db.query("SELECT u.first_name, u.last_name, n.id, n.title, n.description, n.time FROM Needs n, Users u WHERE n.mail=u.mail && (n.title LIKE '%%"+str(keywords[0])+"%%' OR n.description LIKE '%%"+str(keywords[0])+"%%' OR u.first_name LIKE '%%"+str(keywords[0])+"%%' OR u.last_name LIKE '%%"+str(keywords[0])+"%%' )" )
+		self.drop_db_connection()
+		return result
+	
+	def search_user_list(self,keywords):
+		self.create_db_connection()
+		if not keywords:
+			return None
+		resultE = self.db.query("SELECT u.first_name, u.last_name, e.id, e.title, e.description, e.time FROM Events e, Users u WHERE e.mail=u.mail && (u.first_name LIKE '%%"+str(keywords[0])+"%%' OR u.last_name LIKE '%%"+str(keywords[0])+"%%' )" )
+		resultO = self.db.query("SELECT u.first_name, u.last_name, o.id, o.title, o.description, o.time FROM Offers o, Users u WHERE o.mail=u.mail && (u.first_name LIKE '%%"+str(keywords[0])+"%%' OR u.last_name LIKE '%%"+str(keywords[0])+"%%' )" )
+		resultN = self.db.query("SELECT u.first_name, u.last_name, n.id, n.title, n.description, n.time FROM Needs n, Users u WHERE n.mail=u.mail && (u.first_name LIKE '%%"+str(keywords[0])+"%%' OR u.last_name LIKE '%%"+str(keywords[0])+"%%' )" )
+		result = resultE + resultO + resultN
+		result1 = sorted(result, key = attrgetter('time'), reverse = True)
+		self.drop_db_connection()
+		return result1
 		
 			
 

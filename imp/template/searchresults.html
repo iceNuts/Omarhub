@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	 <title>Search Results</title>
+    <link rel="stylesheet" href="{{static_url('./css/main.css')}}" type="text/css"/>
+    <script type="text/javascript" src="{{static_url('./js/jquery.js')}}"></script>
+    <script type="text/javascript" src="{{static_url('./js/simplemodal.js')}}"></script>
+    <link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static_url('./css/960_16_col.css')}}" type="text/css"/>
+    <link rel="stylesheet" href="{{static_url('./css/searchresults.css')}}" type="text/css"/>
+  </head>
+
+  <body>
+    <div id="header-wrap">
+      <div id="header" class="container_16">
+        <div id="logo-wrap" class="grid_4">
+          <a id="logo" href="#">
+            <img src="{{static_url('./img/omarlogo.png')}}" alt="" />
+          </a>
+        </div>
+		  <div id="long-search-form" class="grid_8 prefix_2">
+          <form action="/content/search/getdefault" method="get">
+            <input type="text" name="keywords"/>
+            <button></button>
+          </form>
+        </div>    
+        <div class="create-group grid_1 rela-position">
+          <a id="header-profile-create" href="#" class="header-icon">
+            <img class="avatar" src="{{static_url('./img/new.png')}}" alt="" />
+          </a>
+          <ul id="create-group-list" class="hide hiden-list">
+            <li><a href="#">Create Offer</a></li>
+            <li><a href="#">Create Need</a></li>
+            <li><a href="#">Create Event</a></li>
+          </ul>
+        </div>
+        <div id="header-profile" class="grid_1 rela-position">
+          <a id="header-profile-avatar" href="#" class="header-icon">
+            <img class="avatar" src="{{static_url('./img/avatar.jpg')}}" alt="" />
+          </a>
+          <ul id="profile-nav" class="hide hiden-list">
+          	<li><a href="#">Profile</a></li>
+          	<li><a href="#">Setting</a></li>
+          	<li><a href="#">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+<div id="search-header-wrap">
+  <div  class="search-container_16">
+    <div  class="grid_6">
+            <h2>Search results</h2>
+    </div> 
+
+	<div  class="grid_10">
+		{%if count==0 or count==1%}
+	        <h3>{{count}} item in total</h3>
+	    {%else%}
+	        <h3>{{count}} items in total</h3>
+	    {%end%}
+	</div>
+  </div>
+</div>
+
+  <div id="container" class="container_16">
+      <div  class="sidebar-wrap grid_4">
+        <div class="sidebar">
+		  <div id="top-filter">
+             <ul>
+            	<li><a class="active" href="#">Events</a></li>
+            	<li><a  href="#">Offers</a></li>
+				<li><a href="#">Needs</a></li>
+				<li><a href="#">People</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="content-warp" class="grid_12">
+		  {%if count== 0%}
+		    <h3 class="item-title">{{mes}}</h3>
+          {%end%}      
+	{% for i in sList%}
+        
+         <div class="item-details grid_11 omega">
+                <div class="item-details-main">
+                  <div class="general-info">
+                    <h3 class="item-title">{{i['title']}}</h3>
+					<p class="item-time">{{i['time']}}</p>
+                  </div>
+                  <div class="item-description-wrap">
+                    <p class="item-description"> {{i['description']}}</p>
+                  </div>
+                </div>
+                <div class="item-details-tags">
+                  <div class="location-tag">
+                    {{i['first_name']}} {{i['last_name']}}
+                    <a href="" class="tag normal-tag">tagname</a> 
+                  </div>
+                </div>
+           </div>
+          {%end%} 
+		   
+      </div>
+  </div>
+<div id="container" class="container_16">
+ <div class="grid_5">
+ <p>&nbsp</p>
+ </div>
+ <div class="grid_4">
+    <p id="page">
+    <a href="" class="n">&lt;back</a>
+    <a href="">1</a>
+    <strong>2</strong>
+    <a href="">3</a>
+	<a href="">4</a>
+	<a href="">5</a>
+	<a href="">6</a>
+    <a href="1" class="n">next&gt;</a>
+    </p>
+  </div>
+</div>
+    <script type="text/javascript" src="./js/main.js"></script>
+  </body>
+</html>

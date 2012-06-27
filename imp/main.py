@@ -16,6 +16,7 @@ from activitycreator import *
 from activityshow import *
 from tags import *
 from actions import *
+from searchList import *
 
 class MainHandler(BaseHandler):
 	def get(self):
@@ -54,7 +55,12 @@ class Application(tornado.web.Application):
 			(r"/offer/([\d]+)", OfferShowHandler),
 			(r"/need/([\d]+)", NeedShowHandler),
 			(r"/tags",TagHandler),
-			(r"/action/follow", FollowActionHandler)
+			(r"/action/follow", FollowActionHandler),
+			(r"/content/search/getdefault", SearchListProvider),
+			(r"/content/search/getevents", SearchEventListProvider),
+			(r"/content/search/getoffers", SearchOfferListProvider),
+			(r"/content/search/getneeds", SearchNeedListProvider),
+			(r"/content/search/getusers", SearchUserListProvider)
 			]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "template"),
