@@ -1,0 +1,55 @@
+<html>
+
+<head>i
+</head>
+
+<body>
+
+<link rel=stylesheet href="../jquery.calendarPicker.css" type="text/css" media="screen">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript" src="../jquery.calendarPicker.js"></script>
+<script type="text/javascript" src="jquery.mousewheel.js"></script>
+
+
+<a href="calendarPicker.html#" onclick="calendarPicker1.changeDate(new Date())">today</a>
+
+<div id="dsel1" style="width:240px"></div><br>
+
+<a href="calendarPicker.html#" onclick="calendarPicker2.changeDate(new Date())">today</a>
+<div id="dsel2" style="width:340px"></div>
+<br>
+<span id="wtf"></span>
+
+<script type="text/javascript">
+
+
+  var calendarPicker1 = $("#dsel1").calendarPicker({
+    monthNames:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    //useWheel:true,
+    //callbackDelay:500,
+    //years:1,
+    //months:3,
+    //days:4,
+    //showDayArrows:false,
+    callback:function(cal) {
+      $("#wtf").html("Selected date: " + cal.currentDate);
+    }});
+
+  var calendarPicker2 = $("#dsel2").calendarPicker({
+    monthNames:["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    //useWheel:true,
+    //callbackDelay:500,
+    years:2,
+    months:4,
+    days:5,
+    showDayArrows:false,
+    callback:function(cal) {
+      $("#wtf").html("Selected date: " + cal.currentDate);
+    }});
+
+</script>
+
+</body>
+</html>

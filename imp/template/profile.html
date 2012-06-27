@@ -1,108 +1,55 @@
-{% extends "base.html" %}
+{% extends "profile_base.html" %}
 {% block title %}People and Activity{%end%}
-{% block extra-links %}
-<link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
-{% end %}
 
 
-
-{% block content %}
-<div id="container" class="container_16">
-    <div class="sidebar-wrap grid_4">
-        <div class="sidebar">
-          <div class="profile-top">
-            <div class="avatar-wrap grid_2 alpha">
-              <div class="avatar">
-                <img src="{{static_url('./img/avatar_big.jpg')}}" alt="" />
-              </div>
-            </div>
-            <div class="profile-top-info grid_2 omega">
-              <h4>Name</h4>
-              <a href="#" class="profile-top-follow btn btn-primary">follow</a>
-            </div>
-          </div>
-            <div id="top-filter">
-              <div id="top-filter-bg"></div>
-                <ul>
-                    <li><a href="#">Activities</a></li>
-                    <li><a class="active" href="#">Information</a></li>
-                    <li><a href="#">Innovation</a></li>
-                </ul>
-            </div>
-        </div>
+{% block profile_content %}
+    <div class="profile-info">
+      <h4>Contact Info</h4>
+      <a href="/profile/editMyProfile">edit</a>
+      {% for k,v in user_contact.items() %}
+      <ul class="control-group">
+        <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+        <li class="control-group-content grid_5 omega">
+          <p class="inside">
+          {% if v!=None %}
+          {{v}}
+          {% end %}
+          </p>
+        </li>
+      </ul>
+      {% end %}
+    </div>
+    <div class="profile-info">
+      <h4>Organization Info</h4>
+      <a href="/profile/editMyProfile#organization-info">edit</a>
+      {% for k,v in organization.items() %}
+      <ul class="control-group">
+        <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+        <li class="control-group-content grid_5 omega">
+        <p class="inside">
+        {% if v!=None %}
+        {{v}}
+        {% end %}
+        </p>
+        </li>
+      </ul>
+      {% end %}
+    </div>
+    <div class="profile-info">
+      <h4>Basic Info</h4>
+      <a href="/profile/editMyProfile">edit</a>
+      {% for k,v in user_basic.items() %}
+      <ul class="control-group">
+        <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+        <li class="control-group-content grid_5 omega">
+        <p class="inside">
+        {% if v!=None %}
+        {{v}}
+        {% end %}
+        </p>
+        </li>
+      </ul>
+      {% end %}
     </div>
 
-    <div id="content-wrap" class="grid_9">
-        <div id="content" class="profile-content">
-          <div class="profile-info">
-            <h4>Contact Info</h4>
-            <a href="#">edit</a>
-            {% for k,v in user_contact.items() %}
-            <ul class="control-group">
-              <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
-              <li class="control-group-content grid_5 omega">
-                <p class="inside">
-                  {% if v!=None %}
-                  {{v}}
-                  {% end %}
-                </p>
-              </li>
-            </ul>
-            {% end %}
-          </div>
-          <div class="profile-info">
-            <h4>Organization Info</h4>
-            <a href="#">edit</a>
-            {% for k,v in organization.items() %}
-            <ul class="control-group">
-              <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
-              <li class="control-group-content grid_5 omega">
-                <p class="inside">
-                  {% if v!=None %}
-                  {{v}}
-                  {% end %}
-                </p>
-              </li>
-            </ul>
-            {% end %}
-          </div>
-          <div class="profile-info">
-            <h4>Basic Info</h4>
-            <a href="#">edit</a>
-            {% for k,v in user_basic.items() %}
-            <ul class="control-group">
-              <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
-              <li class="control-group-content grid_5 omega">
-                <p class="inside">
-                  {% if v!=None %}
-                  {{v}}
-                  {% end %}
-                </p>
-              </li>
-            </ul>
-            {% end %}
-          </div>
-
-        </div>
-    </div>
-    <div class="sidebar-wrap grid_3">
-      <div class="sidebar">
-        <div id="follower" class="side-zone">
-          <h4>follower(20)</h4>
-          <ul class="followers-avatar">
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-          </ul>
-        </div>
-        <div id="following" class="side-zone"></div>
-      </div>
-    </div>
-</div>
 {%end%}

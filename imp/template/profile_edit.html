@@ -1,0 +1,32 @@
+{% extends "profile_base.html" %}
+
+{% block profile_content %}
+<div class="profile-info">
+  <h4>Edit your profile</h4>
+  <form class="edit-form" action="/" method="post">
+    {% for k,v in user.items() %}
+    <ul class="control-group">
+      <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+      <li class="control-group-content grid_5 omega"><input name="{{k}}" type="text" value="{%if v!=None %}{{v}}{%end%}"/></li>
+    </ul>
+    {% end %}
+    <ul class="control-group">
+      <li class="control-group-content grid_5 prefix_3 alpha"><button type="submit" class="btn btn-primary grid_2 alpha">submit</button></li>    
+    </ul>
+  </form>
+</div>
+<div id="organization-info" class="profile-info">
+    <h4>organization info:</h4>
+    {% for k,v in organization.items() %}
+    <form class="edit-form" action="/" method="post">
+      <ul class="control-group">
+        <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
+        <li class="control-group-content grid_5 omega"><input name="{{k}}" type="text" value="{%if v!=None %}{{v}}{%end%}"/></li>
+      </ul>
+      {% end %}
+      <ul class="control-group">
+        <li class="control-group-content grid_5 prefix_3 alpha"><button type="submit" class="btn btn-primary grid_2 alpha">submit</button></li>    
+      </ul>
+    </form>
+</div>
+{%end%}

@@ -30,11 +30,6 @@ $('#header .hiden-list').each(function(index, eachOne) {
 });
 
 
-$("#header-profile-create").click(function() {
-        $("#create-modal").modal();
-});
-
-
 $(document).ready(function() {
         var path = document.location.pathname;
         pathList = path.split("\/");

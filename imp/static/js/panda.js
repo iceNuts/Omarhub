@@ -89,10 +89,11 @@ $(document).ready(function(){
                     contentItem.append(userContainer);
 
                     var clearFix = $('<div class="clearfix"></div>');
-                    
+
                     clearFix.append(contentItem);
                     $('#content-items').append(clearFix);
                 }
             }
         }
+        $('#all').trigger('click');
 });

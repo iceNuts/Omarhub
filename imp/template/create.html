@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% block title %}People and Activity{%end%}
+{% block extra-links %}
+<link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+<script type="text/javascript" src="{{static_url('./js/panda.js')}}"></script>
+<script type="text/javascript" src="{{static_url('./js/create.js')}}"></script>
+
+<link rel=stylesheet href="/static/js/calendarPicker/jquery.calendarPicker.css" type="text/css" media="screen">
+<script type="text/javascript" src="/static/js/calendarPicker/jquery.calendarPicker.js"></script>
+<script type="text/javascript" src="/static/js/calendarPicker/test/jquery.mousewheel.js"></script>
+{% end %}
+
+
+
+{% block content %}
+<div id="container" class="container_16">
+    <div class="sidebar-wrap grid_4">
+        <div class="sidebar">
+            <div id="top-filter">
+              <div id="top-filter-bg"></div>
+                <ul>
+                    <li><a id="event" class="active" href="#">create Event</a></li>
+                    <li><a id="offer" href="#">create Offer</a></li>
+                    <li><a id="need" href="#">create Need</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="content-wrap" class="grid_12">
+        <div id="content" class="profile-content">
+          <div class="profile-info">
+            <div id="create-event" class="show">
+              <h4>create Event</h4>
+              <form class="edit-form" action="/event/create" method="post">
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">title:</p></li>
+                  <li class="control-group-content grid_5 omega"><input name="title" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">description:</p></li>
+                  <li class="control-group-content grid_5 omega"><textarea name="description" class="grid_6 alpha"></textarea></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">start date:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="start-date" name="start_date" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">end date:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="end-date" name="end_date" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">location:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="event_location" name="location" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">work field:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="event_work_field" name="work_field" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">population:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="event_population" name="population" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-content grid_5 prefix_3 alpha"><button type="submit" class="btn btn-primary grid_2 alpha">submit</button></li>    
+                </ul>
+              </form>
+            </div>
+
+
+
+            <div id="create-offer" class="hide">
+              <h4>create Offer</h4>
+              <form class="edit-form" action="/offer/create" method="post">
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">title:</p></li>
+                  <li class="control-group-content grid_5 omega"><input name="title" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">description:</p></li>
+                  <li class="control-group-content grid_5 omega"><textarea name="description" class="grid_6 alpha"></textarea></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">location:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="offer-location" name="location" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">work field:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="offer-work-field" name="work_field" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">population:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="offer-population" name="population" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-content grid_5 prefix_3 alpha"><button type="submit" class="btn btn-primary grid_2 alpha">submit</button></li>    
+                </ul>
+              </form>
+            </div>
+
+
+            <div id="create-need" class="hide">
+              <h4>create Need</h4>
+              <form class="edit-form" action="/need/create" method="post">
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">title:</p></li>
+                  <li class="control-group-content grid_5 omega"><input name="event_title" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">description:</p></li>
+                  <li class="control-group-content grid_5 omega"><textarea name="event_description" class="grid_6 alpha"></textarea></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">location:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="need-location" name="location" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">work field:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="need-work-field" name="work_field" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-description grid_3 alpha"><p class="inside">population:</p></li>
+                  <li class="control-group-content grid_5 omega"><input id="need-population" name="population" type="text"/></li>
+                </ul>
+                <ul class="control-group">
+                  <li class="control-group-content grid_5 prefix_3 alpha"><button type="submit" class="btn btn-primary grid_2 alpha">submit</button></li>    
+                </ul>
+              </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{%end%}

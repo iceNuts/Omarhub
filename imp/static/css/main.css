@@ -28,6 +28,19 @@ li {
 input {
     outline: none;
     border: none;
+    border: solid 1px #61C03C;
+    padding: 5px;
+}
+
+input:focus,textarea:focus {
+    box-shadow: 0px 0px 3px #309DF3 inset;
+}
+
+textarea {
+    outline: none;
+    border: none;
+    border: solid 1px #61C03C;
+    padding: 5px;
 }
 
 select {
@@ -154,12 +167,14 @@ div#header #search-form {
 div#header #search-form input[type="text"] {
     height: 30px;
     box-shadow: 0px 1px 2px rgba(0,0,0,0.3) inset;
+    padding: 0px;
     padding-left: 15px;
     width: 85px;
     border-radius: 15px;
     float: right;
     -webkit-transition: width linear 0.3s;
     margin-right: 10px;
+    border: none;
 }
 div#header #search-form input[type="text"]:focus {
     height: 30px;
@@ -382,6 +397,7 @@ div#footer-wrap {
 .general-info .item-time {
     float: right;
     font-size: 0.8em;
+    margin-top: 5px;
 }
 
 .item-description {

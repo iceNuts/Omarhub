@@ -159,6 +159,7 @@ div.profile-info:hover {
 div.profile-info h4 {
     margin-left: 0px;
     display: inline-block;
+    margin-bottom: 10px;
 }
 
 div.profile-info a {
@@ -181,4 +182,12 @@ div.profile-info a {
 
 .profile-info-container .profile-info {
     border: solid 1px #ccc;
+}
+
+.edit-form .control-group {
+    margin-bottom: 20px;
+}
+
+.edit-form .control-group button{
+    height: 30px;
 }
