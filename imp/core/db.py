@@ -210,6 +210,7 @@ class dbmgr:
 		"""Return all people info sorted by time"""
 		if not cursor:
 			return None
+		self.create_db_connection()
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')	
 		list = self.db.query("select user_id, first_name, last_name, avatar, location from Users order by register_date desc limit %s,20", int(strCursor))
 		i = 0
@@ -224,6 +225,7 @@ class dbmgr:
 			item['follower_number'] = number
 			result[i] = item
 			i = i + 1
+		self.drop_db_connection()
 		return list
 	
 	def follow_action(self, mail, user_id):

@@ -87,7 +87,7 @@ class PeopleProvider(BaseHandler):
 		if not self.current_user:
 			return None
 		cursor = self.get_arguments("cursor")
-		list = self.dbManager.get_all_uers(self.current_user,cursor)
+		list = self.dbManager.get_all_users(self.current_user,cursor)
 		self.write(json.dumps(list))
 
 
