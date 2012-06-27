@@ -41,6 +41,7 @@ class Application(tornado.web.Application):
 			(r"/profile/([\d]+)",ProfileHandler),
 			(r"/profile/editMyProfile", ProfileEditHandler),
 			(r"/auth/logout", LogoutHandler),
+			(r"/create", CreateHandler),
 			(r"/event/create", EventCreateHandler),
 			(r"/offer/create", OfferCreateHandler),
 			(r"/need/create", NeedCreateHandler),

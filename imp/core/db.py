@@ -222,7 +222,11 @@ class dbmgr:
 		return result
 
 	def set_user_profile_info(self, mail, info):
-		pass
+		"""Set profile Info"""
+		self.create_db_connection()
+		for item in info:	
+			entry = self.db.query("update Users set %s=%s where mail=%s", item,info[item],mail)
+		self.drop_db_connection()
 			
 	def get_follower_count(self, mail):
 		"""Get the number of followers"""
