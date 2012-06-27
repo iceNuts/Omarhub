@@ -84,6 +84,6 @@ class PasswdSettingHandler(BaseHandler):
 		self.dbManager.update_user_password(mail, passwd)
 		self.set_secure_cookie("user", ''.join(mail))
 		"""Need mail account to redirect"""
-		self.redirect('/home/'+''.join(mail))
+		self.redirect('/home')
 		self.write(passwd)
 

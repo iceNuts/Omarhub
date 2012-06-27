@@ -8,12 +8,12 @@ class ProfileHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
 	
-	def sub_dict_minus(self,dict_ori,somekey):
-		dict_res={}
-		for k in dict_ori:
-			if k!=somekey:
-				dict_res.update({k:dict_ori[k]})
-		return dict_res
+	#def sub_dict_minus(self,dict_ori,somekey):
+	#	dict_res={}
+	#	for k in dict_ori:
+	#		if k!=somekey:
+	#			dict_res.update({k:dict_ori[k]})
+	#	return dict_res
 			
 	def get_strgender(self,gid):
 		if gid==0 :
@@ -89,11 +89,38 @@ class ProfileHandler(BaseHandler):
 class ProfileEditHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
+		
+	def sub_dict_minus(self,dict_ori,somekey):
+		dict_res={}
+		for k in dict_ori:
+			if k!=somekey:
+				dict_res.update({k:dict_ori[k]})
+		return dict_res
 	
 	def get(self):
 		if not self.current_user:
 			self.redirect("/auth/login")
-		pass
+		mail=self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		organizationlist=self.dbManager.get_user_organization(mail)
+		organization=organizationlist[0]
+		user_id=user["user_id"]
+		avatar=user["avatar"]
+		
+		user=self.sub_dict_minus(user,"user_id")
+		user=self.sub_dict_minus(user,"avatar")
+		user=self.sub_dict_minus(user,"mail")
+		user=self.sub_dict_minus(user,"passwd")
+		user=self.sub_dict_minus(user,"register_date")
+		user=self.sub_dict_minus(user,"org_id")
+		
+		self.render("/profile_edit.html",
+			user=user,
+			organization=organization,
+			user_id=user_id,
+			avatar=avatar
+		)
 			
 	def post(self):
 		if not self.current_user:
@@ -110,6 +137,10 @@ class ProfileEditHandler(BaseHandler):
 		language = self.get_arguments("language")
 		country = self.get_arguments("country")
 		skype = self.get_arguments("skype")
+		
+		
+		#xxx=self.get_arguments("xxx")
+		#self.dbManager.update....
 		
 		
 		
