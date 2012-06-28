@@ -104,6 +104,7 @@ $(document).ready(function(){
                     followPeople.addClass('btn-active');
                     followPeople.html('following');
                 }
+                followPeople.prop('name', 'people-follow-'+item.author.user_id);
                 avatarWrap.append(followPeople);
             }
             var pName = $('<p class="name">Name</p>');
@@ -124,6 +125,16 @@ $(document).ready(function(){
             }
 
             var generalInfo = $('<div class="general-info"></div');
+            var itemHeaderLink = $('<a></a>');
+            if (people) {
+                itemHeaderLink.prop('href', '/profile/'+item.author.user_id);
+            }
+            else if(category==='all'){
+                itemHeaderLink.prop('href', '/'+item._type.split('s')[0].toLowerCase()+'/'+item.id);
+            }
+            else {
+                itemHeaderLink.prop('href', '/'+category+'/'+item.id);
+            }
             var itemHeader = $('<h3 class="item-title"></h3>');
             if (category==='all') {
                 if (!people) {
@@ -141,7 +152,8 @@ $(document).ready(function(){
                     itemHeader.html(authorName);
                 }
             }
-            generalInfo.append(itemHeader);
+            itemHeaderLink.append(itemHeader);
+            generalInfo.append(itemHeaderLink);
             if (category === 'event') {
                 var itemTime = $('<p class="item-time">May-2123 to May-23</p>');
                 itemTime.html(item.start_date+'-'+item.end_date);

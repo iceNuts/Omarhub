@@ -50,6 +50,7 @@ $(document).ready(function() {
 $(document).ready(function() {
         $('.profile-top-follow').live('click',function(){
                 url = $(this).prop('href');
+                name = $(this).prop('name');
                 if($(this).hasClass('btn-primary')) {
                     $.ajax({
                             context: this,
@@ -58,10 +59,11 @@ $(document).ready(function() {
                             success: function(msg) {
                                 if (msg==='1') {
                                     var newUrl = url.replace('follow', 'unfollow');
-                                    $(this).prop('href', newUrl);
-                                    $(this).addClass('btn-active');
-                                    $(this).removeClass('btn-primary');
-                                    $(this).html('following');
+                                    var allUserLink = $('a[name="'+name+'"]');
+                                    allUserLink.prop('href', newUrl);
+                                    allUserLink.addClass('btn-active');
+                                    allUserLink.removeClass('btn-primary');
+                                    allUserLink.html('following');
                                 }
                             }
                     });
@@ -73,12 +75,12 @@ $(document).ready(function() {
                             type: 'post',
                             success: function(msg) {
                                 if (msg==='1') {
-                                    var url = $(this).prop('href');
                                     var newUrl = url.replace('unfollow', 'follow');
-                                    $(this).prop('href', newUrl);
-                                    $(this).addClass('btn-primary');
-                                    $(this).removeClass('btn-active');
-                                    $(this).html('follow');
+                                    var allUserLink = $('a[name="'+name+'"]');
+                                    allUserLink.prop('href', newUrl);
+                                    allUserLink.addClass('btn-primary');
+                                    allUserLink.removeClass('btn-active');
+                                    allUserLink.html('follow');
                                 }
                             }
                     });

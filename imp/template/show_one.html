@@ -27,14 +27,6 @@
               {% end %}
             </div>
           </div>
-            <div id="top-filter">
-              <div id="top-filter-bg"></div>
-                <ul>
-                    <li><a href="#">Activities</a></li>
-                    <li><a class="active" href="#">Information</a></li>
-                    <li><a href="#">Innovation</a></li>
-                </ul>
-            </div>
         </div>
     </div>
 
@@ -46,15 +38,15 @@
     
     <div class="sidebar-wrap grid_3">
       <div class="sidebar">
-        <div id="follower" class="side-zone">
-          <h4>follower({{follower_count}})</h4>
-          <ul class="followers-avatar">
-            {% for user in follower_list %}
-            <li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></a></li>
-            {% end %}
-          </ul>
-        </div>
-        <div id="following" class="side-zone"></div>
+        <!--<div id="follower" class="side-zone">-->
+          <!--<h4>follower({{follower_count}})</h4>-->
+          <!--<ul class="followers-avatar">-->
+            <!--{% for user in follower_list %}-->
+            <!--<li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></a></li>-->
+            <!--{% end %}-->
+            <!--</ul>-->
+          <!--</div>-->
+        <!--<div id="following" class="side-zone"></div>-->
       </div>
     </div>
 </div>

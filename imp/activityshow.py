@@ -10,8 +10,8 @@ class EventShowHandler(BaseHandler):
 	def get(self, id):
 		if not self.current_user:
 			self.redirect("/")
-		list = self.get_certain_activity(id, 0)
-		self.write(json.dumps(list))
+		list = self.dbManager.get_certain_activity(id, 0)
+		self.render('show_one.html', list=list)
 
 class OfferShowHandler(BaseHandler):
 	def initialize(self):
@@ -19,8 +19,8 @@ class OfferShowHandler(BaseHandler):
 	def get(self, id):
 		if not self.current_user:
 			self.redirect("/")
-		list = self.get_certain_activity(id, 1)
-		self.write(json.dumps(list))
+		list = self.dbManager.get_certain_activity(id, 1)
+		self.render('show_one.html', list=list)
 
 class NeedShowHandler(BaseHandler):
 	def initialize(self):
@@ -28,5 +28,5 @@ class NeedShowHandler(BaseHandler):
 	def get(self, id):
 		if not self.current_user:
 			self.redirect("/")
-		list = self.get_certain_activity(id, 2)
-		self.write(json.dumps(list))
+		list = self.dbManager.get_certain_activity(id, 2)
+		self.render('show_one.html', list=list)
