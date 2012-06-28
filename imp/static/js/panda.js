@@ -93,17 +93,19 @@ $(document).ready(function(){
             avatarImg.prop('src', '/static/img/avatar_big.jpg');
             avatarWrap.append(avatarImg);
             var followPeople = $('<a class="profile-top-follow btn btn-primary"></a>');
-            if (item.author.is_followed === '0') {
-                followPeople.prop('href', '/action/people/follow/'+item.author.user_id);
-                followPeople.html('follow');
+            if (item.my_user_id!==item.author.user_id) {
+                if (item.author.is_followed === '0') {
+                    followPeople.prop('href', '/action/people/follow/'+item.author.user_id);
+                    followPeople.html('follow');
+                }
+                else {
+                    followPeople.prop('href', '/action/people/unfollow/'+item.author.user_id);
+                    followPeople.removeClass('btn-primary');
+                    followPeople.addClass('btn-active');
+                    followPeople.html('following');
+                }
+                avatarWrap.append(followPeople);
             }
-            else {
-                followPeople.prop('href', '/action/people/unfollow/'+item.author.user_id);
-                followPeople.removeClass('btn-primary');
-                followPeople.addClass('btn-active');
-                followPeople.html('following');
-            }
-            avatarWrap.append(followPeople);
             var pName = $('<p class="name">Name</p>');
             pName.html(item.author.first_name+' '+item.author.last_name);
             var pLocation = $('<p>Location</p>');

@@ -49,12 +49,16 @@ $(document).ready(function() {
 
 $(document).ready(function() {
         $('.profile-top-follow').live('click',function(){
+                url = $(this).prop('href');
                 if($(this).hasClass('btn-primary')) {
                     $.ajax({
-                            url: $(this).prop('href'),
+                            context: this,
+                            url: url,
                             type: 'post',
                             success: function(msg) {
                                 if (msg==='1') {
+                                    var newUrl = url.replace('follow', 'unfollow');
+                                    $(this).prop('href', newUrl);
                                     $(this).addClass('btn-active');
                                     $(this).removeClass('btn-primary');
                                     $(this).html('following');
@@ -64,10 +68,14 @@ $(document).ready(function() {
                 }
                 else {
                     $.ajax({
+                            context: this,
                             url: $(this).prop('href'),
                             type: 'post',
                             success: function(msg) {
                                 if (msg==='1') {
+                                    var url = $(this).prop('href');
+                                    var newUrl = url.replace('unfollow', 'follow');
+                                    $(this).prop('href', newUrl);
                                     $(this).addClass('btn-primary');
                                     $(this).removeClass('btn-active');
                                     $(this).html('follow');

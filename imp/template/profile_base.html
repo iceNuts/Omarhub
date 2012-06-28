@@ -17,9 +17,13 @@
               </div>
             </div>
             <div class="profile-top-info grid_2 omega">
-              <!--<h4>Bill Zeng</h4>-->
-              {% if my_user_id == user_id %}
-              <a href="#" class="profile-top-follow btn btn-primary">follow</a>
+              <h4>{{user_name}}</h4>
+              {% if my_user_id != user_id %}
+              {% if not is_followed %}
+              <a href="/action/people/follow/{{user_id}}" class="profile-top-follow btn btn-primary">follow</a>
+              {% else %}
+              <a href="/action/people/unfollow/{{user_id}}" class="profile-top-follow btn btn-active">following</a>
+              {% end %}
               {% end %}
             </div>
           </div>
@@ -43,17 +47,11 @@
     <div class="sidebar-wrap grid_3">
       <div class="sidebar">
         <div id="follower" class="side-zone">
-          <h4>follower(20)</h4>
+          <h4>follower({{follower_count}})</h4>
           <ul class="followers-avatar">
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
-            <li><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></li>
+            {% for user in follower_list %}
+            <li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></a></li>
+            {% end %}
           </ul>
         </div>
         <div id="following" class="side-zone"></div>
