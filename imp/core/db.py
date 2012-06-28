@@ -92,6 +92,19 @@ class dbmgr:
 			return 0
 		elif cmp(password, ''.join(passwd)) == 0:
 			return 1;
+	
+	def get_certain_activity(self, id, mode):
+		"""Provide certain info to watch"""
+	# 0 event 1 offer 2 need
+		self.create_db_connection()
+		if mode == 0:
+			result = self.db.query("SELECT id,mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE id=%s", int(id))
+		elif mode == 1:
+			result = self.db.query("SELECT id,mail,title,location,description,target_population FROM Offers WHERE id=%s", int(id))
+		elif mode == 2:
+			result = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs WHERE id=%s", int(id))
+		self.drop_db_connection()
+		return result
 
 	def get_event_list(self, mail, cursor, mode):
 		"""for event provider,return dictionary, 0 personal, 1 recent, 2 most followed"""
