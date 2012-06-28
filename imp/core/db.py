@@ -264,7 +264,11 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.query("select * from Follow_Status where mail_to=%s", ''.join(mail))
+		print type(mail)
+		if type(mail) is str:
+			result = self.db.query("select * from Follow_Status where mail_to=%s", ''.join(mail))
+		elif type(mail) is list:
+			result = self.db.query("select * from Follow_Status where mail_to=%s", mail[0]['mail'])
 		self.drop_db_connection()
 		return len(result)
 			
