@@ -21,11 +21,15 @@ class SearchListProvider(BaseHandler):
 		if keyWords==[]:
 			list1=self.dbManager.search_default_list(" ")
 		else:
-			list1=self.dbManager.search_default_list(keyWords)
-		print list1
+			keywords=str(keyWords[0]).split(" ")
+			list1=[]
+			for i in keywords:
+				list2=self.dbManager.search_default_list(i)
+				list3=[a for a in list2 if a not in list1]
+				print i, list2
+				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		print list1, itemCount
 		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
 		
 		
@@ -47,7 +51,12 @@ class SearchEventListProvider(BaseHandler):
 		if keyWords==[]:
 			list1=self.dbManager.search_event_list(" ")
 		else:
-			list1=self.dbManager.search_event_list(keyWords)
+			keywords=str(keyWords[0]).split(" ")
+			list1=[]
+			for i in keywords:
+				list2=self.dbManager.search_event_list(i)
+				list3=[a for a in list2 if a not in list1]
+				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
 		print list1, itemCount
@@ -61,12 +70,16 @@ class SearchOfferListProvider(BaseHandler):
 	def get(self):
 		keyWords=self.get_arguments("keywords")
 		if keyWords==[]:
-			list1=self.dbManager.search_offer_list_list(" ")
+			list1=self.dbManager.search_offer_list(" ")
 		else:
-			list1=self.dbManager.search_event_list(keyWords)
+			keywords=str(keyWords[0]).split(" ")
+			list1=[]
+			for i in keywords:
+				list2=self.dbManager.search_offer_list(i)
+				list3=[a for a in list2 if a not in list1]
+				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		print list1, itemCount
 		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
 		
 
@@ -79,7 +92,12 @@ class SearchNeedListProvider(BaseHandler):
 		if keyWords==[]:
 			list1=self.dbManager.search_need_list(" ")
 		else:
-			list1=self.dbManager.search_need_list(keyWords)
+			keywords=str(keyWords[0]).split(" ")
+			list1=[]
+			for i in keywords:
+				list2=self.dbManager.search_need_list(i)
+				list3=[a for a in list2 if a not in list1]
+				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
 		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
@@ -89,10 +107,17 @@ class SearchUserListProvider(BaseHandler):
 		self.dbManager = dbmgr()
 		
 	def get(self):
-		list1=self.dbManager.search_user_list("e")
+		keyWords=self.get_arguments("keywords")
+		if keyWords==[]:
+			list1=self.dbManager.search_user_list(" ")
+		else:
+			keywords=str(keyWords[0]).split(" ")
+			list1=[]
+			for i in keywords:
+				list2=self.dbManager.search_user_list(i)
+				list3=[a for a in list2 if a not in list1]
+				list1+=list3
+		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		mes=None
-		if list1==None:
-			mes="Sorry, no items found!"
 		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
 		
