@@ -21,7 +21,8 @@ class BaseHandler(tornado.web.RequestHandler):
 		resultlist=self.dbManager.get_user_profile_info(mail,0)
 		result=resultlist[0]
 		user_info=dict()
-		user_info["user_id"]=result["user_id"]
+		user_info["user_id"]=str(result["user_id"])
 		user_info["user_name"]=' '.join([result["first_name"],result["last_name"]])
 		user_info["avatar"]=result["avatar"]
+		return user_info
 		
