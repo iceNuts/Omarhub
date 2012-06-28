@@ -363,6 +363,15 @@ class dbmgr:
 		result = self.db.query("select * from Follow_Status where mail_from=%s", ''.join(mail))
 		self.drop_db_connection()
 		return len(result)
+		
+	def get_follower_brief_list(self, mail,num):
+		"""Get the a brief list of followers"""
+		self.create_db_connection()
+		if not mail:
+			return None
+		result = self.db.query("select u.user_id,u.first_name,u.last_name,u.avatar from Follow_Status f,Users u where f.mail_to=%s and f.mail_to=u.mail limit 0,%s", mail,num)
+		self.drop_db_connection()
+		return result
 
 	def create_new_activity(self, mail, info, mode):
 		"""Insert into tables for new record"""

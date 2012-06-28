@@ -40,12 +40,13 @@ class ProfileHandler(BaseHandler):
 		userlist=self.dbManager.get_user_profile_info_by_id(user_id,0)
 		user=userlist[0]
 		user_mail=user["mail"]
+		user_name=" ".join([user["first_name"],user["last_name"]])
 		
 		organizationlist=self.dbManager.get_user_organization(user_mail)
 		organization=organizationlist[0]
 		
 		user_basic={
-			"name":" ".join([user["first_name"],user["last_name"]]),
+			"name":user_name,
 			"age":user["age"],
 			"gender":user["gender"],
 			"mail":user["mail"],
@@ -81,11 +82,16 @@ class ProfileHandler(BaseHandler):
 		print user_mail
 		follower_count=self.dbManager.get_follower_count(user_mail)
 		following_count=self.dbManager.get_following_count(user_mail)
+		is_followed=self.dbManager.check_if_followed(mail,user_mail)
+		follower_list=self.dbManager.get_follower_brief_list(user_mail,8)
 		self.render("profile.html",
 			my_user_id=my_user_id,
 			user_id=user_id,
+			user_name=user_name,
+			is_followed=is_followed,
 			follower_count=follower_count,
 			following_count=following_count,
+			follower_list=follower_list,
 			user_basic=user_basic,
 			user_contact=user_contact,
 			organization=org_info,
@@ -113,6 +119,7 @@ class ProfileEditHandler(BaseHandler):
 		organizationlist=self.dbManager.get_user_organization(mail)
 		organization=organizationlist[0]
 		user_id=user["user_id"]
+		user_name=" ".join([user["first_name"],user["last_name"]])
 		avatar=user["avatar"]
 		
 		user=self.sub_dict_minus(user,"user_id")
@@ -123,10 +130,21 @@ class ProfileEditHandler(BaseHandler):
 		user=self.sub_dict_minus(user,"org_id")
 		organization=self.sub_dict_minus(organization,"org_id")
 		
+		follower_count=self.dbManager.get_follower_count(mail)
+		following_count=self.dbManager.get_following_count(mail)
+		is_followed=0
+		follower_list=self.dbManager.get_follower_brief_list(mail,8)
+		
 		self.render("profile_edit.html",
 			user=user,
+			user_name=user_name,
 			organization=organization,
+			is_followed=is_followed,
+			follower_count=follower_count,
+			following_count=following_count,
+			follower_list=follower_list,
 			user_id=user_id,
+			my_user_id=user_id,
 			avatar=avatar
 		)
 		
