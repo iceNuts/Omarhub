@@ -41,6 +41,15 @@ class OfferProvider(BaseHandler):
 		id = self.current_user
 		#print id
 		list = self.dbManager.get_offer_list(id, cursor, mode)
+		i = 0
+		mail=self.current_user
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=user_me["user_id"]		
+		for item in list:
+			item['my_user_id'] = my_user_id
+			list[i] = item
+			i = i + 1
 		for item in list:
 			m_mail = item['mail']
 			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
@@ -60,6 +69,15 @@ class NeedProvider(BaseHandler):
 		id = self.current_user
 		#print id/
 		list = self.dbManager.get_need_list(id, cursor, mode)
+		i = 0
+		mail=self.current_user
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=user_me["user_id"]		
+		for item in list:
+			item['my_user_id'] = my_user_id
+			list[i] = item
+			i = i + 1
 		for item in list:
 			m_mail = item['mail']
 			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
@@ -78,6 +96,15 @@ class RecentallProvider(BaseHandler):
 		id = self.current_user
 		#print id
 		list = self.dbManager.get_recent_all_list(id, cursor, mode)
+		i = 0
+		mail=self.current_user
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=user_me["user_id"]		
+		for item in list:
+			item['my_user_id'] = my_user_id
+			list[i] = item
+			i = i + 1
 		self.write(json.dumps(list))
 	
 class PeopleProvider(BaseHandler):
@@ -89,8 +116,13 @@ class PeopleProvider(BaseHandler):
 		cursor = self.get_arguments("cursor")
 		list = self.dbManager.get_all_users(self.current_user,cursor)
 		i = 0
+		mail=self.current_user
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=user_me["user_id"]		
 		for item in list:
 			item['_type'] = "People"
+			item['my_user_id'] = my_user_id
 			list[i] = item
 			i = i + 1
 		self.write(json.dumps(list))
