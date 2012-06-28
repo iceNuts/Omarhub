@@ -296,11 +296,17 @@ class dbmgr:
 		self.drop_db_connection()
 		return result
 	
-	def follow_action(self, mail, user_id):
+	def follow_people_action(self, mail, user_id):
 		"""Add a follow event in Follow_Status"""
 		id = unicodedata.normalize('NFKD', user_id).encode('ascii','ignore')
 		m_mail = self.db.query("select mail from Users where user_id=%s", int(id))
 		self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail[0]['mail'])
+	
+	def unfollow_people_action(self, mail, user_id):
+		"""Unfollow peoplem, simply delete a row"""
+		id = unicodedata.normalize('NFKD', user_id).encode('ascii','ignore')
+		m_mail = self.db.query("select mail from Users where user_id=%s", int(id))
+		self.db.execute("delete from Follow_Status where mail_from=%s and mail_to=%s", mail, m_mail)
 	
 	def get_user_organization(self, mail):
 		"""Return organization info"""
