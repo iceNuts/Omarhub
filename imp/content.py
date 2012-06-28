@@ -20,11 +20,13 @@ class EventProvider(BaseHandler):
 			return None
 		cursor = self.get_arguments("cursor")
 		mode = self.get_arguments("mode")
+		mail = self.current_user
 		id = self.current_user
 		list = self.dbManager.get_event_list(id, cursor, mode)
 		for item in list:
 			m_mail = item['mail']
 			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+			tmp_list[0]["is_followed"] = str(self.dbManager.check_if_followed(mail, m_mail))
 			item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
@@ -53,6 +55,7 @@ class OfferProvider(BaseHandler):
 		for item in list:
 			m_mail = item['mail']
 			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+			tmp_list[0]["is_followed"] = str(self.dbManager.check_if_followed(mail, m_mail))
 			item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
@@ -81,6 +84,7 @@ class NeedProvider(BaseHandler):
 		for item in list:
 			m_mail = item['mail']
 			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
+			tmp_list[0]["is_followed"] = str(self.dbManager.check_if_followed(mail, m_mail))
 			item['author'] = copy(tmp_list[0])
 		self.write(json.dumps(list))
 
