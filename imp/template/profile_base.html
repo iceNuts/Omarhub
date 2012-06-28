@@ -17,8 +17,10 @@
               </div>
             </div>
             <div class="profile-top-info grid_2 omega">
-                <h4>Bill Zeng</h4>
+              <!--<h4>Bill Zeng</h4>-->
+              {% if my_user_id == user_id %}
               <a href="#" class="profile-top-follow btn btn-primary">follow</a>
+              {% end %}
             </div>
           </div>
             <div id="top-filter">

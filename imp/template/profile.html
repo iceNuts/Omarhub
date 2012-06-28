@@ -5,7 +5,9 @@
 {% block profile_content %}
     <div class="profile-info">
       <h4>Contact Info</h4>
+      {% if my_user_id == user_id %}
       <a href="/profile/editMyProfile">edit</a>
+      {%end%}
       {% for k,v in user_contact.items() %}
       <ul class="control-group">
         <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
@@ -21,7 +23,9 @@
     </div>
     <div class="profile-info">
       <h4>Organization Info</h4>
+      {% if my_user_id == user_id %}
       <a href="/profile/editMyProfile#organization-info">edit</a>
+      {% end %}
       {% for k,v in organization.items() %}
       <ul class="control-group">
         <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
@@ -37,7 +41,9 @@
     </div>
     <div class="profile-info">
       <h4>Basic Info</h4>
+      {% if my_user_id == user_id %}
       <a href="/profile/editMyProfile">edit</a>
+      {% end %}
       {% for k,v in user_basic.items() %}
       <ul class="control-group">
         <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>

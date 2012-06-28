@@ -69,9 +69,11 @@ select {
 }
 .btn-active {
     background: #309DF3;
+    border: solid 1px #217ac3;
 }
 .btn-danger {
     background: #E05e7d;
+    border: solid 1px #a03e5d;
 }
 
 .hide {
@@ -287,11 +289,11 @@ div#container {
 }
 
 .user-info {
-    float: right;
+    /*float: right;*/
 }
 
 .user-info .avatar {
-    width: 50px;
+    width: 100px;
     /*border-radius: 25px;*/
     float: right;
 }
@@ -311,7 +313,7 @@ div#footer-wrap {
 /*content items css */
 #content-items {
     margin-top: 10px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding-bottom: 50px;
 }
 
@@ -326,11 +328,28 @@ div#footer-wrap {
 
 .content-item .avatar-wrap{
     /*height: 50px;*/
-    width: 50px;
+    width: 100px;
     /*border-radius: 30px;*/
     border: solid 5px white;
     box-shadow: 0px 0px 3px rgba(0,0,0,0.10);
     overflow:hidden;
+    position: relative;
+}
+
+.content-item .avatar-wrap .profile-top-follow {
+    position: absolute;
+    bottom: 0px;
+    width: 98px;
+    height: 20px;
+    border-radius: 0px;
+}
+.content-item .avatar-wrap p.name {
+    position: absolute;
+    top: 0px;
+    width: 100px;
+    height: 30px;
+    background: rgba(255,255,255,0.7);
+    color: #555;
 }
 
 

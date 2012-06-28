@@ -135,8 +135,10 @@ div.profile-top .avatar {
 
 div.profile-top div.avatar img{
     width: 80px;
-    width: 100%;
-    height: 100%;
+    width: 90px;
+    height: 90px;
+    border: solid 5px white;
+    vertical-align: top;
     /*float: right;*/
 }
 

@@ -48,16 +48,54 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-        $('.profile-top-follow').click(function(){
+        $('.profile-top-follow').live('click',function(){
                 if($(this).hasClass('btn-primary')) {
-                    $(this).addClass('btn-active');
-                    $(this).removeClass('btn-primary');
-                    $(this).html('following');
+                    $.ajax({
+                            url: $(this).prop('href'),
+                            type: 'post',
+                            success: function(msg) {
+                                if (msg==='1') {
+                                    $(this).addClass('btn-active');
+                                    $(this).removeClass('btn-primary');
+                                    $(this).html('following');
+                                }
+                            }
+                    });
                 }
                 else {
-                    $(this).addClass('btn-primary');
-                    $(this).removeClass('btn-active');
-                    $(this).html('follow');
+                    $.ajax({
+                            url: $(this).prop('href'),
+                            type: 'post',
+                            success: function(msg) {
+                                if (msg==='1') {
+                                    $(this).addClass('btn-primary');
+                                    $(this).removeClass('btn-active');
+                                    $(this).html('follow');
+                                }
+                            }
+                    });
                 }
+                return false;
         });     
+        $('.profile-top-follow').live({
+                mouseenter: function() {
+                    if ($(this).hasClass('btn-active')) {
+                        $(this).addClass('btn-danger');
+                        $(this).html('unfollow');
+                    }
+                    else if ($(this).hasClass('btn-primary')) {
+                        $(this).addClass('btn-active');
+                    }
+                },
+                mouseleave: function() {
+                    $(this).removeClass('btn-danger');
+                    if ($(this).hasClass('btn-primary')) {
+                        $(this).html('follow');
+                        $(this).removeClass('btn-active');
+                    }
+                    else {
+                        $(this).html('following');
+                    }
+                }
+        });
 });
