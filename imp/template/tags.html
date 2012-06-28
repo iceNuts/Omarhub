@@ -7,15 +7,44 @@
 $(document).ready(function(){
 		$('#container img').click(function(){
 			if(!$(this).hasClass("follow") ){              //类follow为空类，作为判断空星实星的标记
-				$(this).prop('src','/static/img/star/lit_star.png');
-				$(this).addClass("follow");
+				var url_f="/tags/follow/"+$('a',$(this).parent()).prop('id');
+				$.ajax({
+					url: url_f,
+					type: 'post',
+					data:{},
+					context:this,
+					success: function(msg){
+						//alert(msg)
+						if(msg=="1") {
+							$(this).prop('src','/static/img/star/lit_star.png');
+							$(this).addClass("follow");
+						}
+					}
+				});
+				
 			}
 			else{
-				$(this).prop('src','/static/img/star/unlit_star.png');
-				$(this).removeClass("follow");
+				
+				var url_u="/tags/unfollow/"+$('a',$(this).parent()).prop('id');
+				//alert(url_u)
+				$.ajax({
+					url: url_u,
+					type: 'post',
+					data:{},
+					context:this,
+					success: function(msg){
+						//alert(msg)
+						if(msg=="1") {
+							$(this).prop('src','/static/img/star/unlit_star.png');
+							$(this).removeClass("follow");
+						}
+					}
+				
+				});
 			}
-			})
+			
 	})
+})
 </script>
 {% end %}
 
@@ -38,9 +67,9 @@ $(document).ready(function(){
             </div>
             <div class="grid_4">
 			<ul>
-				{% for k,v,isFollowed in tags_list %}
+				{% for id,k,v,isFollowed in tags_list %}
 				<li>
-					<a class="tag normal-tag" href="#">{{k}}({{v}})</a>
+					<a class="tag normal-tag" id="{{id}}" href="#">{{k}}({{v}})</a>
 					{% if not isFollowed %}
                     <img class="avatar" src="/static/img/star/unlit_star.png" alt="" />
                     {%else%}

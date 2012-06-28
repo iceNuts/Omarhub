@@ -55,6 +55,8 @@ class Application(tornado.web.Application):
 			(r"/offer/([\d]+)", OfferShowHandler),
 			(r"/need/([\d]+)", NeedShowHandler),
 			(r"/tags",TagHandler),
+			(r"/tags/follow/([\d]+)",TagFollowHandler),
+			(r"/tags/unfollow/([\d]+)",TagUnfollowHandler),
 			(r"/action/people/follow/([\d]+)", FollowPeopleActionHandler),
 			(r"/action/people/unfollow/([\d]+)", UnfollwPeopleActionHandler),
 			(r"/content/search/getdefault", SearchListProvider),
