@@ -301,7 +301,7 @@ class dbmgr:
 		self.create_db_connection()
 		id = unicodedata.normalize('NFKD', user_id).encode('ascii','ignore')
 		m_mail = self.db.query("select mail from Users where user_id=%s", int(id))
-		flag = self.check_if_followed(mail, m_mail)
+		flag = self.check_if_followed(mail, m_mail[0]['mail'])
 		if not flag:
 			self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail[0]['mail'])
 		self.drop_db_connection()
@@ -311,9 +311,9 @@ class dbmgr:
 		self.create_db_connection()
 		id = unicodedata.normalize('NFKD', user_id).encode('ascii','ignore')
 		m_mail = self.db.query("select mail from Users where user_id=%s", int(id))
-		flag = self.check_if_followed(mail, m_mail)
+		flag = self.check_if_followed(mail, m_mail[0]['mail'])
 		if flag:
-			self.db.execute("delete from Follow_Status where mail_from=%s and mail_to=%s", mail, m_mail)
+			self.db.execute("delete from Follow_Status where mail_from=%s and mail_to=%s", mail, m_mail[0]['mail'])
 		self.drop_db_connection()
 	
 	def get_user_organization(self, mail):
