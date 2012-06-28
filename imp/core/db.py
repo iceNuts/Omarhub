@@ -302,7 +302,7 @@ class dbmgr:
 		id = unicodedata.normalize('NFKD', user_id).encode('ascii','ignore')
 		m_mail = self.db.query("select mail from Users where user_id=%s", int(id))
 		flag = self.check_if_followed(mail, m_mail[0]['mail'])
-		if not flag:
+		if not flag and cmp(mail,m_mail[0]['mail']) != 0:
 			self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail[0]['mail'])
 		self.drop_db_connection()
 	
