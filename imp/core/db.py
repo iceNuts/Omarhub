@@ -278,7 +278,7 @@ class dbmgr:
 		if not mail:
 			return None
 		print type(mail)
-		if type(mail) is str:
+		if type(mail) is str or unicode:
 			result = self.db.query("select * from Follow_Status where mail_to=%s", ''.join(mail))
 		elif type(mail) is list:
 			result = self.db.query("select * from Follow_Status where mail_to=%s", mail[0]['mail'])
