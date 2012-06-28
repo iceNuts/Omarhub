@@ -290,9 +290,9 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.execute_rowcount("select * from Follow_Status where mail_from=%s", mail)
+		result = self.db.query("select * from Follow_Status where mail_from=%s", ''.join(mail))
 		self.drop_db_connection()
-		return result
+		return len(result)
 
 	def create_new_activity(self, mail, info, mode):
 		"""Insert into tables for new record"""
