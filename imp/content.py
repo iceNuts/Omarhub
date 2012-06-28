@@ -88,6 +88,11 @@ class PeopleProvider(BaseHandler):
 			return None
 		cursor = self.get_arguments("cursor")
 		list = self.dbManager.get_all_users(self.current_user,cursor)
+		i = 0
+		for item in list:
+			item['_type'] = "People"
+			list[i] = item
+			i = i + 1
 		self.write(json.dumps(list))
 
 

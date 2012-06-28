@@ -294,10 +294,12 @@ class dbmgr:
 		if not mail:
 			return None
 		print type(mail)
-		if type(mail) is str or unicode:
+		if type(mail) is str:
 			result = self.db.query("select * from Follow_Status where mail_to=%s", ''.join(mail))
 		elif type(mail) is list:
 			result = self.db.query("select * from Follow_Status where mail_to=%s", mail[0]['mail'])
+		elif type(mail) is unicode:
+			result = self.db.query("select * from Follow_Status where mail_to=%s", mail)
 		self.drop_db_connection()
 		return len(result)
 			
