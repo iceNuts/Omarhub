@@ -51,7 +51,7 @@ class TagHandler(BaseHandler):
 			my_follow=self.dbManager.check_tag_followed(mail,name,"freetag")
 			tagdict["Free Tags"][i]=[tid,name,followed,my_follow]
 			
-		self.render("tags.html",user_id=user_id,tagdict=tagdict)
+		self.render("tags.html",user_id=user_id,tagdict=tagdict,my_user_id=user_id)
 
 class TagFollowHandler(BaseHandler):
 	def initialize(self):

@@ -8,25 +8,43 @@ class EventShowHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
 	def get(self, id):
-		if not self.current_user:
-			self.redirect("/")
+		my_user_id=self.get_current_user_id()
 		list = self.dbManager.get_certain_activity(id, 0)
-		self.render('show_one.html', list=list)
+		mail=list[0]["mail"]
+		user_dict=self.get_user_info(mail)
+		self.render('show_one.html', 
+			list=list ,my_user_id=my_user_id,
+			user_id=user_dict["user_id"],
+			user_name=user_dict["user_name"],
+			avatar=user_dict["avatar"]
+		)
 
 class OfferShowHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
 	def get(self, id):
-		if not self.current_user:
-			self.redirect("/")
+		my_user_id=self.get_current_user_id()
 		list = self.dbManager.get_certain_activity(id, 1)
-		self.render('show_one.html', list=list)
+		mail=list[0]["mail"]
+		user_dict=self.get_user_info(mail)
+		self.render('show_one.html', 
+			list=list ,my_user_id=my_user_id,
+			user_id=user_dict["user_id"],
+			user_name=user_dict["user_name"],
+			avatar=user_dict["avatar"]
+		)
 
 class NeedShowHandler(BaseHandler):
 	def initialize(self):
 		self.dbManager = dbmgr()
 	def get(self, id):
-		if not self.current_user:
-			self.redirect("/")
+		my_user_id=self.get_current_user_id()
 		list = self.dbManager.get_certain_activity(id, 2)
-		self.render('show_one.html', list=list)
+		mail=list[0]["mail"]
+		user_dict=self.get_user_info(mail)
+		self.render('show_one.html', 
+			list=list ,my_user_id=my_user_id,
+			user_id=user_dict["user_id"],
+			user_name=user_dict["user_name"],
+			avatar=user_dict["avatar"]
+		)

@@ -17,6 +17,7 @@ from activityshow import *
 from tags import *
 from actions import *
 from searchList import *
+from admin import *
 
 class MainHandler(BaseHandler):
 	def get(self):
@@ -63,7 +64,8 @@ class Application(tornado.web.Application):
 			(r"/content/search/getevents", SearchEventListProvider),
 			(r"/content/search/getoffers", SearchOfferListProvider),
 			(r"/content/search/getneeds", SearchNeedListProvider),
-			(r"/content/search/getusers", SearchUserListProvider)
+			(r"/content/search/getusers", SearchUserListProvider),
+			(r"/admin",AdminUserHandler)
 			]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "template"),

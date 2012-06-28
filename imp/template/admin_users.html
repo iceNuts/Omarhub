@@ -1,0 +1,92 @@
+{% extends "admin_base.html" %}
+{% block title %}Admin Dashboard{%end%}
+{% block extra-links %}
+<link rel="stylesheet" href="{{static_url('./css/admin_dashboard.css')}}" type="text/css"/>
+{% end %}
+
+{% block admin_content %}
+	
+    <div id="sidebar-wrap" class="grid_4 upfix_1">
+        <div id="sidebar">
+            <div id="top-filter">
+                <ul>
+                    <li><a class="active" href="#">All Users</a></li>
+                    <li><a href="#">Logged-in Users</a></li>
+                    <li><a href="#">Active Users</a></li>
+                </ul>
+            </div>
+            <div id="top-filter">
+				<ul>
+                    <li><a class="active" href="#">All</a></li>
+                    <li><a href="#">Omar Fellow</a></li>
+                </ul>
+			</div>
+            <div id="regular-filter">
+                <!--<h2>Filter</h2>-->
+                <form id="regular-filter-form" action="">
+                    <div class="control-group">
+                        <label for="opportunity-id-input">Opportunity ID:</label>
+                        <input id="opportunity-id-input" type="text" />
+                    </div>
+                    <div class="control-group">
+                        <label for="first-name-input">Firstname:</label>
+                        <input id="first-name-input" type="text" />
+                    </div>
+                    <div class="control-group">
+                        <label for="last-name-input">Lastname:</label>
+                        <input id="last-name-input" type="text" />
+                    </div>
+                    <div class="control-group">
+                        <label for="batch-id-input">Batch ID:</label>
+                        <input id="batch-id-input" type="text" />
+                    </div>
+                    <button class="btn btn-primary" id="set-button">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+	<div id="user-table" class="grid_12 upfix_1">
+		<div>
+			<table id="table-5">
+				<caption>Displaying User 1-20 of N in Total</caption>
+				<tr>
+					<th>HubID</th>
+					<th>Name</th>
+					<th>User Type</th>
+					<th>Country</th>
+					<th>Activity Count</th>
+					<th>Batch</th>
+					<th>Action</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>Sen Young</td>
+					<td>Admin</td>
+					<td>China</td>
+					<td>25</td>
+					<td>Batch1</td>
+					<td>
+						<label>Activate</label>
+						<label>InfoEdit</label>
+						<label>SettingEdit</label>
+						<label>Hide</label>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+		
+	<div class="grid_4 downfix_1 prefix_2">
+		<p id="page">
+			<a href="" class="n">&lt;back</a>
+			<a href="">1</a>
+			<strong>2</strong>
+			<a href="">3</a>
+			<a href="">4</a>
+			<a href="">5</a>
+			<a href="">6</a>
+			<a href="1" class="n">next&gt;</a>
+		</p>
+	</div>
+{%end%}

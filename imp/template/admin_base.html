@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{%end%}
+{% block extra-links %}
+<link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+{% end %}
+
+{% block content %}
+<div id="container" class="container_16">
+	<div id="content-wrap" class="grid_16">
+        <div id="content">
+            <div id="nav-tab" class="clearfix">
+                <ul id="category-tab" class="tab nav grid_15 alpha">
+                    <li><a class="active" href="#">Users</a></li>
+                    <li><a href="#">Offers</a></li>
+                    <li><a href="#">Needs</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Profiles</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#">Tags</a></li>
+                    <li><a href="#">Taxonomy</a></li>
+                    <li><a href="#">Email Templates</a></li>
+                    <li><a href="#">Exceptions</a></li>
+                </ul>
+            </div>
+         </div>
+    </div>
+    
+    {% block admin_content %}{%end%}
+</div>
+{%end%}
