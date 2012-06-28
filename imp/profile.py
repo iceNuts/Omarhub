@@ -35,7 +35,7 @@ class ProfileHandler(BaseHandler):
 		mail=self.current_user
 		userlist_me=self.dbManager.get_user_profile_info(mail,0)
 		user_me=userlist_me[0]
-		my_user_id=user_me["user_id"]
+		my_user_id=str(user_me["user_id"])
 		
 		userlist=self.dbManager.get_user_profile_info_by_id(user_id,0)
 		user=userlist[0]
