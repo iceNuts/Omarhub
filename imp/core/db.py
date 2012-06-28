@@ -388,13 +388,15 @@ class dbmgr:
 		self.drop_db_connection()
 		return entry
 			
-	def create_new_user(first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd):
+	def create_new_user(self, mail, info):
 		"""Create a unique id"""
-		create_db_connection(self)
-		
-		self.db.execute("INSERT INTO Users (first_name,last_name,age,gender,mail,target_population,location,work_field,language,street,city,state,post_code,country,mobile,mobile_code,skype,passwd,register_date, avatar,org_id) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,UTC_TIMESTAMP(),%s,%s)",first_name, last_name, age, gender, mail, target_population, location, work_field, language, street, city, state, post_code, country, mobile, mobile_code, skype, passwd, None,None)	
-		drop_db_connection(self)	
-		return 1
+		self.create_db_connection()
+		self.db.execute("insert into Users (mail) values (%s)", mail)
+		for item in info:
+			sqlstatement=' '.join(["update Users set",item])
+			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
+		self.drop_db_connection()
+		return entry
 
 
 	def delete_a_user(mail):
