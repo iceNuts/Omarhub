@@ -1,5 +1,6 @@
 import tornado.web
 import tornado.auth
+from core.db import *
 
 class BaseHandler(tornado.web.RequestHandler):
 	def get_current_user(self):
