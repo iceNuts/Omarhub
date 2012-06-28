@@ -369,7 +369,7 @@ class dbmgr:
 		self.create_db_connection()
 		if not mail:
 			return None
-		result = self.db.query("select u.user_id,u.first_name,u.last_name,u.avatar from Follow_Status f,Users u where f.mail_to=%s and f.mail_to=u.mail limit 0,%s", mail,num)
+		result = self.db.query("select u.user_id,u.first_name,u.last_name,u.avatar from Follow_Status f,Users u where f.mail_to=%s and f.mail_from=u.mail limit 0,%s", mail,num)
 		self.drop_db_connection()
 		return result
 
