@@ -36,4 +36,20 @@ class dbmgr:
 		tag_id = self.db.get("select tag_id from Tags where name=%s and tag_domain=%s",''.join(name),''.join(tag_domain)) 
 		tagfollowed=self.db.execute_rowcount("select * from UserTag where mail=%s and tag_id=%s",''.join(mail),int(tag_id["tag_id"]))
 		return tagfollowed
+
+	def get_user_profile_info_by_id(self, user_id, mode):
+		"""Profile to fetch info, 0 all 1 part"""
+		self.create_db_connection()
+		if not user_id:
+			return None
+		if mode == 0:
+				result = self.db.query("SELECT * FROM Users WHERE user_id = %s",user_id)
+		elif mode == 1:
+				result = self.db.query("SELECT user_id,first_name,last_name,avatar,location FROM Users WHERE user_id = %s", user_id)#untest
+		self.drop_db_connection()
+		print result
+		if not result:
+			print "Ooops"
+			return None
+		return result
 		

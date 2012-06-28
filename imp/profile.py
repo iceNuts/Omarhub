@@ -33,11 +33,17 @@ class ProfileHandler(BaseHandler):
 		if not self.current_user:
 			self.redirect("/auth/login")
 		mail=self.current_user
-		userlist=self.dbManager.get_user_profile_info(mail,0)
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=user_me["user_id"]
+		
+		userlist=self.dbManager.get_user_profile_info_by_id(user_id,0)
 		user=userlist[0]
-		organizationlist=self.dbManager.get_user_organization(mail)
+		user_mail=user["mail"]
+		
+		organizationlist=self.dbManager.get_user_organization(user_mail)
 		organization=organizationlist[0]
-		user_id=user["user_id"]
+		
 		user_basic={
 			"name":" ".join([user["first_name"],user["last_name"]]),
 			"age":user["age"],
@@ -72,10 +78,11 @@ class ProfileHandler(BaseHandler):
 		org_info["type"]=self. get_str_orgtype(org_info["type"])
 		
 		avatar=user["avatar"]
-		
-		follower_count=self.dbManager.get_follower_count(mail)
-		following_count=self.dbManager.get_following_count(mail)
+		print user_mail
+		follower_count=self.dbManager.get_follower_count(user_mail)
+		following_count=self.dbManager.get_following_count(user_mail)
 		self.render("profile.html",
+			my_user_id=my_user_id,
 			user_id=user_id,
 			follower_count=follower_count,
 			following_count=following_count,
