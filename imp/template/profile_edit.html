@@ -4,7 +4,7 @@
 <div class="profile-info">
   <h4>Edit your profile</h4>
   <form class="edit-form" action="/profile/editMyProfile/user" method="post">
-    {% for k,v in user.items() %}
+    {% for k,v in user_all_info.items() %}
     <ul class="control-group">
       <li class="control-group-description grid_3 alpha"><p class="inside">{{k}}:</p></li>
       <li class="control-group-content grid_5 omega"><input name="{{k}}" type="text" value="{%if v!=None %}{{v}}{%end%}"/></li>

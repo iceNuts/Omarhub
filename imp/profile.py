@@ -79,11 +79,13 @@ class ProfileHandler(BaseHandler):
 		org_info["type"]=self. get_str_orgtype(org_info["type"])
 		
 		avatar=user["avatar"]
-		print user_mail
+		
 		follower_count=self.dbManager.get_follower_count(user_mail)
 		following_count=self.dbManager.get_following_count(user_mail)
 		is_followed=self.dbManager.check_if_followed(mail,user_mail)
 		follower_list=self.dbManager.get_follower_brief_list(user_mail,8)
+		
+		print type(user_basic)
 		self.render("profile.html",
 			my_user_id=my_user_id,
 			user_id=user_id,
@@ -128,6 +130,8 @@ class ProfileEditHandler(BaseHandler):
 		user=self.sub_dict_minus(user,"passwd")
 		user=self.sub_dict_minus(user,"register_date")
 		user=self.sub_dict_minus(user,"org_id")
+		
+		print type(user)
 		organization=self.sub_dict_minus(organization,"org_id")
 		
 		follower_count=self.dbManager.get_follower_count(mail)
@@ -136,7 +140,7 @@ class ProfileEditHandler(BaseHandler):
 		follower_list=self.dbManager.get_follower_brief_list(mail,8)
 		
 		self.render("profile_edit.html",
-			user=user,
+			user_all_info=user,
 			user_name=user_name,
 			organization=organization,
 			is_followed=is_followed,
