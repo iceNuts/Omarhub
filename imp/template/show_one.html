@@ -17,14 +17,7 @@
               </div>
             </div>
             <div class="profile-top-info grid_2 omega">
-              <h4>{{user_name}}</h4>
-              {% if my_user_id != user_id %}
-              {% if not is_followed %}
-              <a href="/action/people/follow/{{user_id}}" class="profile-top-follow btn btn-primary" name="people-follow-{{user_id}}">follow</a>
-              {% else %}
-              <a href="/action/people/unfollow/{{user_id}}" class="profile-top-follow btn btn-active" name="people-follow-{{user_id}}">following</a>
-              {% end %}
-              {% end %}
+              <a href="/profile/{{user_id}}"><h4>{{user_name}}</h4></a>
             </div>
           </div>
         </div>
@@ -32,21 +25,36 @@
 
     <div id="content-wrap" class="grid_9">
         <div id="content" class="profile-content">
-            {% block profile_content %}{% end %}
+          <div class="profile-info">
+            <h2>{{list[0]['title']}}</h2>
+          </div>
+          <div class="profile-info">
+            <h4>Description</h4>
+            <p>{{list[0]['description']}}</p>
+          </div>
+          <div class="profile-info">
+            <h4>Location</h4>
+            <p>{{list[0]['location']}}</p>
+          </div>
+          {% if list[0].has_key('start_date') %}
+          <div class="profile-info">
+            <p>Start date: {{list[0]['start_date']}}</p>
+            <p>End date: {{list[0]['end_date']}}</p>
+          </div>
+          <div class="profile-info">
+            <h4>Work field</h4>
+            <p>{{list[0]['work_field']}}</p>
+          </div>
+          {% end %}
+          <div class="profile-info">
+            <h4>Target population</h4>
+            <p>{{list[0]['target_population']}}</p>
+          </div>
         </div>
     </div>
     
     <div class="sidebar-wrap grid_3">
       <div class="sidebar">
-        <!--<div id="follower" class="side-zone">-->
-          <!--<h4>follower({{follower_count}})</h4>-->
-          <!--<ul class="followers-avatar">-->
-            <!--{% for user in follower_list %}-->
-            <!--<li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></a></li>-->
-            <!--{% end %}-->
-            <!--</ul>-->
-          <!--</div>-->
-        <!--<div id="following" class="side-zone"></div>-->
       </div>
     </div>
 </div>

@@ -12,6 +12,7 @@ class EventShowHandler(BaseHandler):
 		list = self.dbManager.get_certain_activity(id, 0)
 		mail=list[0]["mail"]
 		user_dict=self.get_user_info(mail)
+		print list
 		self.render('show_one.html', 
 			list=list ,my_user_id=my_user_id,
 			user_id=user_dict["user_id"],
