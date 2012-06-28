@@ -182,16 +182,41 @@ class dbmgr:
 				need_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Needs where id=%s", int(typeId))
 				item = dict(item.items() + need_item[0].items())
 				author_item = self.get_user_profile_info(author_mail, 1)
+				#Get if followed
+				flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail, author_mail)
+				number = self.get_follower_count(author_mail)
+				if flag:
+					author_item[0]['is_followed'] = '1'
+				else:
+					author_item[0]['is_followed'] = '0'
+				#Get if followed
+				print author_item
 				item['author'] = copy(author_item[0])
 			elif cmp(type,'Offers') == 0:
 				offer_item = self.db.query("SELECT id, mail,title,location,description,target_population FROM Offers WHERE id = %s ", int(typeId))
 				item = dict(item.items() + offer_item[0].items())
 				author_item = self.get_user_profile_info(author_mail, 1)
+				#Get if followed
+				flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail, author_mail)
+				number = self.get_follower_count(author_mail)
+				if flag:
+					author_item[0]['is_followed'] = '1'
+				else:
+					author_item[0]['is_followed'] = '0'
+				#Get if followed
 				item['author'] = copy(author_item[0])
 			elif cmp(type,'Events') == 0:
 				event_item = self.db.query("SELECT id, mail,title,location,description,work_field,target_population,start_date,end_date FROM Events WHERE id=%s", int(typeId))
 				item = dict(item.items() + event_item[0].items())
 				author_item = self.get_user_profile_info(author_mail, 1)
+				#Get if followed
+				flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail, author_mail)
+				number = self.get_follower_count(author_mail)
+				if flag:
+					author_item[0]['is_followed'] = '1'
+				else:
+					author_item[0]['is_followed'] = '0'
+				#Get if followed
 				item['author'] = copy(author_item[0])
 			result[i] = item
 			i = i + 1
@@ -219,6 +244,15 @@ class dbmgr:
 			print "Ooops"
 			return None
 		return result
+	
+	def check_if_followed(self, mail_from, mail_to):
+		#Get if followed
+		flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail_from, mail_to)
+		if flag:
+			return 1
+		else:
+			return 0
+		#Get if followed
 		
 	def get_user_profile_info_by_id(self, user_id, mode):
 		"""Profile to fetch info, 0 all 1 part"""
@@ -228,7 +262,8 @@ class dbmgr:
 		if mode == 0:
 				result = self.db.query("SELECT * FROM Users WHERE user_id = %s",user_id)
 		elif mode == 1:
-				result = self.db.query("SELECT user_id,first_name,last_name,avatar,location FROM Users WHERE user_id = %s", user_id)#untest
+				result = self.db.query("SELECT user_id,first_name,last_name,avatar,location FROM Users WHERE user_id = %s", user_id)
+				
 		self.drop_db_connection()
 		print result
 		if not result:
