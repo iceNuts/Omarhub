@@ -233,7 +233,7 @@ class dbmgr:
 		"""Add a follow event in Follow_Status"""
 		id = unicodedata.normalize('NFKD', user_id).encode('ascii','ignore')
 		m_mail = self.db.query("select mail from Users where user_id=%s", int(id))
-		self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail)
+		self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail[0]['mail'])
 	
 	def get_user_organization(self, mail):
 		"""Return organization info"""
