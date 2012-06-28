@@ -242,9 +242,10 @@ class dbmgr:
 			return None
 		self.create_db_connection()
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')	
-		list = self.db.query("select user_id, first_name, last_name, avatar, location from Users order by register_date desc limit %s,20", int(strCursor))
+		mylist = self.db.query("select user_id, first_name, last_name, avatar, location from Users order by register_date desc limit %s,20", int(strCursor))
 		i = 0
-		for item in list:
+		result = list(mylist)
+		for item in mylist:
 			m_mail = self.db.query("select mail from Users where user_id=%s", item['user_id'])
 			flag = self.db.query("select * from Follow_Status where mail_from=%s and mail_to=%s", mail, m_mail[0]['mail'])
 			number = self.get_follower_count(m_mail)
@@ -253,10 +254,12 @@ class dbmgr:
 			else:
 				item['is_followed'] = '0'
 			item['follower_number'] = number
-			list[i] = item
+			x = dict()
+			x["author"] = item
+			result[i] = x
 			i = i + 1
 		self.drop_db_connection()
-		return list
+		return result
 	
 	def follow_action(self, mail, user_id):
 		"""Add a follow event in Follow_Status"""
