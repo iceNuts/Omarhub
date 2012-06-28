@@ -242,7 +242,7 @@ class dbmgr:
 			return None
 		self.create_db_connection()
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')	
-		mylist = self.db.query("select user_id, first_name, last_name, avatar, location from Users order by register_date desc limit %s,20", int(strCursor))
+		mylist = self.db.query("select user_id, first_name, last_name, avatar, location from Users where passwd <> '' order by register_date desc limit %s,20", int(strCursor))
 		i = 0
 		result = list(mylist)
 		for item in mylist:
