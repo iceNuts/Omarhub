@@ -23,6 +23,14 @@ class EventProvider(BaseHandler):
 		mail = self.current_user
 		id = self.current_user
 		list = self.dbManager.get_event_list(id, cursor, mode)
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=user_me["user_id"]
+		i = 0
+		for item in list:
+			item['my_user_id'] = my_user_id
+			list[i] = item
+			i = i + 1
 		for item in list:
 			m_mail = item['mail']
 			tmp_list = self.dbManager.get_user_profile_info(m_mail, 1)
