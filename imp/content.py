@@ -28,7 +28,7 @@ class EventProvider(BaseHandler):
 		my_user_id=user_me["user_id"]
 		i = 0
 		if not list:
-			return None
+			return list()
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -59,7 +59,7 @@ class OfferProvider(BaseHandler):
 		user_me=userlist_me[0]
 		my_user_id=user_me["user_id"]	
 		if not list:
-			return None
+			return list()
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -90,7 +90,7 @@ class NeedProvider(BaseHandler):
 		user_me=userlist_me[0]
 		my_user_id=user_me["user_id"]	
 		if not list:
-			return None
+			return list()
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -120,7 +120,7 @@ class RecentallProvider(BaseHandler):
 		user_me=userlist_me[0]
 		my_user_id=user_me["user_id"]	
 		if not list:
-			return None
+			return list()
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -141,7 +141,7 @@ class PeopleProvider(BaseHandler):
 		user_me=userlist_me[0]
 		my_user_id=user_me["user_id"]	
 		if not list:
-			return None
+			return list()
 		for item in list:
 			item['_type'] = "People"
 			item['my_user_id'] = my_user_id
