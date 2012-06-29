@@ -9,7 +9,7 @@ class EventShowHandler(BaseHandler):
 		self.dbManager = dbmgr()
 	def get(self, id):
 		my_user_id=self.get_current_user_id()
-		userlist=self.dbManager.get_user_profile_info_by_id(my_user_id)
+		userlist=self.dbManager.get_user_profile_info_by_id(my_user_id,0)
 		userme=userlist[0]
 		avatar=userme["avatar"]
 		list = self.dbManager.get_certain_activity(id, 0)
@@ -29,7 +29,7 @@ class OfferShowHandler(BaseHandler):
 		self.dbManager = dbmgr()
 	def get(self, id):
 		my_user_id=self.dbManager.get_current_user_id()
-		userlist=self.get_user_profile_info_by_id(my_user_id)
+		userlist=self.get_user_profile_info_by_id(my_user_id,0)
 		userme=userlist[0]
 		avatar=userme["avatar"]
 		list = self.dbManager.get_certain_activity(id, 1)
@@ -48,7 +48,7 @@ class NeedShowHandler(BaseHandler):
 		self.dbManager = dbmgr()
 	def get(self, id):
 		my_user_id=self.get_current_user_id()
-		userlist=self.dbManager.get_user_profile_info_by_id(my_user_id)
+		userlist=self.dbManager.get_user_profile_info_by_id(my_user_id,0)
 		userme=userlist[0]
 		avatar=userme["avatar"]
 		list = self.dbManager.get_certain_activity(id, 2)
