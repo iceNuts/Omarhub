@@ -26,7 +26,7 @@ class LoginHandler(BaseHandler):
 		passwd = self.get_arguments("u_passwd")
 		usr_mail = self.get_arguments("u_mail")
 							
-		if self.dbManager.checkAuth(usr_mail, passwd):
+		if self.dbManager.checkAuth(usr_mail, passwd,0):
 			self.errorcode = ''
 			self.set_secure_cookie("user", ''.join(usr_mail))
 			self.redirect("/home")

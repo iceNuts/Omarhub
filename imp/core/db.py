@@ -84,7 +84,8 @@ class dbmgr:
 		else:
 			return 1
 		
-	def checkAuth(self,usr_name, passwd):
+	def checkAuth(self,usr_name, passwd,mode):
+		#mode 0 for fellow,1 for admin
 		self.create_db_connection()
 		result = self.db.get("SELECT passwd FROM Users WHERE mail = %s", ''.join(usr_name))
 		self.drop_db_connection()
@@ -424,6 +425,7 @@ class dbmgr:
 		self.create_db_connection()
 		exist=self.db.execute_rowcount("select * from Admins where mail=%s",mail)
 		if exist :
+			print "This is illogical"
 			return 0
 		self.db.execute("insert into Admins (mail) values (%s)", mail)
 		for item in info:

@@ -1,33 +1,102 @@
+<html>
+<head>
+<script type="text/javascript">
+	function nN(create_user){
+	
+		var ipt;
+		var textboxes=new Array();
+		var radioList=new Object();
+	
+		var radioes;
+		var inputs=create_user.getElementsByTagName("INPUT");
+		
+		for(var i=0;i<inputs.length;i++)//遍历所有的INPUT
+		{
+			ipt=inputs[i];
+			if(ipt.type=="text")
+			{
+				textboxes[textboxes.length]=ipt;
+			}
+			else if(ipt.type=="radio")
+			{
+				radioes=radioList[ipt.name];
+				if(!radioes)
+				{
+					radioes=new Array();
+				}
+				radioes[radioes.length]=ipt;
+				radioList[ipt.name]=radioes;
+			}
+		}
+		var chk=false;//radio的非空检测
+		for(var i=0;i<radioes.length;i++)
+		{
+			var radio=radioes[i];
+			if(radio.checked)
+			{
+				chk=true;
+				break;
+			}
+		}
+		if(!chk)
+		{
+			alert("please select: "+radioes[0].name);
+			return false;
+		}
+		
+		for(var i=0;i<textboxes.length;i++)//textbox的非空检测
+		{
+			var txt=textboxes[i];
+			if(txt&&txt.value=="")
+			{
+				if(txt.name=="password"&&radioes[0].checked)
+					continue;
+				alert("please fill:"+txt.name);
+				txt.focus();
+				return false;
+			}
+		}
+		
+		
+	return true;
+}
+</script>
+
+
+</head>	
+<body>
 <div>
 	<div>
-		<h3>Create User</h3>
+		<h3>Create Account</h3>
 	</div>
 	<div>
-		<form action="/admin/createuser" method="post">
+		<form method="post" onsubmit="return nN(this);">
 			<div>
-				<label for="email_address">Email Address: </label>
+				<label for="Email Address">Email Address: </label>
 				<input name="email_address" type="text" />
 			</div>
 			<div>
-				<label for="first_name">First Name :&nbsp &nbsp &nbsp </label>
+				<label for="First Name">First Name :&nbsp &nbsp &nbsp </label>
 				<input name="first_name" type="text" />
 			</div>
 			<div>
-				<label for="last_name">Last Name: &nbsp &nbsp &nbsp</label>
+				<label for="Last Name">Last Name: &nbsp &nbsp &nbsp</label>
 				<input name="last_name" type="text" />
 			</div>
 			<div>
-				<label for="password">Password(only for admin): &nbsp &nbsp &nbsp</label>
+				<label for="Password">Password(only valid for admin): &nbsp &nbsp &nbsp</label>
 				<input name="password" type="text" />
 			</div>
 			<div>
-				<label for="roles">Roles: </label><br />
-				<input name="roles" type="radio" value="fellow"/>Omar Fellow<br />
+				<label for="Roles">Roles: </label><br />
+				<input name="roles" type="radio" value="omar_fellow"/>Omar Fellow<br />
 				<input name="roles" type="radio" value="admin"/>Admin<br />
 			</div>
 			<div>
-				<input type="submit" value="Create New Account" />
+				<input name="submit" type="submit" value="Create New Account" />
 			</div>
 		</form>
 	</div>
 </div>
+</body>
+</html>

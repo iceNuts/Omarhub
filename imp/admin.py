@@ -12,13 +12,13 @@ class AdminCreateUserHandler(BaseHandler):
 		user_info=dict()
 		user_info["first_name"]=''.join(self.get_arguments("first_name"))
 		user_info["last_name"]=''.join(self.get_arguments("last_name"))
-		role=self.get_arguments("roles")
-		#print role
-		if ''.join(role)=="fellow":
-			result=self.dbManager.create_new_user(mail,user_info)
-		else :
+		role=self.get_argument("roles")
+		print role
+		if ''.join(role)=="admin":
 			user_info["passwd"]=''.join(self.get_arguments("password"))
 			result=self.dbManager.create_new_admin(mail,user_info)
+		else :
+			result=self.dbManager.create_new_user(mail,user_info)
 		
 		if result :
 			self.write("Success")
