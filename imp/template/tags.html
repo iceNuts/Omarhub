@@ -16,7 +16,7 @@ $(document).ready(function(){
 					success: function(msg){
 						//alert(msg)
 						if(msg=="1") {
-							$(this).prop('src','/static/img/star/lit_star.png');
+							$(this).prop('src','/static/img/tag/following.png');
 							$(this).addClass("follow");
 						}
 					}
@@ -35,7 +35,7 @@ $(document).ready(function(){
 					success: function(msg){
 						//alert(msg)
 						if(msg=="1") {
-							$(this).prop('src','/static/img/star/unlit_star.png');
+							$(this).prop('src','/static/img/tag/plus.png');
 							$(this).removeClass("follow");
 						}
 					}
@@ -54,34 +54,35 @@ $(document).ready(function(){
 
 <div id="container" class="container_16">
 	{% for title,tags_list in tagdict.items() %}
-      <div class="grid_4 tag-display">
-		<div class="general-info">
-        	<div class="grid_4">
-        	<h3 class="item-title">{{title}}</h3> 
-            </div>
-            <div id="sort" class="nav grid_4" >
-				<ul>
-					<li><a class="active" href="#">Name</a></li>
-					<li><a href="#">Most Followers</a></li>
-                </ul>
-            </div>
-            <div class="grid_4">
-			<ul>
-				{% for id,k,v,isFollowed in tags_list %}
-				<li>
-					<a class="tag normal-tag" id="{{id}}" href="#">{{k}}({{v}})</a>
-					{% if not isFollowed %}
-                    <img class="avatar" src="/static/img/star/unlit_star.png" alt="" />
-                    {%else%}
-                    <img class="avatar follow" src="/static/img/star/lit_star.png" alt="" />
-                    {%end%}
-				</li>
-				{% end %}
-			</ul>
-            </div>
-		</div>
-	  </div>
-	  {%end%}
+  <div id="content" class="grid_4">
+    <div class="profile-info tag-display">
+      <div class="general-info">
+          <h3 class="item-title">{{title}}</h3> 
+        <!--<div id="sort" class="nav grid_4" >-->
+          <!--<ul>-->
+            <!--<li><a class="active" href="#">Name</a></li>-->
+            <!--<li><a href="#">Most Followers</a></li>-->
+            <!--</ul>-->
+          <!--</div>-->
+          <ul class="tag-list">
+            {% for id,k,v,isFollowed in tags_list %}
+            <li class="tag normal-tag">
+            <a class="tag-link" id="{{id}}" href="#">{{k}}({{v}})
+            </a>
+            {% if not isFollowed %}
+            <!--<img class="avatar" src="/static/img/star/unlit_star.png" alt="" />-->
+            <img class="avatar" src="/static/img/tag/plus.png" alt="" />
+            {%else%}
+            <!--<img class="avatar follow" src="/static/img/star/lit_star.png" alt="" />-->
+            <img class="avatar" src="/static/img/tag/following.png" alt="" />
+            {%end%}
+            </li>
+            {% end %}
+          </ul>
+      </div>
+    </div>
+  </div>
+  {%end%}
 </div>
 
 {% end %}

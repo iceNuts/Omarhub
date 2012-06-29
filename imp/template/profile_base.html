@@ -13,7 +13,7 @@
           <div class="profile-top">
             <div class="avatar-wrap grid_2 alpha">
               <div class="avatar">
-                <img src="{{static_url('./img/avatar_big.jpg')}}" alt="" />
+                <img src="{{avatar}}" alt="" />
               </div>
             </div>
             <div class="profile-top-info grid_2 omega">
@@ -50,7 +50,7 @@
           <h4>follower({{follower_count}})</h4>
           <ul class="followers-avatar">
             {% for user in follower_list %}
-            <li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{static_url('./img/avatar.jpg')}}" alt="" /></a></li>
+            <li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{user['avatar']}}" alt="" /></a></li>
             {% end %}
           </ul>
         </div>

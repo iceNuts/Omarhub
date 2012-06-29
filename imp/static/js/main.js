@@ -33,17 +33,19 @@ $('#header .hiden-list').each(function(index, eachOne) {
 $(document).ready(function() {
         var path = document.location.pathname;
         pathList = path.split("\/");
+        $('#home-nav').removeClass("active");
+
         if (pathList[1] !== "home") {
             if (pathList[1] == "profile") {
-                $('#home-nav').removeClass("active");
                 $('#profile-nav').addClass("active");
             }
             else if (pathList[1] == "tags") {
-                $('#home-nav').removeClass("active");
                 $('#tags-nav').addClass("active");
             }
         }
-
+        else if (pathList[1] === "home") {
+        $('#home-nav').addClass("active");
+    }
 });
 
 

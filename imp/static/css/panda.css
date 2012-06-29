@@ -155,6 +155,10 @@ div.profile-info {
     border-bottom: solid 1px #ccc;
 }
 
+.single-one .profile-info {
+    border-bottom: solid 1px #fff;
+}
+
 div.profile-info:hover {
     background: #f4f4f4;
 }

@@ -90,7 +90,7 @@ $(document).ready(function(){
             var avatarWrap = $('<a class="avatar-wrap" href=""></a>');
             avatarWrap.prop('href', '/profile/'+item.author.user_id);
             var avatarImg = $('<img class="avatar"></img>');
-            avatarImg.prop('src', '/static/img/avatar_big.jpg');
+            avatarImg.prop('src', item.author.avatar);
             avatarWrap.append(avatarImg);
             var followPeople = $('<a class="profile-top-follow btn btn-primary"></a>');
             if (item.my_user_id!==item.author.user_id) {
@@ -135,6 +135,7 @@ $(document).ready(function(){
             else {
                 itemHeaderLink.prop('href', '/'+category+'/'+item.id);
             }
+            
             var itemHeader = $('<h3 class="item-title"></h3>');
             if (category==='all') {
                 if (!people) {
@@ -162,6 +163,19 @@ $(document).ready(function(){
             itemDetailMain.append(generalInfo);
 
             var descriptionWrap = $('<div class="item-description-wrap"></div>');
+            if (people) {
+                var peopleLocation = $('<p class="item-description"></p>');
+                if (item.author.location) {
+                    peopleLocation.html('location: '+item.author.location);
+                }
+                else {
+                    peopleLocation.html('location: unknow');
+                }
+                descriptionWrap.append(peopleLocation);
+                var followerNumber = $('<p class="item-description"></p>');
+                followerNumber.html('follower number: '+item.author.follower_number);
+                descriptionWrap.append(followerNumber);
+            }
             var itemDescription = $('<p class="item-description"></p>');
             itemDescription.html(item.description);
 

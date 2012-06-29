@@ -30,7 +30,11 @@ class SearchListProvider(BaseHandler):
 				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
+		mail=self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
+		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes, my_user_id=user_id)
 		
 		
 	"""def post(self):
@@ -60,7 +64,11 @@ class SearchEventListProvider(BaseHandler):
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
 		print list1, itemCount
-		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
+		mail=self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
+		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes, my_user_id=user_id)
 		
 		
 class SearchOfferListProvider(BaseHandler):
@@ -80,7 +88,11 @@ class SearchOfferListProvider(BaseHandler):
 				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
+		mail=self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
+		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes, my_user_id=user_id)
 		
 
 class SearchNeedListProvider(BaseHandler):
@@ -100,7 +112,11 @@ class SearchNeedListProvider(BaseHandler):
 				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
+		mail=self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
+		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes, my_user_id=user_id)
 		
 class SearchUserListProvider(BaseHandler):
 	def initialize(self):
@@ -119,5 +135,9 @@ class SearchUserListProvider(BaseHandler):
 				list1+=list3
 		mes="Sorry, no item found!"
 		itemCount=len(list1)
-		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes)
+		mail=self.current_user
+		userlist=self.dbManager.get_user_profile_info(mail,0)
+		user=userlist[0]
+		user_id=user["user_id"]
+		self.render("searchresults.html", sList = list1, count = itemCount, mes = mes, my_user_id=user_id)
 		

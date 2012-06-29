@@ -449,22 +449,23 @@ div#footer-wrap {
 
 .tag {
     height: 15px;
-    background: #CCC;
-    border-right: solid 1px #aaa;
-    border-bottom: solid 1px #aaa;
-    border-radius: 3px;
+    background: #ddd;
+    border-right: solid 1px #bbb;
+    border-bottom: solid 1px #bbb;
+    /*border-radius: 3px;*/
     padding-left: 15px;
     padding-right: 3px;
     font-size: 0.8em;
     display: inline;
+    float: left;
 }
 
 .normal-tag {
-    background:#CCC url("../img/tag/plus.png") left center no-repeat;
+    /*background:#CCC url("../img/tag/plus.png") left center no-repeat;*/
     color: white;
 }
 .normal-tag:hover {
-    background:#bbb url("../img/tag/plus.png") left center no-repeat;
+    /*background:#bbb url("../img/tag/plus.png") left center no-repeat;*/
     color: white;
 }
 

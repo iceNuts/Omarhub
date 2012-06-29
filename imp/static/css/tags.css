@@ -39,6 +39,11 @@ div#sort .nav li a:hover {
 }
 
 div.tag-display{
-	background:white;
+	background: #fcfcfc;
 	height: 380px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tag-list {
+    clear: both;
 }
