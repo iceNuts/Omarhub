@@ -426,6 +426,8 @@ class dbmgr:
 			sqlstatement=' '.join(["update Users set",item])
 			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
 		self.db.execute("update Users set avatar=%s where mail=%s", gravatar_url, mail)
+		entry = self.db.execute("insert into Organization () values ()")
+		self.db.execute("update Users set org_id=%s where mail=%s", int(entry), mail)
 		self.drop_db_connection()
 		return 1
 		
