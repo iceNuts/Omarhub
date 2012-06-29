@@ -534,25 +534,31 @@ class dbmgr:
 		#mode 0 for follow,mode 1 for unfollow
 		self.create_db_connection()
 		if not mail or not tag_id:
+			self.drop_db_connection()
 			return 0
 		tagfollowed=self.db.execute_rowcount("select * from UserTag where user_mail=%s and tag_id=%s",''.join(mail),tag_id)
 		if mode != tagfollowed:
+			self.drop_db_connection()
 			return 0
 		if mode==0 :
 			result=self.db.execute("INSERT INTO UserTag (tag_id,user_mail) VALUES(%s,%s)",tag_id,''.join(mail))
+			self.db.execute("UPDATE Tags SET followed=followed+1 WHERE tag_id=%s",tag_id)
 		else:
-			result=self.db.execute("DELETE FROM UserTag WHERE user_mail=%s and tag_id=%s",''.join(mail),tag_id)
-		
+			result=self.db.execute("DELETE FROM UserTag WHERE user_mail=%s AND tag_id=%s",''.join(mail),tag_id)
+			self.db.execute("UPDATE Tags SET followed=followed-1 WHERE tag_id=%s",tag_id)
+		self.drop_db_connection()
 		return 1
 		
 	def check_tag_followed(self,mail,name,tag_domain):
 		self.create_db_connection()
-		
 		tag_id = self.db.get("select tag_id from Tags where name=%s and tag_domain=%s",''.join(name),''.join(tag_domain)) 
 		if not tag_id:
+			self.drop_db_connection()
 			return 0
 		tagfollowed=self.db.execute_rowcount("select * from UserTag where user_mail=%s and tag_id=%s",''.join(mail),int(tag_id["tag_id"]))
+		self.drop_db_connection()
 		return tagfollowed
+		
 	def search_default_list(self,keywords):
 		self.create_db_connection()
 		resultE = self.search_event_list(keywords)

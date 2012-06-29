@@ -18,7 +18,7 @@ INSERT INTO Tags (
 INSERT INTO Tags (
 	name,tag_domain,followed )
 	values (
-	"single man in Beijing","target",0);
+	"single man","target",0);
 	
 INSERT INTO UserTag (
 	tag_id,user_mail )

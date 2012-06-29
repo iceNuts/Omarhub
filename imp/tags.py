@@ -63,11 +63,11 @@ class TagFollowHandler(BaseHandler):
 			self.redirect("/auth/login")
 		mail=self.current_user
 		success=self.dbManager.set_follow_tags(tag_id,mail,0)
-		self.write("1")
-		#if success==1 :
-		#	self.write("1")
-		#else :
-		#	self.write("0")
+		#self.write("1")
+		if success==1 :
+			self.write("1")
+		else :
+			self.write("0")
 		
 class TagUnfollowHandler(BaseHandler):
 	def initialize(self):
