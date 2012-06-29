@@ -27,6 +27,8 @@ class EventProvider(BaseHandler):
 		user_me=userlist_me[0]
 		my_user_id=user_me["user_id"]
 		i = 0
+		if not list:
+			return None
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -55,7 +57,9 @@ class OfferProvider(BaseHandler):
 		mail=self.current_user
 		userlist_me=self.dbManager.get_user_profile_info(mail,0)
 		user_me=userlist_me[0]
-		my_user_id=user_me["user_id"]		
+		my_user_id=user_me["user_id"]	
+		if not list:
+			return None
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -84,7 +88,9 @@ class NeedProvider(BaseHandler):
 		mail=self.current_user
 		userlist_me=self.dbManager.get_user_profile_info(mail,0)
 		user_me=userlist_me[0]
-		my_user_id=user_me["user_id"]		
+		my_user_id=user_me["user_id"]	
+		if not list:
+			return None
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -112,7 +118,9 @@ class RecentallProvider(BaseHandler):
 		mail=self.current_user
 		userlist_me=self.dbManager.get_user_profile_info(mail,0)
 		user_me=userlist_me[0]
-		my_user_id=user_me["user_id"]		
+		my_user_id=user_me["user_id"]	
+		if not list:
+			return None
 		for item in list:
 			item['my_user_id'] = my_user_id
 			list[i] = item
@@ -131,7 +139,9 @@ class PeopleProvider(BaseHandler):
 		mail=self.current_user
 		userlist_me=self.dbManager.get_user_profile_info(mail,0)
 		user_me=userlist_me[0]
-		my_user_id=user_me["user_id"]		
+		my_user_id=user_me["user_id"]	
+		if not list:
+			return None
 		for item in list:
 			item['_type'] = "People"
 			item['my_user_id'] = my_user_id
