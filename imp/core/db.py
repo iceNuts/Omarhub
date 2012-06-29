@@ -322,7 +322,7 @@ class dbmgr:
 		flag = self.check_if_followed(mail, m_mail[0]['mail'])
 		if not flag and cmp(mail,m_mail[0]['mail']) != 0:
 			self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail[0]['mail'])
-			self.db.execute("insert into Recent_Events (_type, _from, _to) values (%s,%s,%s)", "Follow", mail, m_mail['0']['mail'])
+			self.db.execute("insert into Recent_Events (_type, _from, _to) values (%s,%s,%s)", "Follow", mail, m_mail[0]['mail'])
 		self.drop_db_connection()
 	
 	def unfollow_people_action(self, mail, user_id):
