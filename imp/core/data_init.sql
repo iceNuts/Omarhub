@@ -15,12 +15,12 @@ INSERT INTO Users (
 INSERT INTO Users (
 	first_name,last_name,age,gender,mail,passwd,avatar,org_id)
 	values (
-	"Bill","Zeng",16,0,"billzeng808@gmail.com","alpine","http://pica.nipic.com/2008-04-15/2008415122531866_2.jpg",1);
+	"Bill","Zeng",16,0,"billzeng808@gmail.com","alpine","http://ww2.sinaimg.cn/large/684ff39bjw1duex3qrwqsj.jpg",1);
 	
 INSERT INTO Users (
 	first_name,last_name,age,gender,mail,passwd,avatar,org_id)
 	values (
-	"Jadon","Wong",16,0,"clww.me@gmail.com","alpine","http://pic17.nipic.com/20111101/4795343_124140854000_2.jpg",1);
+	"Jadon","Wong",16,0,"clww.me@gmail.com","alpine","http://ww3.sinaimg.cn/large/696490f0jw1duf0ayla4qj.jpg",1);
 	
 INSERT INTO Admins (
 	first_name,last_name,mail,passwd)
