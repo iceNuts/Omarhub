@@ -36,6 +36,7 @@ class ProfileHandler(BaseHandler):
 		userlist_me=self.dbManager.get_user_profile_info(mail,0)
 		user_me=userlist_me[0]
 		my_user_id=str(user_me["user_id"])
+		my_avatar=user_me["avatar"]
 		
 		userlist=self.dbManager.get_user_profile_info_by_id(user_id,0)
 		user=userlist[0]
@@ -97,6 +98,7 @@ class ProfileHandler(BaseHandler):
 			user_basic=user_basic,
 			user_contact=user_contact,
 			organization=org_info,
+			my_avatar=my_avatar,
 			avatar=avatar
 		)
 
@@ -149,6 +151,7 @@ class ProfileEditHandler(BaseHandler):
 			follower_list=follower_list,
 			user_id=user_id,
 			my_user_id=user_id,
+			my_avatar=avatar,
 			avatar=avatar
 		)
 		

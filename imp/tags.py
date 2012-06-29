@@ -15,6 +15,7 @@ class TagHandler(BaseHandler):
 		userlist=self.dbManager.get_user_profile_info(mail,0)
 		user=userlist[0]
 		user_id=user["user_id"]
+		avatar=user["avatar"]
 		tagdict=dict()
 		tagdict["Work Field"]=self.dbManager.get_tags("work_field")
 		#print type(tagdict["Work Field"])
@@ -51,7 +52,7 @@ class TagHandler(BaseHandler):
 			my_follow=self.dbManager.check_tag_followed(mail,name,"freetag")
 			tagdict["Free Tags"][i]=[tid,name,followed,my_follow]
 			
-		self.render("tags.html",user_id=user_id,tagdict=tagdict,my_user_id=user_id)
+		self.render("tags.html",user_id=user_id,tagdict=tagdict,my_user_id=user_id,my_avatar=avatar)
 
 class TagFollowHandler(BaseHandler):
 	def initialize(self):
