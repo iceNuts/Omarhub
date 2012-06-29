@@ -40,7 +40,7 @@ CREATE TABLE Users (
     skype VARCHAR(100),
     passwd VARCHAR(100),
     register_date TIMESTAMP,
-    avatar VARCHAR(100),
+    avatar VARCHAR(1000),
     org_id INT,
 	UNIQUE KEY (mail),
  	FOREIGN KEY (org_id) REFERENCES Organization(org_id)
