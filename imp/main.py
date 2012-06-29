@@ -65,6 +65,7 @@ class Application(tornado.web.Application):
 			(r"/content/search/getoffers", SearchOfferListProvider),
 			(r"/content/search/getneeds", SearchNeedListProvider),
 			(r"/content/search/getusers", SearchUserListProvider),
+			(r"/profile/(\d+)/innovation", ProfileInnovationHandler),
 			(r"/admin",AdminUserHandler)
 			]
 		settings = dict(

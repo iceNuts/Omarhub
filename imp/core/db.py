@@ -3,6 +3,7 @@ from tornado.options import define, options
 import unicodedata
 from copy import copy
 from operator import itemgetter, attrgetter
+import urllib, hashlib
 
 define("port", default=8888, help="run on the given port", type=int)
 define("mysql_host", default="localhost:3306", help="imp host")
@@ -162,7 +163,7 @@ class dbmgr:
 			print "Ooops"
 			return None
 		return result
-        
+		
 	def get_recent_all_list(self,mail, cursor, mode):
 		"""for all recent events provider,return dictionary, mode = 1 most recent 2 most followed"""
 		self.create_db_connection()
@@ -170,9 +171,11 @@ class dbmgr:
 			return None
 		strCursor = unicodedata.normalize('NFKD', cursor[0]).encode('ascii','ignore')
 		if int(''.join(mode)) == 0: # most recent
-			result = self.db.query("SELECT _type,typeId,_from,_to FROM Recent_Events order by _date DESC LIMIT %s,20", int(strCursor))
+			result = self.db.query("SELECT _type,typeId,_from,_to FROM Recent_Events where _type <> 'Follow' order by _date DESC LIMIT %s,20", int(strCursor))
 		elif int(''.join(mode)) == 1: # most followed
-			result = self.db.query("SELECT _type,typeId,_from,_to FROM Recent_Events order by followed DESC LIMIT %s,20", int(strCursor))
+			result = self.db.query("SELECT _type,typeId,_from,_to FROM Recent_Events where _type <> 'Follow' order by followed DESC LIMIT %s,20", int(strCursor))
+		elif int(''.join(mode)) == 2: # myself
+			result = self.db.query("SELECT _type,typeId,_from,_to, _date FROM Recent_Events where mail_from = %s order by _date DESC LIMIT %s,20", mail,int(strCursor))	
 		i = 0
 		for item in result:
 			type = unicodedata.normalize('NFKD', item['_type']).encode('ascii','ignore') # judge which table
@@ -218,6 +221,11 @@ class dbmgr:
 					author_item[0]['is_followed'] = '0'
 				#Get if followed
 				item['author'] = copy(author_item[0])
+			elif cmp(type,'Follow') == 0:
+				mail_from_item = self.get_user_profile_info(item[_from], 1)
+				mail_to = self.get_user_profile_info(item[_to], 1)
+				item = dict(item.items() + mail_from[0].items() + mail_to[0].itmes())
+				item['_date'] = str(item['_date'])
 			result[i] = item
 			i = i + 1
 									
@@ -304,6 +312,7 @@ class dbmgr:
 		flag = self.check_if_followed(mail, m_mail[0]['mail'])
 		if not flag and cmp(mail,m_mail[0]['mail']) != 0:
 			self.db.execute("insert into Follow_Status (mail_from,mail_to) values(%s, %s)", mail, m_mail[0]['mail'])
+			self.db.execute("insert into Recent_Events (_type, _from, _to) values (%s,%s,%s)", "Follow", mail, m_mail['0']['mail'])
 		self.drop_db_connection()
 	
 	def unfollow_people_action(self, mail, user_id):
@@ -391,10 +400,19 @@ class dbmgr:
 	def create_new_user(self, mail, info):
 		"""Create a unique id"""
 		self.create_db_connection()
+		
+		email = mail
+		default = "http://ww2.sinaimg.cn/large/675f2d7fjw1due79vjemjj.jpg"
+		size = 40
+		
+		gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
+		gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
+
 		self.db.execute("insert into Users (mail) values (%s)", mail)
 		for item in info:
 			sqlstatement=' '.join(["update Users set",item])
 			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
+		self.db.execute("update Users set avatar=%s where mail=%s", gravatar_url, mail)
 		self.drop_db_connection()
 		return entry
 

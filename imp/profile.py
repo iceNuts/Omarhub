@@ -218,7 +218,6 @@ class ProfileEditOrgHandler(BaseHandler):
 		
 		self.redirect("/profile/"+str(user_id))
 		
-
-
-
+class ProfileInnovationHandler(BaseHandler):
+	pass
 
