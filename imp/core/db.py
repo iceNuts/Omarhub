@@ -93,6 +93,7 @@ class dbmgr:
 			result = self.db.get("SELECT passwd FROM Admins WHERE mail = %s", ''.join(usr_name))		
 		self.drop_db_connection()
 		password = unicodedata.normalize('NFKD', result.passwd).encode('ascii','ignore')
+		print type(passwd)
 		if mode == 0:
 			if not password or cmp(password, ''.join(passwd)) != 0:
 				return 0

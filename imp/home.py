@@ -9,6 +9,7 @@ class HomeHandler(BaseHandler):
 	def get(self):
 		if not self.current_user:
 			self.redirect("/auth/login")
+			return 
 		mail=self.current_user
 		userlist=self.dbManager.get_user_profile_info(mail,0)
 		user=userlist[0]

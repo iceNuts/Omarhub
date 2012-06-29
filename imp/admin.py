@@ -6,7 +6,11 @@ from core.db import *
 
 class AdminCreateUserHandler(BaseHandler):
 	def get(self):
+		if not self.get_secure_cookie("admin"):
+			self.redirect("/auth/admin/login")
+			return 
 		self.render("create_user.html")
+		
 	def post(self):
 		mail=''.join(self.get_arguments("email_address"))
 		user_info=dict()

@@ -49,7 +49,7 @@ class AdminLoginHandler(BaseHandler):
 		self.dbManager = dbmgr()
 	def get(self):
 		"""Cookie judge if auth"""
-		if self.current_user:
+		if self.get_secure_cookie("admin"):
 			self.redirect("/admin/createuser")
 			return
 		"""Show template for login"""
@@ -58,10 +58,10 @@ class AdminLoginHandler(BaseHandler):
 	def post(self):
 		"""Check username & passwd"""
 		passwd = self.get_arguments("u_passwd")
-		usr_mail = self.get_arguments("u_mail")
+		usr_mail = self.get_arguments("u_username")
 		
 		if self.dbManager.checkAuth(usr_mail, passwd,1):
-			self.set_secure_cookie("user", ''.join(usr_mail))
+			self.set_secure_cookie("admin", ''.join(usr_mail))
 			self.redirect("/admin/createuser")
 			return
 		else:
