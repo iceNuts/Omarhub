@@ -22,7 +22,8 @@ class CreateHandler(BaseHandler):
 		userlist=self.dbManager.get_user_profile_info(mail,0)
 		user=userlist[0]
 		user_id=user["user_id"]
-		self.render("create.html", user_id=user_id)
+		avatar=user["avatar"]
+		self.render("create.html", user_id=user_id,my_user_id=user_id,my_avatar=avatar)
 
 class EventCreateHandler(BaseHandler):
 	def initialize(self):
