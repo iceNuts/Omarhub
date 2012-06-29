@@ -22,6 +22,11 @@ INSERT INTO Users (
 	values (
 	"Jadon","Wong",16,0,"clww.me@gmail.com","alpine",1);
 	
+INSERT INTO Admins (
+	first_name,last_name,mail,passwd)
+	values (
+	"First","Admin","371347230@qq.com","alpine");
+	
 INSERT INTO Recent_Events (
 	_type,typeId,_from,followed)
 	values (

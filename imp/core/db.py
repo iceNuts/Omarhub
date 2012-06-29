@@ -408,13 +408,29 @@ class dbmgr:
 		gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
 		gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
 
+		exist=self.db.execute_rowcount("select * from Users where mail=%s",mail)
+		if exist :
+			return 0
 		self.db.execute("insert into Users (mail) values (%s)", mail)
 		for item in info:
 			sqlstatement=' '.join(["update Users set",item])
 			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
 		self.db.execute("update Users set avatar=%s where mail=%s", gravatar_url, mail)
 		self.drop_db_connection()
-		return entry
+		return 1
+		
+	def create_new_admin(self, mail, info):
+		"""Create a unique id"""
+		self.create_db_connection()
+		exist=self.db.execute_rowcount("select * from Admins where mail=%s",mail)
+		if exist :
+			return 0
+		self.db.execute("insert into Admins (mail) values (%s)", mail)
+		for item in info:
+			sqlstatement=' '.join(["update Admins set",item])
+			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
+		self.drop_db_connection()
+		return 1
 
 
 	def delete_a_user(mail):
