@@ -391,12 +391,28 @@ class dbmgr:
 	def create_new_user(self, mail, info):
 		"""Create a unique id"""
 		self.create_db_connection()
+		exist=self.db.execute_rowcount("select * from Users where mail=%s",mail)
+		if exist :
+			return 0
 		self.db.execute("insert into Users (mail) values (%s)", mail)
 		for item in info:
 			sqlstatement=' '.join(["update Users set",item])
 			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
 		self.drop_db_connection()
-		return entry
+		return 1
+		
+	def create_new_admin(self, mail, info):
+		"""Create a unique id"""
+		self.create_db_connection()
+		exist=self.db.execute_rowcount("select * from Admins where mail=%s",mail)
+		if exist :
+			return 0
+		self.db.execute("insert into Admins (mail) values (%s)", mail)
+		for item in info:
+			sqlstatement=' '.join(["update Admins set",item])
+			entry = self.db.execute(sqlstatement+"=%s where mail=%s", ''.join(info[item]),mail)
+		self.drop_db_connection()
+		return 1
 
 
 	def delete_a_user(mail):

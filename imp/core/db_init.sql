@@ -46,6 +46,14 @@ CREATE TABLE Users (
  	FOREIGN KEY (org_id) REFERENCES Organization(org_id)
 );
 
+CREATE TABLE Admins (
+	admin_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    mail VARCHAR(100) NOT NULL,
+    passwd VARCHAR(100)
+);
+
 CREATE TABLE Activate_Events (
 	mail VARCHAR(100) NOT NULL PRIMARY KEY,
 	_id   VARCHAR(100),

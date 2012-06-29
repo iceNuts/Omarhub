@@ -65,7 +65,8 @@ class Application(tornado.web.Application):
 			(r"/content/search/getoffers", SearchOfferListProvider),
 			(r"/content/search/getneeds", SearchNeedListProvider),
 			(r"/content/search/getusers", SearchUserListProvider),
-			(r"/admin",AdminUserHandler)
+			#(r"/admin",AdminUserHandler),
+			(r"/admin/createuser",AdminCreateUserHandler)
 			]
 		settings = dict(
 			template_path=os.path.join(os.path.dirname(__file__), "template"),
