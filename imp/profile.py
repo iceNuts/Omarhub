@@ -142,6 +142,7 @@ class ProfileEditHandler(BaseHandler):
 		following_count=self.dbManager.get_following_count(mail)
 		is_followed=0
 		follower_list=self.dbManager.get_follower_brief_list(mail,8)
+		following_list=self.dbManager.get_following_brief_list(mail,8)
 		
 		self.render("profile_edit.html",
 			user_all_info=user,
@@ -151,6 +152,7 @@ class ProfileEditHandler(BaseHandler):
 			follower_count=follower_count,
 			following_count=following_count,
 			follower_list=follower_list,
+			following_list=following_list,
 			user_id=user_id,
 			my_user_id=user_id,
 			my_avatar=avatar,
