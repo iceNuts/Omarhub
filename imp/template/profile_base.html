@@ -54,7 +54,14 @@
             {% end %}
           </ul>
         </div>
-        <div id="following" class="side-zone"></div>
+        <div id="follower" class="side-zone">
+          <h4>following({{len(following_list)}})</h4>
+          <ul class="followers-avatar">
+            {% for user in following_list %}
+            <li><a href="/profile/{{user['user_id']}}" title="{{user['first_name']}} {{user['last_name']}}"><img src="{{user['avatar']}}" alt="" /></a></li>
+            {% end %}
+          </ul>
+        </div>
       </div>
     </div>
 </div>

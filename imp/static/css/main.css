@@ -299,12 +299,13 @@ div#container {
 }
 
 div#footer-wrap {
-    height: 120px;
+    height: 80px;
     border-top: solid 1px whitesmoke;
     background: #474747;
     width: 100%;
     margin-top: 50px;
     bottom: 0px;
+    position: absolute;
 }
 
 
