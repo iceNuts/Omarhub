@@ -404,7 +404,7 @@ class dbmgr:
 		
 		email = mail
 		default = "http://ww2.sinaimg.cn/large/675f2d7fjw1due79vjemjj.jpg"
-		size = 40
+		size = 100
 		
 		gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"
 		gravatar_url += urllib.urlencode({'d':default, 's':str(size)})
