@@ -17,6 +17,14 @@ class SearchListProvider(BaseHandler):
 		return dict([(k,somedict[k]) for k in somekeys if k in somedict])
 		
 	def get(self):
+		if not self.current_user :
+			self.redirect("/")
+			return 
+		mail=self.current_user
+		userlist_me=self.dbManager.get_user_profile_info(mail,0)
+		user_me=userlist_me[0]
+		my_user_id=str(user_me["user_id"])
+		my_avatar=user_me["avatar"]
 		keyWords=self.get_arguments("keywords")
 		if keyWords==[]:
 			list1=self.dbManager.search_default_list(" ")
@@ -29,7 +37,7 @@ class SearchListProvider(BaseHandler):
 				list1+=list3
 		print list1
 		itemcount=len(list1)
-		self.render("searchresults.html", sList=list1,count=itemcount,key=keyWords)
+		self.render("searchresults.html", sList=list1,count=itemcount,key=keyWords,my_user_id=my_user_id,my_avatar=my_avatar)
 		
 class SearchAllListProvider(BaseHandler):
 	def initialize(self):
