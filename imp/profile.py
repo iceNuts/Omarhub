@@ -85,6 +85,7 @@ class ProfileHandler(BaseHandler):
 		following_count=self.dbManager.get_following_count(user_mail)
 		is_followed=self.dbManager.check_if_followed(mail,user_mail)
 		follower_list=self.dbManager.get_follower_brief_list(user_mail,8)
+		following_list=self.dbManager.get_following_brief_list(user_mail,8)
 		
 		print type(user_basic)
 		self.render("profile.html",
@@ -95,6 +96,7 @@ class ProfileHandler(BaseHandler):
 			follower_count=follower_count,
 			following_count=following_count,
 			follower_list=follower_list,
+			following_list=following_list,
 			user_basic=user_basic,
 			user_contact=user_contact,
 			organization=org_info,
