@@ -33,6 +33,7 @@ class Application(tornado.web.Application):
 		handlers = [
 			(r"/", MainHandler),
 			(r"/auth/login", LoginHandler),
+			(r"/auth/admin/login", AdminLoginHandler),
 			(r"/home", HomeHandler),
 			(r"/auth/activate", ActivateHandler),
 			(r"/auth/activate/([\S]+)",PasswdSettingHandler),

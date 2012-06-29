@@ -44,8 +44,37 @@ class LogoutHandler(BaseHandler):
 			self.clear_all_cookies()
 		self.redirect("/")
 				
+class AdminLoginHandler(BaseHandler):
+	def initialize(self):
+		self.dbManager = dbmgr()
+		global errorcode
+	def get(self):
+		"""Cookie judge if auth"""
+		if self.current_user:
+			self.redirect("/admin/createuser")
+			return
+		"""Show template for login"""
+		global errorcode
+		print errorcode
+		self.render("Adminlogin.html", errorcode=errorcode)	
+		errorcode = ''
+	
+	def post(self):
+		global errorcode
+		"""Check username & passwd"""
+		passwd = self.get_arguments("u_passwd")
+		usr_mail = self.get_arguments("u_mail")
+		
+		if self.dbManager.checkAuth(usr_mail, passwd,1):
+			self.errorcode = ''
+			self.set_secure_cookie("user", ''.join(usr_mail))
+			self.redirect("/admin/createuser")
+			return
+		else:
+			errorcode = '1'
+			self.redirect("/")
+			return
 
-
-
+	
 
 		

@@ -87,13 +87,22 @@ class dbmgr:
 	def checkAuth(self,usr_name, passwd,mode):
 		#mode 0 for fellow,1 for admin
 		self.create_db_connection()
-		result = self.db.get("SELECT passwd FROM Users WHERE mail = %s", ''.join(usr_name))
+		if mode == 0:
+			result = self.db.get("SELECT passwd FROM Users WHERE mail = %s", ''.join(usr_name))
+		elif mode == 1:
+			result = self.db.get("SELECT passwd FROM Admins WHERE mail = %s", ''.join(usr_name))		
 		self.drop_db_connection()
 		password = unicodedata.normalize('NFKD', result.passwd).encode('ascii','ignore')
-		if not password or cmp(password, ''.join(passwd)) != 0:
-			return 0
-		elif cmp(password, ''.join(passwd)) == 0:
-			return 1;
+		if mode == 0:
+			if not password or cmp(password, ''.join(passwd)) != 0:
+				return 0
+			elif cmp(password, ''.join(passwd)) == 0:
+				return 1
+		elif mode == 1:
+			if not password or cmp(password, ''.join(passwd)) != 0:
+				return 0
+			elif cmp(password, ''.join(passwd)) == 0:
+				return 1
 	
 	def get_certain_activity(self, id, mode):
 		"""Provide certain info to watch"""
