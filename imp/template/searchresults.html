@@ -1,202 +1,150 @@
-<!DOCTYPE html>
-<html>
-  <head>
-	 <title>Search Results</title>
-    <link rel="stylesheet" href="{{static_url('./css/main.css')}}" type="text/css"/>
-    <script type="text/javascript" src="{{static_url('./js/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{static_url('./js/simplemodal.js')}}"></script>
-    <link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
-    <link rel="stylesheet" href="{{static_url('./css/960_16_col.css')}}" type="text/css"/>
-    <link rel="stylesheet" href="{{static_url('./css/searchresults.css')}}" type="text/css"/>
-    <script language = "javascript">
+{% extends "base.html" %}
+{% block title %}Search{%end%}
+{% block extra-links %}
+<link rel="stylesheet" href="{{static_url('./css/panda.css')}}" type="text/css"/>
+<link rel="stylesheet" href="{{static_url('./css/searchresults.css')}}" type="text/css"/>
+<script language = "javascript">
 
-$(document).ready(function(){
-    
-		$("ul#top-filter2  li a").click(function() {
-                //change the current tab to active state
-                $("ul#top-filter2  li a").removeClass("active");
-                $(this).addClass("active");
+  $(document).ready(function(){
 
-                //get the id of the tab
-                var category = $(this).prop('id');
-                var callbackUrl = '/content/search/get'+category+'s';
-                var keywords =document.getElementById("keywords").value;
-          
+    $("ul#top-filter2  li a").click(function() {
+      //change the current tab to active state
+      $("ul#top-filter2  li a").removeClass("active");
+      $(this).addClass("active");
 
-                //send ajax to get the events/offer/needs
-                $.ajax({
-                        url: callbackUrl,
-                        type: 'get',
-                        data: {'keywords':keywords},
-                        success:function(sList) {
-                            contentJson = JSON.parse(sList);
-							showContent(contentJson, category);
-                        }
-                });
-                return false;
-        });
+      //get the id of the tab
+      var category = $(this).prop('id');
+      var callbackUrl = '/content/search/get'+category+'s';
+      var keywords =document.getElementById("keywords").value;
 
-        function showContent(contentJson, category) {
-            if (contentJson === 'null') {
-                $('#content-warp')[0].innerHTML = "<p>No items in the database.</p>";
-            }
 
-            else {
-                $('#content-warp')[0].innerHTML = '';
-                var i = contentJson.length-1;
-                if(contentJson.length==0||contentJson.length==1)
-					$('#itemcount').html(contentJson.length+" item in total");
-				else
-					$('#itemcount').html(contentJson.length+" items in total");
-				
-                for (i;i>=0;i--) {
-					
-                    var item = contentJson[i];
-					var contentWrap = $('#content-warp');
-					 
-					 var itemDetail = $('<div class="item-details grid_11 omega"></div>');
-					 var itemDetailMain = $('<div class="item-details-main"></div>');
-					 var generalInfo = $('<div class="general-info"></div>');
-					 var itemTitle2 = $('<h3 class="item-title"></h3>');
-					 var itemDate = $('<p class="item-time"></p>');
-					 
-					 //itemTitle2.html(contentJson[i].title);
-					 itemDate.html( contentJson[i].date);
-					 itemTitle2.html("<a href=\"" + contentJson[i].address + contentJson[i].id +"\"><h3 class=\"item-title\">"+contentJson[i].title +"</h3></a>");
-					 
-					 generalInfo.append(itemTitle2);
-					 generalInfo.append(itemDate);
-					 itemDetailMain.append(generalInfo);
-					var itemDescriptionWrap = $('<div class="item-description-wrap"></div>');
-					var itemDescription = $('<p class="item-description"></p>');
-					itemDescription.html( contentJson[i].description);
-					
-					itemDescriptionWrap.append(itemDescription);
-					itemDetailMain.append(itemDescriptionWrap);
-					var itemDetailTag = $('<div class="item-details-tags"></div>');
-					var locationTag = $('<div class="location-tag"></div>');
-					locationTag.html( contentJson[i].first_name +  contentJson[i].last_name);
-					itemDetailTag.append(locationTag);
-
-					itemDetail.append(itemDetailMain); 
-					itemDetail.append(itemDetailTag); 
-					contentWrap.append(itemDetail);
-					
-                }
-            }
+      //send ajax to get the events/offer/needs
+      $.ajax({
+        url: callbackUrl,
+        type: 'get',
+        data: {'keywords':keywords},
+        success:function(sList) {
+          contentJson = JSON.parse(sList);
+          showContent(contentJson, category);
         }
-        //$('#all').trigger('click');
-});
+      });
+      return false;
+    });
 
-    </script>
-  </head>
+    function showContent(contentJson, category) {
+      if (contentJson === 'null') {
+        $('#content-warp')[0].innerHTML = "<p>No items in the database.</p>";
+      }
 
-  <body>
-    <div id="header-wrap">
-      <div id="header" class="container_16">
-        <div id="logo-wrap" class="grid_4">
-          <a id="logo" href="#">
-            <img src="{{static_url('./img/omarlogo.png')}}" alt="" />
-          </a>
-        </div>
-		  <div id="long-search-form" class="grid_8 prefix_2">
-          <form action="/content/search/getdefault" method="get" onsubmit="javascript:return setcok(this);" id="form1" name='form1'>
-			  {% if key==[] %}
-            <input type="text" name="keywords" id = "keywords" >
-              {%else%}
-               <input type="text" name="keywords" id = "keywords" value={{key[0]}} >
-               {%end%}
-            <button type = "submit"></button>
-          </form>
-        </div>    
-        <div class="create-group grid_1 rela-position">
-          <a id="header-profile-create" href="#" class="header-icon">
-            <img class="avatar" src="{{static_url('./img/new.png')}}" alt="" />
-          </a>
-          <ul id="create-group-list" class="hide hiden-list">
-            <li><a href="#">Create Offer</a></li>
-            <li><a href="#">Create Need</a></li>
-            <li><a href="#">Create Event</a></li>
-          </ul>
-        </div>
-        <div id="header-profile" class="grid_1 rela-position">
-          <a id="header-profile-avatar" href="#" class="header-icon">
-            <img class="avatar" src="{{static_url('./img/avatar.jpg')}}" alt="" />
-          </a>
-          <ul id="profile-nav" class="hide hiden-list">
-          	<li><a href="#" >Profile</a></li>
-          	<li><a href="#" >Setting</a></li>
-          	<li><a href="#">Logout</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-	
+      else {
+        $('#content-warp')[0].innerHTML = '';
+        var i = contentJson.length-1;
+        if(contentJson.length==0||contentJson.length==1)
+        $('#itemcount').html(contentJson.length+" item in total");
+        else
+        $('#itemcount').html(contentJson.length+" items in total");
+
+        for (i;i>=0;i--) {
+
+          var item = contentJson[i];
+          var contentWrap = $('#content-warp');
+
+          var itemDetail = $('<div class="item-details grid_11 omega"></div>');
+          var itemDetailMain = $('<div class="item-details-main"></div>');
+          var generalInfo = $('<div class="general-info"></div>');
+          var itemTitle2 = $('<h3 class="item-title"></h3>');
+          var itemDate = $('<p class="item-time"></p>');
+
+          //itemTitle2.html(contentJson[i].title);
+          itemDate.html( contentJson[i].date);
+          itemTitle2.html("<a href=\"" + contentJson[i].address + contentJson[i].id +"\"><h3 class=\"item-title\">"+contentJson[i].title +"</h3></a>");
+
+          generalInfo.append(itemTitle2);
+          generalInfo.append(itemDate);
+          itemDetailMain.append(generalInfo);
+          var itemDescriptionWrap = $('<div class="item-description-wrap"></div>');
+          var itemDescription = $('<p class="item-description"></p>');
+          itemDescription.html( contentJson[i].description);
+
+          itemDescriptionWrap.append(itemDescription);
+          itemDetailMain.append(itemDescriptionWrap);
+          var itemDetailTag = $('<div class="item-details-tags"></div>');
+          var locationTag = $('<div class="location-tag"></div>');
+          locationTag.html( contentJson[i].first_name +  contentJson[i].last_name);
+          itemDetailTag.append(locationTag);
+
+          itemDetail.append(itemDetailMain); 
+          itemDetail.append(itemDetailTag); 
+          contentWrap.append(itemDetail);
+
+        }
+      }
+    }
+    //$('#all').trigger('click');
+  });
+
+</script>
+{% end %}
+
+{% block content %}
 <div id="search-header-wrap">
   <div  class="search-container_16">
     <div  class="grid_6">
-            <h2>Search results</h2>
+      <h2>Search results:
+        {% if count==0 or count==1%}
+        {{count}} item in total
+        {%else%}
+        {{count}} items in total
+      </h2>
+      {%end%}
     </div> 
 
-	<div  class="grid_10">
-		{% if count==0 or count==1%}
-	        <h3 id="itemcount">{{count}} item in total</h3>
-	     {%else%}
-	        <h3 id="itemcount">{{count}} items in total</h3>
-	     {%end%}
-
-	</div>
   </div>
 </div>
 
-  <div id="container" class="container_16">
-      <div  class="sidebar-wrap grid_4">
-        <div class="sidebar">
-		  <div id="top-filter">
-             <ul id= "top-filter2">
-            	<li><a class="active" href="#" id = "default">All</a></li>
-            	<li><a  href="#" id = "event">Events</a></li>
-            	<li><a  href="#" id = "offer">Offers</a></li>
-				<li><a href="#" id = "need">Needs</a></li>
-				<li><a href="#" id = "user">People</a></li>
-            </ul>
-          </div>
+<div id="container" class="container_16">
+  <div  class="sidebar-wrap grid_4">
+    <div class="sidebar">
+      <div id="top-filter">
+        <ul id= "top-filter2">
+          <li><a class="active" href="#" id = "default">All</a></li>
+          <li><a  href="#" id = "event">Events</a></li>
+          <li><a  href="#" id = "offer">Offers</a></li>
+          <li><a href="#" id = "need">Needs</a></li>
+          <li><a href="#" id = "user">People</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-warp" class="grid_12">
+    {% if count==0%}
+    <h3 class="item-title">"Sorry, no item found!"</h3>
+    {%end%}
+    {% for i in sList%} 
+    <div class="item-details grid_11 omega">
+      <div class="item-details-main">
+        <div class="general-info">
+          <a style=" font-size: 22px; margin-top: 10px;float: left;  display: inline-block; color: #61C03C;" href="{{i['address']}}{{i['id']}}" >{{i['title']}}</a>
+          <p class="item-time">{{i['date']}}</p>
+        </div>
+        <div class="item-description-wrap">
+          <p class="item-description">{{i['description']}}</p>
         </div>
       </div>
-
-      <div id="content-warp" class="grid_12">
-		 {% if count==0%}
-		    <h3 class="item-title">"Sorry, no item found!"</h3>
-		 {%end%}
-        {% for i in sList%} 
-         <div class="item-details grid_11 omega">
-                <div class="item-details-main">
-                  <div class="general-info">
-                    <a style=" font-size: 22px; margin-top: 10px;float: left;  display: inline-block; color: #61C03C;" href="{{i['address']}}{{i['id']}}" >{{i['title']}}</a>
-					<p class="item-time">{{i['date']}}</p>
-                  </div>
-                  <div class="item-description-wrap">
-                    <p class="item-description">{{i['description']}}</p>
-                  </div>
-                </div>
-                <div class="item-details-tags">
-                  <div class="location-tag">
-                  {{i['first_name']}} {{i['last_name']}}
-                  </div>
-                </div>
-           </div> 
-           {%end%} 
-		   
+      <div class="item-details-tags">
+        <div class="location-tag">
+          {{i['first_name']}} {{i['last_name']}}
+        </div>
       </div>
-  </div>
-<div id="container" class="container_16">
- <div class="grid_5">
- <p>&nbsp</p>
- </div>
- <div class="grid_4">
-    
+    </div> 
+    {%end%} 
+
   </div>
 </div>
-    <!--<script type="text/javascript" src="./js/main.js"></script>-->
-  </body>
-</html>
+<!--><div id="container" class="container_16">-->
+  <!--><div class="grid_5">-->
+    <!--><p>&nbsp</p>-->
+    <!--></div>-->
+  <!--><div class="grid_4">-->
+{% end %}
