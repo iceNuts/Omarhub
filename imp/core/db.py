@@ -543,21 +543,22 @@ class dbmgr:
 			return 0
 		tagfollowed=self.db.execute_rowcount("select * from UserTag where user_mail=%s and tag_id=%s",''.join(mail),int(tag_id["tag_id"]))
 		return tagfollowed
-		    
 	def search_default_list(self,keywords):
 		self.create_db_connection()
 		resultE = self.search_event_list(keywords)
 		resultO = self.search_offer_list(keywords)
 		resultN = self.search_need_list(keywords)
 		result = resultE + resultO + resultN
-		result1 = sorted(result, key = attrgetter('time'), reverse = True)
+		result1 = sorted(result, key = attrgetter('date'), reverse = True)
 		return result1
 	
 	def search_event_list(self,keywords):
 		self.create_db_connection()
 		if not keywords:
 			return None
-		result = self.db.query("SELECT u.first_name, u.last_name, e.id, e.title, e.description, e.time FROM Events e, Users u WHERE e.mail=u.mail && (e.title LIKE '%%"+keywords+"%%' OR e.description LIKE '%%"+keywords+"%%' OR u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		result = self.db.query("SELECT u.first_name, u.last_name, e.id, e.title, e.description, DATE_FORMAT(e.time,'%%Y %%M %%D %%H %%i %%S') AS date FROM Events e, Users u WHERE e.mail=u.mail && (e.title LIKE '%%"+keywords+"%%' OR e.description LIKE '%%"+keywords+"%%' OR u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		for i in result:
+			i.setdefault('address','/event/')
 		self.drop_db_connection()
 		return result
 		
@@ -565,7 +566,9 @@ class dbmgr:
 		self.create_db_connection()
 		if not keywords:
 			return None
-		result = self.db.query("SELECT u.first_name, u.last_name, o.id, o.title, o.description, o.time FROM Offers o, Users u WHERE o.mail=u.mail && (o.title LIKE '%%"+keywords+"%%' OR o.description LIKE '%%"+keywords+"%%' OR u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		result = self.db.query("SELECT u.first_name, u.last_name, o.id, o.title, o.description, DATE_FORMAT(o.time,'%%Y %%M %%D %%H %%i %%S') AS date FROM Offers o, Users u WHERE o.mail=u.mail && (o.title LIKE '%%"+keywords+"%%' OR o.description LIKE '%%"+keywords+"%%' OR u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		for i in result:
+			i.setdefault('address','/offer/')
 		self.drop_db_connection()
 		return result
         
@@ -573,7 +576,9 @@ class dbmgr:
 		self.create_db_connection()
 		if not keywords:
 			return None
-		result = self.db.query("SELECT u.first_name, u.last_name, n.id, n.title, n.description, n.time FROM Needs n, Users u WHERE n.mail=u.mail && (n.title LIKE '%%"+keywords+"%%' OR n.description LIKE '%%"+keywords+"%%' OR u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		result = self.db.query("SELECT u.first_name, u.last_name, n.id, n.title, n.description, DATE_FORMAT(n.time,'%%Y %%M %%D %%H %%i %%S') AS date FROM Needs n, Users u WHERE n.mail=u.mail && (n.title LIKE '%%"+keywords+"%%' OR n.description LIKE '%%"+keywords+"%%' OR u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		for i in result:
+			i.setdefault('address','/need/')
 		self.drop_db_connection()
 		return result
 	
@@ -581,31 +586,19 @@ class dbmgr:
 		self.create_db_connection()
 		if not keywords:
 			return None
-		resultE = self.db.query("SELECT u.first_name, u.last_name, e.id, e.title, e.description, e.time FROM Events e, Users u WHERE e.mail=u.mail && (u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
-		resultO = self.db.query("SELECT u.first_name, u.last_name, o.id, o.title, o.description, o.time FROM Offers o, Users u WHERE o.mail=u.mail && (u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
-		resultN = self.db.query("SELECT u.first_name, u.last_name, n.id, n.title, n.description, n.time FROM Needs n, Users u WHERE n.mail=u.mail && (u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		resultE = self.db.query("SELECT u.first_name, u.last_name, e.id, e.title, e.description, DATE_FORMAT(e.time,'%%Y %%M %%D %%H %%i %%S') AS date FROM Events e, Users u WHERE e.mail=u.mail && (u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		resultO = self.db.query("SELECT u.first_name, u.last_name, o.id, o.title, o.description, DATE_FORMAT(o.time,'%%Y %%M %%D %%H %%i %%S') AS date FROM Offers o, Users u WHERE o.mail=u.mail && (u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		resultN = self.db.query("SELECT u.first_name, u.last_name, n.id, n.title, n.description, DATE_FORMAT(n.time,'%%Y %%M %%D %%H %%i %%S') AS date FROM Needs n, Users u WHERE n.mail=u.mail && (u.first_name LIKE '%%"+keywords+"%%' OR u.last_name LIKE '%%"+keywords+"%%' )" )
+		for i in resultE:
+			i.setdefault('address','/event/')
+		for i in resultE:
+			i.setdefault('address','/offer/')
+		for i in resultE:
+			i.setdefault('address','/need/')
 		result = resultE + resultO + resultN
-		result1 = sorted(result, key = attrgetter('time'), reverse = True)
+		result1 = sorted(result, key = attrgetter('date'), reverse = True)
 		self.drop_db_connection()
 		return result1
 		
 			
 
-
-
-
-
-
-
-
-
-			
-
-
-
-
-
-
-
-
-		

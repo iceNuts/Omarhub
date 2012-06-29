@@ -62,6 +62,7 @@ class Application(tornado.web.Application):
 			(r"/action/people/follow/([\d]+)", FollowPeopleActionHandler),
 			(r"/action/people/unfollow/([\d]+)", UnfollwPeopleActionHandler),
 			(r"/content/search/getdefault", SearchListProvider),
+			(r"/content/search/getdefaults", SearchAllListProvider),
 			(r"/content/search/getevents", SearchEventListProvider),
 			(r"/content/search/getoffers", SearchOfferListProvider),
 			(r"/content/search/getneeds", SearchNeedListProvider),
